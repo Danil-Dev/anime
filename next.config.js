@@ -1,4 +1,11 @@
+const {join} = require("path");
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    sassOptions: {
+        includePaths: [join(__dirname, 'styles')],
+        prependData: `@import "@/styles/variables.scss";`
+    }
+}
+
 
 module.exports = nextConfig

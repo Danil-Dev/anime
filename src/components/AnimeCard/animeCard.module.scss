@@ -1,0 +1,19 @@
+.anime_card{
+  margin-bottom: 60px;
+
+  &_poster{
+    margin-bottom: 24px;
+    img{
+      border-radius: 10px;
+    }
+  }
+  &_content{
+
+    h2{
+      font-size: 18px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+  }
+}
