@@ -1,0 +1,36 @@
+.episodes{
+  width: 50%;
+
+  &_wrapper{
+    margin-top: 25px;
+    margin-left: 20px;
+    background: $dark;
+    padding: 30px 30px 40px;
+
+    &_episode{
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid $gray;
+      font-size: 14px;
+      font-weight: 600;
+      color: $light;
+
+      &_title{
+        cursor: pointer;
+        svg{
+          cursor: pointer;
+          color: $primary-color;
+          margin-right: 10px;
+        }
+      }
+      &_duraction{
+        float: right;
+        svg{
+          cursor: pointer;
+          color: $primary-color;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

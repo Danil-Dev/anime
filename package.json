@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/stream-react": "^1.8.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -22,9 +24,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "react-player": "^2.12.0",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1",
     "sass": "^1.64.1",
+    "screenfull": "^6.0.2",
     "styled-components": "^6.0.5",
     "swiper": "^10.0.4",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "usehooks-ts": "^2.9.1"
   }
 }

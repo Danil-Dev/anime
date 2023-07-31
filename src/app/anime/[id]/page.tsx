@@ -1,13 +1,17 @@
-import {FC} from "react";
+
 import {AnimeService} from "@/services/Anime";
 import styles from './singleAnime.module.scss'
 import Image from "next/image";
 import {Tags} from "@/components/Tags";
 import {Calendar, Star} from "react-feather";
+import {VideoPlayer} from "@/components/Player";
+import {EpisodesList} from "@/components/EpisodesList";
+import {EpisodeArea} from "@/app/anime/[id]/EpisodeArea";
 export default async function SinglePage ({params: {id}} : {params: {id:string}}) {
 
     const anime = await AnimeService.getAnime(id)
     const pretty_date = new Date(anime.release_date).getFullYear()
+    const episodes = anime.seasons[0].episodes
     console.log(pretty_date)
     console.log(anime)
 
@@ -45,6 +49,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     </div>
                 </div>
             </section>
+            <EpisodeArea anime={anime}/>
         </main>
     )
 
