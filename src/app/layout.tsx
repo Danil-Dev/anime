@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Footer from "@/components/Footer";
+import Copyright from "@/components/copyright";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Header/>
         {children}
         <Footer/>
+
       </body>
     </html>
   )
