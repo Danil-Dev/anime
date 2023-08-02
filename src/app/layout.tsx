@@ -2,9 +2,12 @@ import './globals.scss'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 import {ReduxProvider} from "@/providers/ReduxProvider";
+
 const inter = Inter({ subsets: ['latin'] })
 
 // export const metadata: Metadata = {
@@ -23,9 +26,8 @@ export default function RootLayout({
         <ReduxProvider>
             <Header/>
             {children}
+          <Footer/>
         </ReduxProvider>
-
-
 
       </body>
     </html>
