@@ -28,7 +28,6 @@ export default function Header () {
                             </div>
                             <div className={styles.header_wrapper}>
                                 <ul>
-
                                     {navLinks.map((link, index) => {
                                         const isActive = pathname ==link.path
                                         return (
@@ -39,7 +38,6 @@ export default function Header () {
                                             </li>
                                         )
                                     })}
-
                                 </ul>
                             </div>
                         </nav>
