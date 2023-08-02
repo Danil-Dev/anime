@@ -1,4 +1,4 @@
-import {useTimelineDrag, useVolume} from "@/lib/limeplay-core/dist";
+import {useTimelineDrag, useVolume} from "@/lib/limeplay-core/";
 import {useRef} from "react";
 import {OnSliderHandlerProps} from '../TimelineControl'
 import * as Slider from '@radix-ui/react-slider';

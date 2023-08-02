@@ -1,5 +1,5 @@
 import {useRef} from "react";
-import {useLimeplay, useSliderEvents, useTimeline} from "@/lib/limeplay-core/dist";
+import {useLimeplay, useSliderEvents, useTimeline} from "@/lib/limeplay-core/";
 import styles from './timelineControl.module.scss'
 import {CurrentTime} from "@/components/Player/Controls/TimeControl/CurrentTime";
 import * as Slider from '@radix-ui/react-slider';

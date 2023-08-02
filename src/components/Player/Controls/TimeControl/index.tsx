@@ -1,4 +1,4 @@
-import {useLimeplay, useTimeline} from "@/lib/limeplay-core/dist";
+import {useLimeplay, useTimeline} from "@/lib/limeplay-core/";
 import {CurrentTime} from "@/components/Player/Controls/TimeControl/CurrentTime";
 import styles from './timeControl.module.scss'
 import {buildTimeString} from "@/components/Player/Controls/TimelineControl/utils";

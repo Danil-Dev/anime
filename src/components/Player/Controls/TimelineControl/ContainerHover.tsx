@@ -1,6 +1,6 @@
 import {RefObject} from "react";
 import {OnSliderHandlerProps} from "@/components/Player/Controls/TimelineControl/index";
-import {useTimelineHover} from "@/lib/limeplay-core/dist";
+import {useTimelineHover} from "@/lib/limeplay-core/";
 import styles from './timelineControl.module.scss'
 
 export function ContainerHover({

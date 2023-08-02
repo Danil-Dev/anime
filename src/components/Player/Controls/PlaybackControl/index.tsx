@@ -1,5 +1,5 @@
 import {useShakaPlayer} from "@limeplay/shaka-player";
-import {usePlayback} from "@/lib/limeplay-core/dist";
+import {usePlayback} from "@/lib/limeplay-core/";
 import styles from './playbackControl.module.scss'
 import {Pause, Play} from "react-feather";
 
