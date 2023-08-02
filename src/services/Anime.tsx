@@ -11,7 +11,8 @@ export interface IAnimeData {
 }
 
 export interface IAnimeList{
-    all_anime: IAnimeData[]
+    all_anime: IAnimeData[],
+    title: string
 }
 export interface IAnimeSingle {
     anime: IAnimeData

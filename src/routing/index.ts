@@ -5,10 +5,6 @@ export interface INavLink {
 
 export const navLinks : INavLink[] = [
     {
-        name: 'Home',
-        path: '/'
-    },
-    {
         name: 'Catalog',
         path: '/anime'
     },
