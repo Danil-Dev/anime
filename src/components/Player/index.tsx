@@ -3,7 +3,7 @@ import {IEpisodeData} from "@/services/Anime";
 import styles from './player.module.scss'
 import {usePlayerLayoutType, useTogglePlayerLayout} from "@/store/application/hooks";
 import {PlayerLayoutType} from "@/store/application/reducer";
-import {LimeplayProvider, MediaOutlet} from "@/lib/limeplay-core/dist";
+import {LimeplayProvider, MediaOutlet} from "@/lib/limeplay-core/";
 import {ErrorBoundary} from "@sentry/nextjs";
 import {ErrorPlayer} from "@/components/Player/Controls/ErrorPlayer";
 import {PlayerOutlet} from "@/components/Player/Controls/PlayerOutlet";

@@ -1,4 +1,4 @@
-import {useLimeplay, useShakaPlayer} from "@/lib/limeplay-core/dist";
+import {useLimeplay, useShakaPlayer} from "@/lib/limeplay-core/";
 import {useEffect} from "react";
 import {ControlsOverlay} from "@/components/Player/Controls/ControlsOverlay";
 import styles from './playerOutlet.module.scss'
