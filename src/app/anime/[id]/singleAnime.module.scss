@@ -59,4 +59,14 @@
       }
     }
   }
+
+  &_episodes{
+    &_wrapper{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &_list{
+      width: 50%;
+    }
+  }
 }

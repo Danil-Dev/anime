@@ -9,22 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/stream-react": "^1.8.0",
+    "@limeplay/shaka-player": "^1.0.0",
+    "@radix-ui/react-slider": "^1.1.2",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@sentry/nextjs": "^7.61.0",
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "@types/swiper": "^6.0.0",
+    "@use-gesture/react": "^10.2.27",
     "axios": "^1.4.0",
     "babel-plugin-styled-components": "^2.1.4",
     "bootstrap": "^5.3.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "loglevel": "^1.8.1",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "react-player": "^2.12.0",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1",
     "sass": "^1.64.1",
+    "screenfull": "^6.0.2",
+    "shaka-player": "^4.3.8",
+    "shaka-player-react": "^1.1.5",
     "styled-components": "^6.0.5",
     "swiper": "^10.0.4",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "usehooks-ts": "^2.9.1"
   }
 }

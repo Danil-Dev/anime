@@ -1,0 +1,14 @@
+.playback_control{
+  cursor: pointer;
+
+  button{
+    border: none;
+    background: none;
+    color: #fff;
+
+    &:hover{
+      color: $primary-color;
+      transition: color .2s cubic-bezier(.4,0,1,1) ;
+    }
+  }
+}
