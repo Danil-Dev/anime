@@ -6,9 +6,10 @@ import 'swiper/css/effect-fade'
 import {Autoplay} from "swiper/modules";
 import SliderItem from "@/components/ComingAnimes/SliderItem";
 import styles from './comingAnimes.module.scss'
+import {IBannerData} from "@/services/Anime";
 
 
-export default function ComingAnimes(){
+export default function ComingAnimes({banners}: {banners: IBannerData[]}){
     return(
         <section>
             <Swiper className={styles.banner_wrapper}
@@ -18,16 +19,12 @@ export default function ComingAnimes(){
                 }}
                 modules={[Autoplay]}
                 >
-                <SwiperSlide>
-                    <SliderItem url={'/assets/img/banner/comingAnimeMagicBattleSliderItem.jpg'}></SliderItem>
+                {banners.map((banner, index) => (
+                    <SwiperSlide>
+                        <SliderItem data={banner}/>
+                    </SwiperSlide>
+                ))}
 
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SliderItem url={'/assets/img/banner/comingAnimeMagicBattleSliderItem.jpg'}></SliderItem>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SliderItem url={'/assets/img/banner/comingAnimeMagicBattleSliderItem.jpg'}></SliderItem>
-                </SwiperSlide>
 
 
             </Swiper>

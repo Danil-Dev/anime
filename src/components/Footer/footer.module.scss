@@ -19,7 +19,8 @@
     border-bottom: white;
     border-width: 20px;
   }
-  padding: 30px 0;
+
+  margin-top: 10px;
   position: relative;
   bottom: 0;
   left: 0;
@@ -84,7 +85,6 @@
   }
 
   &_copyright{
-    padding: 18px 0;
     h2{
       font-size: 15px;
       color: #a8a7a7;

@@ -16,10 +16,11 @@
   }
   &_wrapper{
     flex-grow: 1;
+    margin-left: 20px;
 
     ul{
       display: flex;
-      flex-direction:  row;
+      flex-direction:column;
       flex-wrap: wrap;
       margin:auto 0;
       li{

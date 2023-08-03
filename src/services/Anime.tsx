@@ -26,6 +26,16 @@ export interface IAnimeData {
     seasons: ISeasonData[]
 }
 
+export interface IBannerData{
+    title: string,
+    genre: string[],
+    studio: string,
+    description: string,
+    link: string,
+    image: string,
+    image_banner:string
+}
+
 export interface IAnimeList{
     all_anime: IAnimeData[],
     title: string

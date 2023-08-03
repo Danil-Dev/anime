@@ -7,6 +7,8 @@ import {navLinks} from "@/routing";
 import {usePathname} from "next/navigation";
 import styles from './header.module.scss'
 import {Lilita_One} from "next/font/google";
+import DropdownMenu from "@/components/dropdownMenu";
+
 
 const lilita = Lilita_One({subsets: ['latin'], weight: ['400']})
 
@@ -27,18 +29,7 @@ export default function Header () {
                                 </Link>
                             </div>
                             <div className={styles.header_wrapper}>
-                                <ul>
-                                    {navLinks.map((link, index) => {
-                                        const isActive = pathname ==link.path
-                                        return (
-                                            <li key={index}>
-                                                <Link href={link.path} className={isActive ? 'active' : ''}>
-                                                    {link.name}
-                                                </Link>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
+                                <DropdownMenu/>
                             </div>
                         </nav>
 
