@@ -104,6 +104,11 @@ li{
   height: 100%;
 }
 
+.player_wide{
+  width: 100%  !important;
+  transition: width .2s cubic-bezier(.4,0,1,1);
+}
+
 
 
 
