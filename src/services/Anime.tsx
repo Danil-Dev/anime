@@ -1,4 +1,13 @@
 
+export interface IAnimeFoundData {
+    title: string,
+    id: string,
+    rating: number,
+    description: string,
+    image: string,
+    genre: string[],
+    release_date: string,
+}
 export interface IEpisodeData {
     episode_number: number,
     title: string,

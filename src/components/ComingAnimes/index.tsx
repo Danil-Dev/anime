@@ -20,7 +20,7 @@ export default function ComingAnimes({banners}: {banners: IBannerData[]}){
                 modules={[Autoplay]}
                 >
                 {banners.map((banner, index) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                         <SliderItem data={banner}/>
                     </SwiperSlide>
                 ))}
