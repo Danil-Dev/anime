@@ -1,0 +1,43 @@
+.episode{
+
+
+  &_info{
+    padding-top: 24px;
+
+    &_header{
+
+      a{
+        color: $primary-color;
+        font-weight: 500;
+      }
+
+      h2{
+
+      }
+
+    }
+    &_metadata{
+      padding: 8px 0;
+      display: flex;
+      width: 100%;
+    }
+    &_description{
+
+    }
+
+    &_episodes{
+      padding-top: 24px;
+
+      &_more_btn{
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      &_episode{
+        h2{
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

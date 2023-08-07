@@ -7,6 +7,7 @@ import {Calendar, Star} from "react-feather";
 import {VideoPlayer} from "@/components/Player";
 import {EpisodesList} from "@/components/EpisodesList";
 import {EpisodeArea} from "@/app/anime/[id]/EpisodeArea";
+import {EpisodeCard} from "@/components/EpisodeCard";
 export default async function SinglePage ({params: {id}} : {params: {id:string}}) {
 
     const anime = await AnimeService.getAnime(id)
@@ -49,7 +50,23 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     </div>
                 </div>
             </section>
-            <EpisodeArea anime={anime}/>
+
+            <section>
+
+            </section>
+            <section>
+                <div className="container">
+                    <div className="row">
+
+                        {episodes.map((episode , idx)=> (
+                            <EpisodeCard episode={episode} key={idx}/>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+
+
         </main>
     )
 

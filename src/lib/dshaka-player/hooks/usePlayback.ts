@@ -1,27 +1,40 @@
-import {RefObject, useCallback, useState} from "react";
+import {useEffect, useState} from "react";
+import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 
+export function usePlayback() {
+    const [isPlaying, setIsPlaying] = useState(false)
+    const {video} = useShaka()
 
-interface PlaybackProps{
-    videoRef: RefObject<HTMLVideoElement | null>
-}
+    const togglePlayback = () => {
 
-const usePlayback = ({videoRef}: PlaybackProps) => {
-    const [isPlaying, setIsPlaying] = useState<boolean>(false)
+        if (!video.duration) return;
 
-    const togglePlay = useCallback(() => {
-        const video = videoRef.current
-        if (video){
-            if (video.paused){
-                video.play()
-                setIsPlaying(true)
-            } else {
-                video.pause()
+        if(video.paused) video.play()
+        else video.pause()
+    }
+
+    useEffect(() => {
+        const playbackEventHandler = () => setIsPlaying(!video.paused)
+
+        const events = ['play', 'pause', 'waiting', 'seeking', 'seeked'];
+
+        events.forEach((event) => {
+            video.addEventListener(event, playbackEventHandler);
+        });
+
+        return () => {
+            if (video){
+                events.forEach((event) => {
+                    video.removeEventListener(event, playbackEventHandler)
+                })
             }
         }
-    }, [videoRef])
+
+    }, []);
 
 
-    return { isPlaying, togglePlay}
-}
-
-export default usePlayback
+    return {
+        isPlaying,
+        togglePlayback
+    }
+ }

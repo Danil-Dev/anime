@@ -1,32 +1,53 @@
-import {useEffect, useRef} from "react";
-import shaka from 'shaka-player'
+import {MutableRefObject, useEffect, useRef, useState} from "react";
+import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
+// @ts-ignore
+import shaka from "shaka-player";
 
 
-const useShakaPlayer = (url: string) => {
-    const videoRef = useRef<HTMLVideoElement>(null)
-    const playerRef = useRef<shaka.Player>(null)
+export function useShakaPlayer() {
+    const {video, setPlayer, player} = useShaka()
 
+    const [error, setError] = useState<shaka.util.Error | null>()
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
+
+    console.log('[ShakaPlayerHook]: Hooked', video)
 
     useEffect(() => {
-        const video = videoRef.current
-        if (!video) return;
 
-        const player = new shaka.Player(video)
+        console.log('[ShakaPlayerHook]: Mounting with props', video)
 
-        playerRef.current = player
-
-        player.load(url).catch((error) => {
-            console.error('Ошибка при загрузке видео:', error);
-        })
-
-        return () => {
-            playerRef.current?.destroy()
-            playerRef.current = null
+        const errorHandler = (event: shaka.util.Error | Event) => {
+            console.log('[ShakaPlayerHook]: Error', event)
+            if (event instanceof Event) return;
+            setError(event)
         }
-    }, [url]);
+
+        if (video){
+            console.log('[ShakaPlayerHook]: VideoElement found, start create Player')
+            const _player = new shaka.Player(video)
+            console.log('[ShakaPlayerHook]: Player created', _player)
+            setPlayer(_player)
+            _player.addEventListener('error', errorHandler)
+            setIsLoaded(true)
+        }
+
+        return ()=> {
+            console.log('[ShakaPlayerHook]: Unmount', video, player)
+            setIsLoaded(false)
+            setError(null)
+            if(player){
+                player.destroy()
+                setPlayer(null)
+            }
+        }
+
+    }, [video]);
 
 
-    return {videoRef, playerRef}
+    return {
+        error,
+        isLoaded,
+        player,
+        video
+    }
 }
-
-export default useShakaPlayer

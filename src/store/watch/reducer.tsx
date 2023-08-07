@@ -1,9 +1,0 @@
-
-
-interface WatchState {
-
-}
-
-const initialState = {
-
-}
