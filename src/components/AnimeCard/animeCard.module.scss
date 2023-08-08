@@ -8,11 +8,18 @@
     }
   }
   &_content{
+    border-radius: 10px;
+    min-width: 310px;
+    min-height: 50px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
 
     h2{
       font-size: 18px;
       margin: 0;
       font-weight: 700;
+
     }
 
   }
