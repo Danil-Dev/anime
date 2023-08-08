@@ -70,7 +70,11 @@ export const AnimeService = {
                 revalidate: 60
             }
         })
+        return res.json()
+    },
 
+    async searchAnime(search: string): Promise<IAnimeData[] | null>{
+        const res = await fetch(`${BASE_API_URL}/search?q=${search}`)
         return res.json()
     }
 
