@@ -6,7 +6,7 @@ export interface INavLink {
 export const navLinks : INavLink[] = [
     {
         name: 'Catalog',
-        path: '/anime'
+        path: '/catalog'
     },
     {
         name: 'Ongoing',
