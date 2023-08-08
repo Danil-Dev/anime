@@ -49,7 +49,6 @@ export default function Footer(){
                                 </ul>
                             </div>
                         </nav>
-
                     </div>
                     <div className={styles.footer_copyright}>
                         <h2>Copyright © 2023. All Rights Reserved By Aniverse</h2>
