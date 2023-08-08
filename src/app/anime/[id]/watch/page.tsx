@@ -1,8 +1,11 @@
-import {AnimeService} from "@/services/Anime";
+import {AnimeService, IAnimeData} from "@/services/Anime";
 import {CustomPlayer} from "@/components/CustomPlayer";
+import {useRouter} from "next/router";
+
+import {usePathname} from "next/navigation";
 
 
-export default async function WatchPage({params: {id}}: {params: {id: string}}) {
+export default async function WatchPage({params: {id}}: {params: {id: string, episode: string}}) {
 
     console.log('Watch', id)
 
@@ -10,16 +13,14 @@ export default async function WatchPage({params: {id}}: {params: {id: string}}) 
 
 
 
-
     return(
 
+        <CustomPlayer anime={anime}/>
 
-        <>
-            <CustomPlayer anime={anime}/>
-
-
-        </>
 
     )
 
 }
+
+
+

@@ -71,7 +71,7 @@ export function RangeSlider({min, max, step, value, loading, onChange, color=var
         <div className={styles.slider_wrapper}>
             <input type="range" min={min} max={max} step={step} defaultValue={value} ref={rangeRef} className={styles.slider_item}/>
             <div className={styles.slider_progress} style={{width: `${progress}%`, background: color}}></div>
-            {loading && <div className={styles.slider_loading} style={{width: `${loading}%`}}></div>}
+            {loading ? <div className={styles.slider_loading} style={{width: `${loading}%`}}></div> : null}
         </div>
     )
 }

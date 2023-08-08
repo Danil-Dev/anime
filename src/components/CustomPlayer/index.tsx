@@ -1,26 +1,37 @@
 'use client'
 import {IAnimeData} from "@/services/Anime";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAppDispatch} from "@/store/hooks";
-import {useEpisodeState} from "@/store/watch/hooks";
+import {useEpisodeState, useLastEpisode} from "@/store/watch/hooks";
 import {updateEpisode} from "@/store/watch/reducer";
 import {ShakaPlayer} from "@/lib/dshaka-player/components/ShakaPlayer";
 import styles from './watch.module.scss'
 import Link from "next/link";
 import {Eye, Star} from "react-feather";
 import {Tags} from "@/components/Tags";
-import Scrollbar from "react-scrollbars-custom";
 import {EpisodeItem} from "@/components/EpisodesList/EpisodeItem";
+import {useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
-export function CustomPlayer ({anime}: {anime: IAnimeData}) {
+interface CustomPlayerProps{
+    anime: IAnimeData,
+}
 
+export function CustomPlayer ({anime}: CustomPlayerProps) {
 
-    const [currentEpisode, setCurrentEpisode] = useState<number>(0)
+    const searchParams = useSearchParams()
+
+    const episodeFromQuery = searchParams.get('ep')
+    const episodeSave = useLastEpisode(anime.id)
+    console.log('EpisodeSave:',episodeFromQuery, episodeFromQuery ? +episodeFromQuery : episodeSave ? episodeSave.episodeNumber : 0)
+
+    const [currentEpisode, setCurrentEpisode] = useState<number>(episodeFromQuery ? +episodeFromQuery : episodeSave ? episodeSave.episodeNumber : 0)
     const [currentSeason, setCurrentSeason] =  useState<number>(0)
     const isLastEpisode = !Boolean(anime.seasons[currentSeason].episodes[currentEpisode + 1])
-    const episode = anime.seasons[currentSeason].episodes[currentEpisode]
+    const episodeData = anime.seasons[currentSeason].episodes[currentEpisode]
     const dispatch = useAppDispatch()
     const episodeInfo = useEpisodeState(anime.id, currentEpisode)
+    const router =useRouter()
     const handleOnmountPlayer = (video: HTMLVideoElement) => {
         // console.log('Player onmount', player, video)
         // console.log('Curr time', video.currentTime)
@@ -43,18 +54,20 @@ export function CustomPlayer ({anime}: {anime: IAnimeData}) {
 
     }
     const handleChangeEpisode = ( number : number) => {
-        console.log('Change episode to ', number)
         setCurrentEpisode(number)
-        console.log(currentEpisode, anime.seasons[currentSeason].episodes[currentEpisode])
+        if (episodeFromQuery){
+            router.replace(`/anime/${anime.id}/watch`)
+        }
+
     }
 
 
     return (
         <>
             <ShakaPlayer
-                url={episode.video}
-                start={episode.start}
-                end={episode.end}
+                url={episodeData.video}
+                start={episodeData.start}
+                end={episodeData.end}
                 onOnmountPlayer={handleOnmountPlayer}
                 onEnd={onEnd}
                 currentTime={episodeInfo? episodeInfo.time: null}
@@ -68,7 +81,7 @@ export function CustomPlayer ({anime}: {anime: IAnimeData}) {
                                 <Link href={`/anime/${anime.id}/`}>
                                     {anime.title}
                                 </Link>
-                                <h2>E{episode.episode_number} - {episode.title}</h2>
+                                <h2>E{episodeData.episode_number} - {episodeData.title}</h2>
                                 <div className={styles.episode_info_metadata}>
                                     <div>
                                         <Tags tags={anime.genre}/>
@@ -115,3 +128,5 @@ export function CustomPlayer ({anime}: {anime: IAnimeData}) {
 
     )
 }
+
+
