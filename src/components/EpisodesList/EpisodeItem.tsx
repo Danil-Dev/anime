@@ -1,6 +1,7 @@
 import {IEpisodeData} from "@/services/Anime";
 import styles from './episodesList.module.scss'
-import {Clock, Play} from "react-feather";
+import Image from "next/image";
+
 
 export const EpisodeItem = ({episode, handleChangeEpisode} : {episode: IEpisodeData, handleChangeEpisode: (number : number) => void}) => {
 
@@ -9,14 +10,15 @@ export const EpisodeItem = ({episode, handleChangeEpisode} : {episode: IEpisodeD
 
     return (
         <li className={styles.episodes_wrapper_episode} onClick={() => {handleChangeEpisode(episode.episode_number)}}>
-            <span className={styles.episodes_wrapper_episode_title}>
-                <Play/>
-                Episode {episode.episode_number} — {episode.title}
-            </span>
-            <span className={styles.episodes_wrapper_episode_duraction}>
-                <Clock/>
-                {time[1]} min {time[2]} s
-            </span>
+            <div className={styles.episodes_wrapper_episode_thumb}>
+
+                <Image src={episode.image_thumb} alt={episode.title} width={160} height={90}/>
+
+            </div>
+            <div className={styles.episodes_wrapper_episode_info}>
+                <h3>Episode {episode.episode_number}</h3>
+                <p>{episode.title}</p>
+            </div>
         </li>
     )
 }

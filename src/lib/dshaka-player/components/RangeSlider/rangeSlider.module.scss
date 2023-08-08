@@ -1,0 +1,34 @@
+.slider{
+
+   &_wrapper{
+     position: relative;
+   }
+
+  &_item{
+    width: 100%;
+    position: relative;
+    z-index: 20;
+  }
+
+  &_progress{
+    background: $primary-color;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    height: 4px;
+    z-index: 15;
+    border-radius: 2px;
+  }
+  &_loading{
+    background: #fff;
+    position: absolute;
+    opacity: 0.48;
+    top: 8px;
+    left: 0;
+    height: 4px;
+    z-index: 10;
+    border-radius: 2px;
+  }
+
+}
+

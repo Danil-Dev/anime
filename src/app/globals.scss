@@ -90,7 +90,7 @@ body {
 
 body {
   color: #fff;
-  background-color: #000 !important;
+  background-color: #0f0f0f;
 
 }
 
@@ -106,10 +106,90 @@ li{
   width: 100%;
   height: 100%;
 }
+
 /* reset */
 button {
   all: unset;
 }
+
+
+.player_wide{
+  width: 100%  !important;
+  transition: width .2s cubic-bezier(.4,0,1,1);
+}
+
+
+input[type="range"]{
+  -webkit-appearance: none;
+  //appearance: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+
+
+input[type="range"]::-webkit-slider-runnable-track, input[type="range"]::-moz-range-track  {
+  background: #fff;
+  opacity: 0.28;
+  height: 5px;
+  border-radius: 2px;
+}
+input[type="range"]::-webkit-slider-thumb, input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -12px; /* Centers thumb on the track */
+  border: none;
+  background-color: $primary-color;
+  height: 10px;
+  width: 10px;
+  visibility: hidden;
+  opacity: 0;
+}
+.ScrollbarsCustom-Wrapper{
+  width: 100%;
+  height: 100%;
+}
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY{
+
+  position: absolute;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  user-select: none;
+  width: 5px;
+  height: calc(100% - 20px);
+  top: 10px;
+  right: 0px;
+  .ScrollbarsCustom-Thumb.ScrollbarsCustom-ThumbY{
+    cursor: pointer;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+
+    background: $border-color;
+  }
+}
+
+button{
+  background: $primary-color;
+  color: $black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: 500;
+
+}
+
+/***** Firefox *****/
+//input[type="range"]::-moz-range-thumb {
+//
+//  background-color: #5cd5eb;
+//  height: 10px;
+//  width: 10px;
+//  border-radius: 10px;
+//}
+
 
 
 

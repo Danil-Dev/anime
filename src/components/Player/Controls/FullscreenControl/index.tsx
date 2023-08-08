@@ -1,6 +1,6 @@
 import {useRef} from "react";
 import {useFullScreen, useOrientation} from "@/lib/limeplay-core/";
-import styles from './fulscreenControl.module.scss'
+import styles from './fullscreenControl.module.scss'
 import {Maximize, Minimize} from "react-feather";
 
 

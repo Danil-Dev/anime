@@ -10,10 +10,14 @@ export interface IAnimeFoundData {
 }
 export interface IEpisodeData {
     episode_number: number,
+    start: number,
+    end: number,
     title: string,
     description: string,
     video: string,
-    duration: string
+    duration: string,
+    image_thumb: string
+
 }
 
 export interface ISeasonData {

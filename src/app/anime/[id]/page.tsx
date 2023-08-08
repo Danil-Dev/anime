@@ -4,9 +4,8 @@ import styles from './singleAnime.module.scss'
 import Image from "next/image";
 import {Tags} from "@/components/Tags";
 import {Calendar, Star} from "react-feather";
-import {VideoPlayer} from "@/components/Player";
-import {EpisodesList} from "@/components/EpisodesList";
-import {EpisodeArea} from "@/app/anime/[id]/EpisodeArea";
+
+import {EpisodeCard} from "@/components/EpisodeCard";
 export default async function SinglePage ({params: {id}} : {params: {id:string}}) {
 
     const anime = await AnimeService.getAnime(id)
@@ -40,16 +39,70 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                                         <p>{anime.rating}</p>
                                     </div>
                                 </div>
-
                                 <div className={styles.single_anime_details_content_description}>
                                     <p>{anime.description}</p>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <EpisodeArea anime={anime}/>
+
+            <section className={styles.single_anime_info}>
+                <div className="container">
+                    <div className="row">
+
+                        <div className="col-md-8">
+                            <div className={styles.single_anime_info_metadata}>
+                                <h2>{anime.title}</h2>
+                                <div className={styles.single_anime_info_metadata_item}>
+                                    <span>Studio</span>
+                                    <span>Bind</span>
+                                </div>
+                                <div className={styles.single_anime_info_metadata_item}>
+                                    <span>Audio</span>
+                                    <span>Amanogawa, Amanogawa, Amanogawa</span>
+                                </div>
+                                <div className={styles.single_anime_info_metadata_item}>
+                                    <span>Language</span>
+                                    <span>English, Ukrainian</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <h3>Current episode</h3>
+                            <EpisodeCard episode={anime.seasons[0].episodes[1]} animeId={anime.id}/>
+                        </div>
+
+
+                        <div className={styles.single_anime_episodes}>
+
+                            <h3>Episodes</h3>
+
+                            <div className={styles.single_anime_episodes_wrapper}>
+                                {episodes.map((episode , idx)=> (
+                                    <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
+                                ))}
+                                {episodes.map((episode , idx)=> (
+                                    <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
+                                ))}{episodes.map((episode , idx)=> (
+                                <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
+                            ))}{episodes.map((episode , idx)=> (
+                                <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
+                            ))}
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+
         </main>
     )
 

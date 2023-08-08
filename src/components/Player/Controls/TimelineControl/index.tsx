@@ -16,7 +16,7 @@ export type OnSliderHandlerProps = {
     skipSize?: number;
 };
 
-export function TimelineControl() {
+export function TimelineControl({isHidden}: {isHidden: boolean}) {
 
     const elementRef = useRef<HTMLDivElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -48,7 +48,7 @@ export function TimelineControl() {
     })
 
     return (
-        <div className={styles.timeline_wrapper} ref={containerRef}>
+        <div className={!isHidden ? styles.timeline_wrapper + ' ' + styles.visible : styles.timeline_wrapper} ref={containerRef}>
             {/*<CurrentTime isLive={isLive} player={player} duration={duration} currentTime={currentTime} liveLatency={liveLatency}/>*/}
             <Slider.Root
                 value={[isSliding? value: currentTime]}
