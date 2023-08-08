@@ -9,5 +9,15 @@ export function usePlayerLayoutType(): PlayerLayoutType{
 export function useTogglePlayerLayout() : () => void {
     const layout = usePlayerLayoutType()
     const dispatch = useAppDispatch()
-    return  useCallback( () => dispatch(updatePlayerLayout(layout === PlayerLayoutType.NORMAl ? PlayerLayoutType.WIDE : PlayerLayoutType.NORMAl)), [dispatch, layout])
+    return  useCallback( () => {
+        const player = document.getElementById('limeplay-player')
+        console.log(player)
+        if (layout === PlayerLayoutType.NORMAl){
+            player.classList.add('player_wide')
+        }
+        else{
+            player.classList.remove('player_wide')
+        }
+        dispatch(updatePlayerLayout(layout === PlayerLayoutType.NORMAl ? PlayerLayoutType.WIDE : PlayerLayoutType.NORMAl))
+    }, [dispatch, layout])
 }

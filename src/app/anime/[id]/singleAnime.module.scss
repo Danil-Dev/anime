@@ -60,13 +60,66 @@
     }
   }
 
-  &_episodes{
+  &_player{
+    padding: 50px 0;
     &_wrapper{
       display: flex;
+      //align-items: center;
       flex-wrap: wrap;
     }
-    &_list{
-      width: 50%;
+
+  }
+  &_info{
+    padding: 30px 0;
+
+    &_metadata{
+
+      h2{
+        margin-bottom: 24px;
+      }
+
+      &_item{
+        display: flex;
+        //width: 70%;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 18px;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $border-color;
+        span:nth-child(1){
+          font-weight: 600;
+        }
+        span:nth-child(2){
+          text-align: right;
+        }
+      }
     }
   }
+
+  &_episodes{
+
+    padding: 30px;
+
+    h3{
+      padding-bottom: 15px;
+    }
+
+    &_wrapper{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+    }
+  }
+
+}
+
+.player_overlay_wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
 }

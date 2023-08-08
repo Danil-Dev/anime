@@ -10,7 +10,7 @@ export interface ApplicationState {
 }
 
 const initialState: ApplicationState = {
-    player_layout: PlayerLayoutType.NORMAl
+    player_layout: PlayerLayoutType.WIDE
 }
 
 const applicationSlide = createSlice({

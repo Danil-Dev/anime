@@ -1,16 +1,20 @@
 import {useShakaPlayer} from "@limeplay/shaka-player";
-import {usePlayback} from "@/lib/limeplay-core/";
+import {useLimeplay, usePlayback} from "@/lib/limeplay-core/";
 import styles from './playbackControl.module.scss'
 import {Pause, Play} from "react-feather";
 
 export const PlaybackControl = () => {
-    const {isPlaying, togglePlayback} = usePlayback()
+    const { togglePlayback} = usePlayback()
+    const {playback} = useLimeplay()
+
+    const isPlay = !playback.paused
+
 
 
     return (
         <div className={styles.playback_control}>
-            <button onClick={togglePlayback} aria-label={isPlaying ? 'Pause' : 'Play'}>
-                {isPlaying? <Pause size={24}/> : <Play size={24}/> }
+            <button onClick={togglePlayback} aria-label={isPlay ? 'Pause' : 'Play'}>
+                {isPlay? <Pause size={24}/> : <Play size={24}/> }
             </button>
         </div>
     )
