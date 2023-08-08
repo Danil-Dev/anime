@@ -26,9 +26,8 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
     console.log('EpisodeSave:',episodeFromQuery, episodeFromQuery ? +episodeFromQuery : episodeSave ? episodeSave.episodeNumber : 0)
 
     const [currentEpisode, setCurrentEpisode] = useState<number>(episodeFromQuery ? +episodeFromQuery : episodeSave ? episodeSave.episodeNumber : 0)
-    const [currentSeason, setCurrentSeason] =  useState<number>(0)
-    const isLastEpisode = !Boolean(anime.seasons[currentSeason].episodes[currentEpisode + 1])
-    const episodeData = anime.seasons[currentSeason].episodes[currentEpisode]
+    const isLastEpisode = !Boolean(anime.episodes[currentEpisode + 1])
+    const episodeData = anime.episodes[currentEpisode]
     const dispatch = useAppDispatch()
     const episodeInfo = useEpisodeState(anime.id, currentEpisode)
     const router =useRouter()
@@ -49,7 +48,7 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
     }
     const onEnd = () => {
         console.log('[ShakaPlayer]: Video is end')
-        console.log('[ShakaPlayer]: Next Episode', anime.seasons[currentSeason].episodes[currentEpisode + 1])
+        console.log('[ShakaPlayer]: Next Episode', anime.episodes[currentEpisode + 1])
         setCurrentEpisode(currentEpisode + 1)
 
     }
@@ -100,14 +99,14 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                             {!isLastEpisode && (
                                 <div className={styles.episode_info_episodes_episode}>
                                     <h2>Next episode</h2>
-                                    <EpisodeItem episode={anime.seasons[currentSeason].episodes[currentEpisode + 1]} handleChangeEpisode={handleChangeEpisode}/>
+                                    <EpisodeItem episode={anime.episodes[currentEpisode + 1]} handleChangeEpisode={handleChangeEpisode}/>
                                 </div>
                             )}
                             {currentEpisode !== 0 && (
 
                                 <div className={styles.episode_info_episodes_episode}>
                                     <h2>Prev episode</h2>
-                                    <EpisodeItem episode={anime.seasons[currentSeason].episodes[currentEpisode - 1]} handleChangeEpisode={handleChangeEpisode}/>
+                                    <EpisodeItem episode={anime.episodes[currentEpisode - 1]} handleChangeEpisode={handleChangeEpisode}/>
                                 </div>
                             )}
                             <Link href={`/anime/${anime.id}`}>

@@ -20,12 +20,6 @@ export interface IEpisodeData {
 
 }
 
-export interface ISeasonData {
-    season_number: number,
-    season_image: string,
-    episodes: IEpisodeData[]
-}
-
 
 export interface IAnimeData {
     title: string,
@@ -36,7 +30,7 @@ export interface IAnimeData {
     genre: string[],
     release_date: string,
     image_banner: string,
-    seasons: ISeasonData[]
+    episodes: IEpisodeData[]
 }
 
 export interface IBannerData{

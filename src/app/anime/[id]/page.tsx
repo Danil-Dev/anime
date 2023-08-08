@@ -10,7 +10,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const anime = await AnimeService.getAnime(id)
     const pretty_date = new Date(anime.release_date).getFullYear()
-    const episodes = anime.seasons[0].episodes
+    const episodes = anime.episodes
     console.log(pretty_date)
     console.log(anime)
 
@@ -24,7 +24,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                                 <Image src={anime.image} alt={anime.title} width={300} height={430}/>
                             </div>
                         </div>
-                        <div className="col-xl-6 col-lg-8">
+                        <div className="col-xl-9 col-lg-8">
                             <div className={styles.single_anime_details_content}>
                                 <h5>無職転生 Ⅱ ～異世界行ったら本気だす～ </h5>
                                 <h2>{anime.title}</h2>
@@ -74,7 +74,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         </div>
                         <div className="col-md-4">
                             <h3>Current episode</h3>
-                            <EpisodeCard episode={anime.seasons[0].episodes[1]} animeId={anime.id}/>
+                            <EpisodeCard episode={anime.episodes[1]} animeId={anime.id}/>
                         </div>
 
 
@@ -86,13 +86,6 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                                 {episodes.map((episode , idx)=> (
                                     <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
                                 ))}
-                                {episodes.map((episode , idx)=> (
-                                    <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
-                                ))}{episodes.map((episode , idx)=> (
-                                <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
-                            ))}{episodes.map((episode , idx)=> (
-                                <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
-                            ))}
                             </div>
 
                         </div>
