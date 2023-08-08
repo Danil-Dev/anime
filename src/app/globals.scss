@@ -146,6 +146,9 @@ input[type="range"]::-webkit-slider-thumb, input[type="range"]::-moz-range-thumb
   visibility: hidden;
   opacity: 0;
 }
+.ScrollbarsCustom{
+  overflow: hidden;
+}
 .ScrollbarsCustom-Wrapper{
   width: 100%;
   height: 100%;

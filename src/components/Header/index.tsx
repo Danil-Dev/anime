@@ -7,7 +7,7 @@ import {navLinks} from "@/routing";
 import {usePathname} from "next/navigation";
 import styles from './header.module.scss'
 import {Lilita_One} from "next/font/google";
-import SearchComponent from '@/components/SearchComponent'
+import SearchComponent from '../Search'
 
 
 const lilita = Lilita_One({subsets: ['latin'], weight: ['400']})
