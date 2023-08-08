@@ -18,7 +18,7 @@ export default function SearchCard({data, onClick}: SearchCardProps) {
 
     }
     return (
-        <Link onClick={handleClick} href={`/anime/${data.id}`}>
+        <Link onClick={handleClick} className={styles.searchCard} href={`/anime/${data.id}`}>
             <div className={styles.searchCard_wrapper}>
                 <div className={styles.searchCard_img_wrapper}>
                     <Image src={data.image} alt={data.title} width={90} height={130}/>
