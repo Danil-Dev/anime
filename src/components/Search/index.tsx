@@ -39,7 +39,7 @@ export default function SearchComponent() {
 
             if (!isLoading) {
                 setIsLoading(true)
-                AnimeService.searchAnime(search).then((data) => {
+                AnimeService.searchAnime(target.value).then((data) => {
                     console.log("Searched", data)
                     setSearchAnime(data)
                     setIsLoading(false)
@@ -95,17 +95,28 @@ export default function SearchComponent() {
                 <div style={{width: '$'}} className={styles.modal}>
                     <div className={styles.modal_content} ref={contentRef}>
                         <div className={styles.modal_content_searchBar}>
-                            <input
-                                type="text"
-                                onChange={handleChangeSearch}
-                                placeholder={'Search'}
-                                ref={inputRef}
-                            />
+                            <div className={styles.modal_content_searchBar_input_wrapper} data-search={search.length >= 3}>
+                                <div className={styles.modal_content_searchBar_input_wrapper_content}>
+                                    <input
+                                        type="text"
+                                        onChange={handleChangeSearch}
+                                        placeholder={'Start typing anime...'}
+                                        ref={inputRef}
+                                    />
+
+                                    <div className={styles.modal_content_searchBar_input_wrapper_icon}>
+                                        {isLoading  ? (
+                                            <div className={styles.loader}></div>
+                                        ) : <Search size={24}/>}
+                                    </div>
+                                </div>
+
+                            </div>
+
 
 
 
                             <div className={styles.modal_content_searchBar_result}>
-                                {isLoading && (<h1>Loading...</h1>)}
                                 {search.length > 3 && searchAnime.length == 0 && (
                                     <div className={styles.modal_content_searchBar_result_content}>
                                         <div className={styles.modal_content_searchBar_result_content_notFound}>
@@ -130,6 +141,10 @@ export default function SearchComponent() {
                                                     {searchAnime.map((anime, idx) => (
                                                         <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
                                                     ))}
+                                                    {searchAnime.map((anime, idx) => (
+                                                        <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
+                                                    ))}
+
                                                 </div>
                                         )}
 
