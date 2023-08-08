@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import {ReduxProvider} from "@/providers/ReduxProvider";
+import {ShakaProvider} from "@/lib/dshaka-player/components/ShakaProvider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,9 +25,12 @@ export default function RootLayout({
     <html lang="ua">
       <body >
         <ReduxProvider>
-            <Header/>
-            {children}
-          <Footer/>
+            <ShakaProvider>
+                <Header/>
+                {children}
+                <Footer/>
+            </ShakaProvider>
+
         </ReduxProvider>
 
       </body>
