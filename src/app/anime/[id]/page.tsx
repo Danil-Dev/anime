@@ -14,6 +14,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
     console.log(pretty_date)
     console.log(anime)
 
+
     return (
         <main>
             <section className={styles.single_anime_details} style={{backgroundImage: `url("${anime.image_banner}")`}}>
@@ -82,7 +83,14 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
                             <h3>Episodes</h3>
 
+                            {episodes.length === 0 && (
+                                <>
+                                    <h1>Episodes Data not found</h1>
+                                </>
+                            )}
+
                             <div className={styles.single_anime_episodes_wrapper}>
+
                                 {episodes.map((episode , idx)=> (
                                     <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
                                 ))}

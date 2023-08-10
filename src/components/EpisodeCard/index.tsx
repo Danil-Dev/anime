@@ -10,6 +10,13 @@ interface EpisodeCardProps {
 export function EpisodeCard ({episode, animeId}: EpisodeCardProps) {
 
 
+    if (!episode) return (
+        <>
+            <h1>No episode Data</h1>
+        </>
+    )
+
+
     return(
         <div className={styles.episodeCard}>
             <Link href={`/anime/${animeId}/watch?ep=${episode.episode_number}`}>

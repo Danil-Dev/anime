@@ -1,0 +1,16 @@
+.breadcrumbs{
+  a, span {
+    color: $second-text-color;
+    transition: color .2s ease-in-out;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14px;
+  }
+  a:hover{
+    color: $primary-color;
+  }
+  span{
+    display: inline-block;
+    margin: 0 10px;
+  }
+}

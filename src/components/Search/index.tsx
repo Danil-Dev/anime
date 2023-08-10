@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import styles from './searchComponent.module.scss';
-import {AnimeList} from "@/components/AnimeList";
-import {AnimeService, IAnimeData, IAnimeFoundData} from "@/services/Anime";
+import {AnimeService, IAnimeData} from "@/services/Anime";
 import SearchCard from "@/components/Search/SearchCard";
 import {Search} from "react-feather";
 import {Scrollbar} from "react-scrollbars-custom";
 import pageScrollDisabled from "@/utils/pageScrollDisabled";
+import {Button, Text, Box, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
 
 export default function SearchComponent() {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +14,8 @@ export default function SearchComponent() {
     const [search, setSearch] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [searchAnime, setSearchAnime] = useState<IAnimeData[]>([])
+
+    const [searchResultHeight, setSearchResultHeight] = useState<number>(1)
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +45,12 @@ export default function SearchComponent() {
                     console.log("Searched", data)
                     setSearchAnime(data)
                     setIsLoading(false)
+                    if (data.length >= 1){
+
+                        setSearchResultHeight(380)
+                    }else {
+                        setSearchResultHeight(80)
+                    }
 
                 })
             }
@@ -50,6 +58,7 @@ export default function SearchComponent() {
         }
         else {
             setSearchAnime([])
+            setSearchResultHeight(0)
         }
 
     }
@@ -75,6 +84,8 @@ export default function SearchComponent() {
         }
     }, []);
 
+    console.log(search.length >= 3 , searchAnime.length >= 1)
+
     useEffect(() => {
         if (isOpen && inputRef.current){
             inputRef.current.focus()
@@ -83,40 +94,103 @@ export default function SearchComponent() {
     return (
 
         <>
-            <button
-                className={styles.btnModal}
-                onClick={toggleIsOpen}
-                ref={buttonRef}
+            <Box
+                borderRadius={12}
+                backdropFilter={'blur(60px)'}
+                overflow={'hidden'}
+                position={'relative'}
+                zIndex={3}
             >
-                <Search size={22}/>
-                Search...
-            </button>
+                <Button
+                    ref={buttonRef}
+                    onClick={toggleIsOpen}
+                    leftIcon={<Search size={16}/> }
+                    bg={'none'}
+                    width={'100%'}
+                    h={'40px'}
+                    backdropFilter={'blur(60px)'}
+                    borderWidth={'1px'}
+                    borderRadius={'12px'}
+                    backgroundColor={'searchBackground'}
+                    borderColor={'searchOutline'}
+                    padding={'6px 16px'}
+                    zIndex={'auto'}
+                    display={'flex'}
+                    gap={'12px'}
+                    justifyContent={'flex-start'}
+                    _before={{
+                        opacity: 0,
+                        transition: 'opacity .25s ease-out',
+                        bg: 'linear-gradient(91.46deg,#4673fa,#9646fa 100.13%) border-box',
+                        border: '1px solid transparent',
+                        content: '" "',
+                        position: 'absolute',
+                        inset: '-1px',
+                        ['-webkit-mask']: 'linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0)',
+                        maskComposite: 'exclude',
+                        w: '100%',
+                        h: '100%',
+                        borderRadius: 'inherit'
+
+
+
+
+                    }}
+                    _hover = {{
+                        _before:{
+                            opacity: 1
+                        }
+                    }}
+
+                >
+                    <Text mb={0} fontWeight={300} color={'textSecondary'}>
+                        Search the anime...
+                    </Text>
+
+                </Button>
+            </Box>
+
             {isOpen && (
                 <div style={{width: '$'}} className={styles.modal}>
                     <div className={styles.modal_content} ref={contentRef}>
                         <div className={styles.modal_content_searchBar}>
-                            <div className={styles.modal_content_searchBar_input_wrapper} data-search={search.length >= 3}>
-                                <div className={styles.modal_content_searchBar_input_wrapper_content}>
-                                    <input
-                                        type="text"
-                                        onChange={handleChangeSearch}
-                                        placeholder={'Start typing anime...'}
-                                        ref={inputRef}
-                                    />
-
-                                    <div className={styles.modal_content_searchBar_input_wrapper_icon}>
-                                        {isLoading  ? (
-                                            <div className={styles.loader}></div>
-                                        ) : <Search size={24}/>}
-                                    </div>
-                                </div>
-
-                            </div>
 
 
+                                <Box
+                                    pos={'relative'}
+                                    px={'12px'}
+                                    borderColor={search.length >= 3 ? 'backgroundInteractive': 'none'}
+                                    borderBottomWidth={search.length >= 3 ? '1px' : '0'}
+                                >
+                                    <InputGroup >
+                                        <InputLeftElement pointerEvents='none'>
+                                            <Search size={24}/>
+                                        </InputLeftElement>
+                                        <Input
+
+                                            type="text"
+                                            outline={'none'}
+                                            color={'white'}
+                                            size={'lg'}
+                                            variant={'unstyled'}
+                                            onChange={handleChangeSearch}
+                                            placeholder={'Start typing anime...'}
+                                            ref={inputRef}
+                                            h={'42px'}
+                                            _placeholder={{
+                                                color: 'white'
+                                            }}
+                                        />
+                                    </InputGroup>
+                                </Box>
 
 
-                            <div className={styles.modal_content_searchBar_result}>
+
+
+
+
+
+                            <div className={`${styles.modal_content_searchBar_result} ${search.length >= 3 ? styles.modal_content_searchBar_result_visible : ''}`} style={{height: searchResultHeight}}>
                                 {search.length > 3 && searchAnime.length == 0 && (
                                     <div className={styles.modal_content_searchBar_result_content}>
                                         <div className={styles.modal_content_searchBar_result_content_notFound}>
@@ -127,9 +201,18 @@ export default function SearchComponent() {
                                 {!isLoading && searchAnime.length > 0 && (
 
                                     <>
-                                        {searchAnime.length > 2 ? (
+                                        {searchAnime.length >= 1 ? (
                                             <Scrollbar className={styles.modal_content_searchBar_result_content} noDefaultStyles style={{width: '100%', height: '380px'}}>
                                                 <>
+                                                    {searchAnime.map((anime, idx) => (
+                                                        <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
+                                                    ))}
+                                                    {searchAnime.map((anime, idx) => (
+                                                        <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
+                                                    ))}
+                                                    {searchAnime.map((anime, idx) => (
+                                                        <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
+                                                    ))}
                                                     {searchAnime.map((anime, idx) => (
                                                         <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
                                                     ))}
@@ -141,6 +224,10 @@ export default function SearchComponent() {
                                                     {searchAnime.map((anime, idx) => (
                                                         <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
                                                     ))}
+                                                    {searchAnime.map((anime, idx) => (
+                                                        <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
+                                                    ))}
+
                                                     {searchAnime.map((anime, idx) => (
                                                         <SearchCard onClick={closeSearchModal} key={idx} data={anime}/>
                                                     ))}

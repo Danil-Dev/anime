@@ -282,7 +282,7 @@ var require_o9n = __commonJS({
   }
 });
 
-// src/index.ts
+// src/index.tsx
 var src_exports = {};
 __export(src_exports, {
   LimeplayProvider: () => LimeplayProvider,

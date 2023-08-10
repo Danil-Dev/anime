@@ -44,14 +44,15 @@ export interface IBannerData{
 }
 
 export interface IAnimeList{
-    all_anime: IAnimeData[],
-    title: string
+    animeList: IAnimeData[],
+    title: string,
+    link: string
 }
 export interface IAnimeSingle {
     anime: IAnimeData
 }
 
-const BASE_API_URL = 'http://localhost:3301'
+ export const BASE_API_URL = 'http://localhost:3301'
 
 export const AnimeService = {
     async getAllAnime () : Promise<IAnimeData[]> {
@@ -76,6 +77,24 @@ export const AnimeService = {
     async searchAnime(search: string): Promise<IAnimeData[] | null>{
         const res = await fetch(`${BASE_API_URL}/search?q=${search}`)
         return res.json()
+    },
+
+    async getCatalog(catalog: string): Promise<IAnimeData[]>{
+        console.log('Get catalog', catalog)
+
+        const res = await fetch(`${BASE_API_URL}/${catalog}`)
+
+        return res.json()
+    },
+
+    async getCategory (category: string): Promise<IAnimeData[]>{
+
+        console.log(`${BASE_API_URL}/category/${category}`)
+
+        const res = await fetch(`${BASE_API_URL}/anime/category/${category}`)
+
+        return  res.json()
     }
+
 
 }

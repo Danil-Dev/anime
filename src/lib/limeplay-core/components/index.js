@@ -26,7 +26,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/components/index.ts
+// src/components/index.tsx
 var components_exports = {};
 __export(components_exports, {
   LimeplayProvider: () => LimeplayProvider,

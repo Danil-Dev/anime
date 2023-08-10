@@ -1,11 +1,9 @@
-import React from "react";
-import styles from './catalog.module.scss'
 import CatalogArea from "@/components/CatalogArea";
+import React from "react";
+import styles from '../catalog.module.scss'
 import Breadcrumbs, {BreadcrumbsLink} from "@/components/ Breadcrumbs/Breadcrumbs";
 
-
-
-export default function CatalogPage() {
+export default function CatalogGenrePage ({params: {genre}} : {params: {genre:string}}) {
 
 
     const links: BreadcrumbsLink[] = [
@@ -17,7 +15,12 @@ export default function CatalogPage() {
             title: 'Категорії',
             link: '/catalog'
         },
+        {
+            title: decodeURIComponent(genre),
+            link: `/catalog/${decodeURIComponent(genre)}`
+        },
     ]
+
 
     return (
         <main>
@@ -25,9 +28,8 @@ export default function CatalogPage() {
 
                 <div className="container">
                     <div className={styles.catalog_page_head}>
-                        <h2>Каталог аниме</h2>
-
-                        <Breadcrumbs links={links} delimiter={'/'}/>
+                        <h2>Каталог аниме | {decodeURIComponent(genre)}</h2>
+                        <Breadcrumbs links={links} delimiter={'|'}/>
                     </div>
                 </div>
 

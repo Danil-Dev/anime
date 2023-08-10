@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/next-js": "^2.1.5",
+    "@chakra-ui/react": "^2.8.0",
     "@cloudflare/stream-react": "^1.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@limeplay/shaka-player": "^1.0.0",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
@@ -28,10 +32,12 @@
     "bootstrap": "^5.3.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "framer-motion": "^10.15.1",
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "next": "13.4.12",
     "npm": "^9.8.1",
+    "polished": "^4.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
@@ -47,6 +53,7 @@
     "shaka-player-react": "^1.1.5",
     "styled-components": "^6.0.5",
     "swiper": "^10.0.4",
+    "swr": "^2.2.0",
     "typescript": "5.1.6",
     "usehooks-ts": "^2.9.1"
   }

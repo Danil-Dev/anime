@@ -7,27 +7,37 @@ import {Autoplay} from "swiper/modules";
 import SliderItem from "@/components/ComingAnimes/SliderItem";
 import styles from './comingAnimes.module.scss'
 import {IBannerData} from "@/services/Anime";
+import {Box} from "@chakra-ui/layout";
+import {Container} from "@chakra-ui/react";
 
 
 export default function ComingAnimes({banners}: {banners: IBannerData[]}){
     return(
-        <section>
-            <Swiper className={styles.banner_wrapper}
-                slidesPerView={1}
-                autoplay={{
-                    delay:2500
-                }}
-                modules={[Autoplay]}
+
+
+
+        <Box bgColor={'backgroundBackdrop'} p={'80px 0'}>
+            <Container maxW={'container.xl'}>
+                <Swiper className={styles.banner_wrapper}
+                        slidesPerView={1}
+                        speed={2500}
+                    // autoplay={{
+                    //     disableOnInteraction: false,
+                    //     delay:2500
+                    // }}
+                        modules={[Autoplay]}
                 >
-                {banners.map((banner, index) => (
-                    <SwiperSlide key={index}>
-                        <SliderItem data={banner}/>
-                    </SwiperSlide>
-                ))}
+                    {banners.map((banner, index) => (
+                        <SwiperSlide key={index}>
+                            <SliderItem data={banner}/>
+                        </SwiperSlide>
+                    ))}
 
 
 
-            </Swiper>
-        </section>
+                </Swiper>
+            </Container>
+        </Box>
+
     )
 }

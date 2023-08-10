@@ -282,7 +282,7 @@ var require_o9n = __commonJS({
   }
 });
 
-// src/hooks/index.ts
+// src/hooks/index.tsx
 var hooks_exports = {};
 __export(hooks_exports, {
   languageParser: () => languageParser,

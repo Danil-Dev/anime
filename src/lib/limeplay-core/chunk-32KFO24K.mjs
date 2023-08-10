@@ -1,4 +1,4 @@
-// src/utils/index.ts
+// src/utils/index.tsx
 var on = (target, eventNames, listener, options) => {
   if (Array.isArray(eventNames)) {
     eventNames.forEach(

@@ -26,7 +26,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/utils/index.ts
+// src/utils/index.tsx
 var utils_exports = {};
 __export(utils_exports, {
   getDuration: () => getDuration,
@@ -71,7 +71,7 @@ var import_loglevel = __toESM(require("loglevel"));
 var logger = import_loglevel.default.getLogger("limeplay-core");
 logger.setLevel("DEBUG");
 
-// src/utils/index.ts
+// src/utils/index.tsx
 var on = (target, eventNames, listener, options) => {
   if (Array.isArray(eventNames)) {
     eventNames.forEach(

@@ -8,6 +8,11 @@ export default async function Home() {
 
     const all_anime = await AnimeService.getAllAnime()
 
+    const popular = await AnimeService.getCategory('popular')
+    const ongoing= await AnimeService.getCategory('ongoing')
+
+    console.log(popular)
+
     const bannerData : IBannerData = {
         title: 'Магічна битва (2 сезон)',
         genre: ['Бойовик', 'Драма', 'Надприродне'],
@@ -30,7 +35,7 @@ export default async function Home() {
         title: 'Mushoku Tensei',
         genre: ['Пригоди', 'Драма', 'Еччі','Фентезі'],
         studio: 'Cтудiя: Studio Bind',
-        description: 'ОПИСАНИЕ ОЧЕНЬ МНОГА ТЕКСТА ВОТ ПРО РЕИНКАРНАЦИЮ',
+        description: 'Історія переносить глядачів на 12 років назад, у 2006, коли найсильніший маг Ґоджьо Сатору був звичайнісіньким учнем старшої школи. Разом зі своїм другом, Ґето Суґуру, вони вирушають на місію, від якої залежить доля всього світу. Перші виклики і перешкоди, перші помилки й втрати. Із цієї подорожі вони повернуться зовсім іншими людьми.',
         link: '#',
         image_banner:'/assets/img/banner/mushoku_banner.avif',
         image: '/assets/img/poster/mushoku.webp'
@@ -42,10 +47,10 @@ export default async function Home() {
     <main>
       <MainBanner/>
         <div className={styles.main_anime_section}>
-            <AnimeList all_anime={all_anime} title={'Ongoings'} />
-            <AnimeList all_anime={all_anime} title={'Popular'} />
+            <AnimeList animeList={ongoing} title={'Ongoings'} link={'/anime/category'} />
+            <AnimeList animeList={popular} title={'Popular'}  link={'/anime/category'}/>
             <ComingAnimes banners={banners}/>
-            <AnimeList all_anime={all_anime} title={'All anime'} />
+            <AnimeList animeList={all_anime} title={'All anime'} link={'/anime/category'}/>
         </div>
 
     </main>
