@@ -16,7 +16,7 @@ export default function ComingAnimes({banners}: {banners: IBannerData[]}){
 
 
 
-        <Box bgColor={'backgroundBackdrop'} p={'80px 0'}>
+        <Box p={'80px 0'}>
             <Container maxW={'container.xl'}>
                 <Swiper className={styles.banner_wrapper}
                         slidesPerView={1}

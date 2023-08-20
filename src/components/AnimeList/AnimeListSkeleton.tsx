@@ -11,12 +11,11 @@ interface AnimeListSkeletonProps{
 export function AnimeListSkeleton({count=8, isLoading}: AnimeListSkeletonProps){
 
     console.log(isLoading, count)
-    const array = new Array(count + 1)
-
-    console.log(array)
 
     return(
         <SimpleGrid columns={4} spacing={'15px'}>
+            <AnimeCardSkeleton isLoading={isLoading}/>
+            <AnimeCardSkeleton isLoading={isLoading}/>
             <AnimeCardSkeleton isLoading={isLoading}/>
             <AnimeCardSkeleton isLoading={isLoading}/>
             <AnimeCardSkeleton isLoading={isLoading}/>

@@ -1,5 +1,6 @@
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {useCallback, useEffect, useState} from "react";
+import {usePlayerState} from "@/store/player/hooks";
 
 export interface UsePlaybackRateConfig{
     onSelect?: (selectedRate: number) => void
@@ -9,8 +10,9 @@ export interface UsePlaybackRateConfig{
 export function usePlaybackRate({onSelect}: UsePlaybackRateConfig = {}) {
 
     const {video} = useShaka()
+    const {speed} = usePlayerState()
 
-    const [currentRate, setCurrentRate] = useState(video.playbackRate)
+    const [currentRate, setCurrentRate] = useState(speed)
 
     const selectRate = useCallback((rate: number) => {
         if (video.readyState === 0) return;
@@ -26,7 +28,6 @@ export function usePlaybackRate({onSelect}: UsePlaybackRateConfig = {}) {
     const updatePlaybackRate = useCallback((event) => {
 
         if (video){
-            console.log('update playbackRate', event, video.playbackRate)
             if(event.target){
                 setCurrentRate(video.playbackRate)
             }

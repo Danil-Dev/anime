@@ -1,110 +1,130 @@
 
-import {AnimeService} from "@/services/Anime";
-import styles from './singleAnime.module.scss'
+import {AnimeService, IAnimeData, UserData} from "@/services/Anime";
 import Image from "next/image";
 import {Tags} from "@/components/Tags";
 import {Calendar, Star} from "react-feather";
-
+import AddToWatchListButton from "@/components/Button/AddToWatchlist";
 import {EpisodeCard} from "@/components/EpisodeCard";
+import {Box, Container, Flex, Text, Heading, VStack, HStack, Spacer, Grid, GridItem} from "@chakra-ui/layout";
+
+import AnimeInfo from "@/components/AnimeInfo";
+import {authOptions} from "@/configs/auth";
+import {getServerSession} from "next-auth/next";
+
+
+
+
+
 export default async function SinglePage ({params: {id}} : {params: {id:string}}) {
 
+
+    const session = await getServerSession(authOptions)
+
     const anime = await AnimeService.getAnime(id)
+
     const pretty_date = new Date(anime.release_date).getFullYear()
-    const episodes = anime.episodes
-    console.log(pretty_date)
-    console.log(anime)
+
+
+    const userData : UserData = await AnimeService.getAnimeWithCredentials( anime.id, session.user.id)
+    console.log(userData)
+
+
+
+
 
 
     return (
-        <main>
-            <section className={styles.single_anime_details} style={{backgroundImage: `url("${anime.image_banner}")`}}>
-                <div className="container">
-                    <div className="row align-items-center position-relative">
-                        <div className="col-xl-3 col-lg-4">
-                            <div className={styles.single_anime_details_poster}>
+        <>
+            <Box
+                pt={'175px'}
+                pb={'120px'}
+                bgImage={`url("${anime.image_banner}")`}
+                bgPosition={'top center'}
+                bgSize={'cover'}
+                zIndex={'-1'}
+                position={'relative'}
+                _before={{
+                    content: "''",
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "backgroundOutlineBlack",
+                    zIndex: "-1",
+                    backdropFilter: "blur(5px)"
+                }}
+            >
+                <Container
+                    maxW={'container.xl'}
+
+                >
+                    <Flex
+                        alignItems={'center'}
+                        justifyContent={'space-between'}>
+                        <Box w={'35%'} >
+                            <Box
+                                borderRadius={'10px'}
+                                overflow={'hidden'}
+                                display={'inline-block'}
+                            >
                                 <Image src={anime.image} alt={anime.title} width={300} height={430}/>
-                            </div>
-                        </div>
-                        <div className="col-xl-9 col-lg-8">
-                            <div className={styles.single_anime_details_content}>
-                                <h5>無職転生 Ⅱ ～異世界行ったら本気だす～ </h5>
-                                <h2>{anime.title}</h2>
-                                <div className={styles.single_anime_details_content_meta}>
-                                    <Tags tags={anime.genre}/>
-                                    <div className={styles.single_anime_details_content_date}>
-                                        <Calendar size={16}/>
-                                        <p>{pretty_date}</p>
-                                    </div>
-                                    <div className={styles.single_anime_details_content_rating}>
-                                        <Star size={16}/>
-                                        <p>{anime.rating}</p>
-                                    </div>
-                                </div>
-                                <div className={styles.single_anime_details_content_description}>
-                                    <p>{anime.description}</p>
-                                </div>
+                            </Box>
+                        </Box>
+                        <VStack spacing={4}
+                                align={'left'}
+                                w={'65%'}
+                        >
+                            <Heading fontSize={'52px'}>{anime.title}</Heading>
+                            <HStack spacing={2} alignItems={'center'}>
+                                <Tags tags={anime.genre}/>
+                                <Calendar size={16}/>
+                                <Text mb={0}>{pretty_date}</Text>
+                                <Star size={16}/>
+                                <Text mb={0}>{anime.rating}</Text>
+                            </HStack>
+                            <Text>{anime.description}</Text>
+                        </VStack>
+                    </Flex>
+                </Container>
+            </Box>
+            <Container
+                maxW={'container.xl'}
+                paddingTop={'50px'}
+            >
+                <Flex>
+                    <Box w={'60%'}>
+                        <Heading fontSize={'26px'}>{anime.title}</Heading>
+                        <Box>
+                            <AddToWatchListButton disable={ !userData} isInWatchlist={userData?.isInWatchlist} id={anime._id}/>
+                        </Box>
+                        <AnimeInfo anime={anime}/>
+                    </Box>
+                    <Spacer/>
+                    <Box w={'30%'}>
+                        <Heading fontSize={'24px'}>
+                            Current episode
+                        </Heading>
+                        <EpisodeCard episode={anime.episodes[0]} animeId={anime.id}/>
+                    </Box>
+                </Flex>
+            </Container>
+            <Container
+                maxW={'container.xl'}
+                pt={'50px'}
+                pb={'50px'}
+            >
+                <Heading>Episodes</Heading>
+                <Grid templateColumns={'repeat(4, 1fr)'} gap={6}>
+                    {anime.episodes.map((episode , idx)=> (
+                        <GridItem key={idx}>
+                            <EpisodeCard episode={episode}  animeId={anime.id}/>
+                        </GridItem>
 
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className={styles.single_anime_info}>
-                <div className="container">
-                    <div className="row">
-
-                        <div className="col-md-8">
-                            <div className={styles.single_anime_info_metadata}>
-                                <h2>{anime.title}</h2>
-                                <div className={styles.single_anime_info_metadata_item}>
-                                    <span>Studio</span>
-                                    <span>Bind</span>
-                                </div>
-                                <div className={styles.single_anime_info_metadata_item}>
-                                    <span>Audio</span>
-                                    <span>Amanogawa, Amanogawa, Amanogawa</span>
-                                </div>
-                                <div className={styles.single_anime_info_metadata_item}>
-                                    <span>Language</span>
-                                    <span>English, Ukrainian</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <h3>Current episode</h3>
-                            <EpisodeCard episode={anime.episodes[1]} animeId={anime.id}/>
-                        </div>
-
-
-                        <div className={styles.single_anime_episodes}>
-
-                            <h3>Episodes</h3>
-
-                            {episodes.length === 0 && (
-                                <>
-                                    <h1>Episodes Data not found</h1>
-                                </>
-                            )}
-
-                            <div className={styles.single_anime_episodes_wrapper}>
-
-                                {episodes.map((episode , idx)=> (
-                                    <EpisodeCard episode={episode} key={idx} animeId={anime.id}/>
-                                ))}
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-
-        </main>
+                    ))}
+                </Grid>
+            </Container>
+        </>
     )
 
 }

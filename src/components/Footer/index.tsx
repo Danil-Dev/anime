@@ -1,60 +1,47 @@
-
-'use client'
-
 import React from "react";
-import styles from './footer.module.scss'
-import Link from "next/link";
-import Image from "next/image";
-import {Lilita_One} from "next/font/google";
-import {navLinks} from "@/routing";
-const lilita = Lilita_One({subsets: ['latin'], weight: ['400']})
+import { Box, Flex, HStack, Link, Spacer, Text } from "@chakra-ui/layout";
+import NextLink from "next/link";
 
-export default function Footer(){
+export default function Footer() {
+    return (
+        <footer>
+            <Box
+                borderTop="1px solid"
+                borderColor="backgroundOutline"
+                bg="background"
+                backdropFilter="blur(60px)"
+                py="20px"
+                px="30px"
+            >
+                <Flex alignItems="center">
+                    <HStack spacing={8} fontWeight={300} fontSize="14px" fontStyle="italic" mb="12px">
+                        <Link as={NextLink} href="/">
+                            Faq
+                        </Link>
+                        <Link as={NextLink} href="/">
+                            About
+                        </Link>
+                        <Link as={NextLink} href="/">
+                            Privacy Policy
+                        </Link>
+                        <Link as={NextLink} href="/">
+                            Contact Us
+                        </Link>
+                    </HStack>
 
-    return(
-        <footer className={styles.footer}>
-            <div className={'container'}>
-                <div className={'row'}>
-                    <div className={'col-md-12'}>
-                        <nav className={styles.footer_navigation}>
-                            <div className={styles.footer_logo}>
-                                <Link href={'/'}>
-                                    <Image src={'/assets/img/logo/logo.png'} alt={'Logo'} width={60} height={60}/>
-                                    <p className={lilita.className}>Aniverse</p>
-                                </Link>
-                            </div>
-                            <div className={styles.footer_wrapper}>
-                                <ul>
-                                    {navLinks.map((link, index) => {
-                                        return (
-                                            <li key={index}>
-                                                <Link href={link.path} >
-                                                    {link.name}
-                                                </Link>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                    <div className={styles.footer_faq}>
-                        <nav className={styles.footer_faq_nav}>
-                            <div className={styles.footer_wrapper}>
-                                <ul>
-                                    <li><Link href={'/'}>FAQ</Link></li>
-                                    <li><Link href={'/'}>HELP CENTER</Link></li>
-                                    <li><Link href={'/'}>TERMS OF USE</Link></li>
-                                    <li><Link href={'/'}>PRIVACY</Link></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                    <div className={styles.footer_copyright}>
-                        <h2>Copyright © 2023. All Rights Reserved By Aniverse</h2>
-                    </div>
-                </div>
-            </div>
+                    <Spacer />
+
+                    <HStack spacing={5}>
+                        <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">
+                            Здесь будут ссылки на соц сети
+                        </Link>
+                    </HStack>
+                </Flex>
+
+                <Text fontSize="14px" color="accentTextLightSecondary">
+                    © 2023 Aniverse - danilmarc4uk.grf@gmail.com
+                </Text>
+            </Box>
         </footer>
-    )
+    );
 }

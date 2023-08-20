@@ -1,21 +1,74 @@
 'use client'
+import {IAnimeData} from "@/services/Anime";
 import React from "react";
-import styles from './catalogArea.module.scss'
-import {Filter} from "@/components/Filter/Filter";
+
 import CatalogItems from "@/components/CatalogArea/CatalogItems";
 import {useCatalogItems} from "@/hooks/useCatalogItems";
 import {useParams} from "next/navigation";
-import CategoryFilter from "@/components/CatalogArea/CategoryFilter";
-import {AnimeCardSkeleton} from "@/components/AnimeCard/Skeleton";
 import {AnimeListSkeleton} from "@/components/AnimeList/AnimeListSkeleton";
+import {Grid, GridItem, Box, HStack, VStack} from "@chakra-ui/react";
+import CatalogFilter from "@/app/catalog/CatalogFilter";
 
 
 export default function CatalogArea () {
 
-    const genres = ['Бойовик', 'Пригоди', 'Драма','Еччі','Фентезі',]
+    const genres = [
+        {
+            id: 'action',
+            title: 'Бойовик',
+        },
+        {
+            id: 'adventure',
+            title: 'Пригоди',
+        },
+        {
+            id: 'drama',
+            title: 'Драма',
+        },
+        {
+            id: 'ecchi',
+            title: 'Еччі',
+        },
+        {
+            id: 'fantasy',
+            title: 'Фентезі',
+        }
+    ]
 
 
-    const voicingList = ['Amonogawa', 'Tagaroshi', 'Dzuski', 'FanVoxUa']
+    const voicingList = [
+        {
+            id: 'amonogawa',
+            title: 'Amonogawa',
+        },
+        {
+            id: 'tagaroshi',
+            title: 'Tagaroshi',
+        },
+        {
+            id: 'dzuski',
+            title: 'Dzuski',
+        },
+        {
+            id: 'fanvoxua',
+            title: 'FanVoxUa',
+        }
+    ]
+
+    const categoryList =[
+        {
+            id: 'popular',
+            title: 'Популярні',
+        },
+        {
+            id: 'new',
+            title: 'Нові',
+        },
+        {
+            id: 'ongoing',
+            title: 'Онгоінги',
+        }
+    ]
 
     const params = useParams()
 
@@ -24,24 +77,41 @@ export default function CatalogArea () {
     )
 
     return(
-       <>
-            <div className="col-md-3">
-                <div className={styles.filters}>
-                    <div className={styles.filters_filter}>
-                        <CategoryFilter genres={genres} title={'Аніме за жанром'}/>
-                    </div>
-
-                    <div className={styles.filters_filter}>
-                        <CategoryFilter genres={voicingList} title={'Озвучення'}/>
-                    </div>
-
-                </div>
-            </div>
-           <div className="col-md-9">
-
+       <Grid
+           templateColumns='1fr 3fr'
+           gap={8}
+           marginTop={'20px'}
+       >
+           <GridItem>
+               <VStack spacing={'20px'}>
+                   <Box
+                       borderRadius={'8px'}
+                       w={'100%'}
+                   >
+                       <CatalogFilter filter={genres} type={'genres'} title={'Аніме за жанром'} defaultIsOpen={params.genre && typeof params.genre === 'string'}/>
+                   </Box>
+                   <Box
+                       borderRadius={'8px'}
+                       w={'100%'}
+                       border={'1px solid'}
+                       borderColor={'backgroundOutline'}
+                   >
+                       <CatalogFilter type={'sub'} filter={voicingList} title={'Озвучення'}/>
+                   </Box>
+                   <Box
+                       borderRadius={'8px'}
+                       w={'100%'}
+                       border={'1px solid'}
+                       borderColor={'backgroundOutline'}
+                   >
+                       <CatalogFilter type={'categories'} filter={categoryList} title={'Категори'}/>
+                   </Box>
+               </VStack>
+           </GridItem>
+           <GridItem>
                {isLoading ? <AnimeListSkeleton isLoading={isLoading}/> : <CatalogItems animeList={animeList}/>}
+           </GridItem>
+       </Grid>
 
-           </div>
-       </>
     )
 }

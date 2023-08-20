@@ -1,3 +1,4 @@
+'use client'
 import {IAnimeData, IAnimeList, IAnimeSingle} from "@/services/Anime";
 
 import Link from "next/link";
@@ -17,9 +18,14 @@ export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
 
     return (
         <LinkBox maxW={300} as={'div'} >
-            <Box mb={5} rounded={'md'} overflow={'hidden'}>
+            <Box mb={5} >
                 <LinkOverlay href={`/anime/${anime.id}/`}>
-                    <Image src={anime.image} alt={anime.title} width={width} height={width / 3 * 4}/>
+                    <Box rounded={'md'}
+                         overflow={'hidden'}
+                         display={'inline-block'}
+                    >
+                        <Image  src={anime.image} alt={anime.title}  width={width} height={width / 3 * 4}/>
+                    </Box>
                 </LinkOverlay>
             </Box>
             <Box borderRadius={'md'}>

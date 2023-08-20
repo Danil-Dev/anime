@@ -2,11 +2,26 @@ import styles from './controls.module.scss'
 import {Volume1, Volume2, VolumeX} from "react-feather";
 import {RangeSlider} from "@/lib/dshaka-player/components/RangeSlider";
 import {useVolume} from "@/lib/dshaka-player/hooks/useVolume";
+import {useAppDispatch} from "@/store/hooks";
+import {updateVolume} from "@/store/player/reducer";
+import {useHotkeys} from "@mantine/hooks";
+import {clamp} from "lodash";
 
 
 export function VolumeControl() {
 
     const {volume, updateCurrentVolume} = useVolume()
+    const dispatch = useAppDispatch()
+    const handleVolumeChange = (vol: number) => {
+        console.log('handleVolumeChange', vol)
+        updateCurrentVolume(vol)
+        dispatch(updateVolume(clamp(vol, 0, 1)))
+    }
+    useHotkeys([
+        ['m', () => handleVolumeChange(0)],
+        ['ArrowUp', () => handleVolumeChange(volume + 0.1)],
+        ['ArrowDown', () => handleVolumeChange(volume - 0.1)],
+    ])
 
 
     return(
@@ -21,7 +36,7 @@ export function VolumeControl() {
                     step={0.1}
                     value={volume}
                     color={'#fff'}
-                    onChange={updateCurrentVolume}
+                    onChange={handleVolumeChange}
                     onInput={updateCurrentVolume}
                 />
             </div>

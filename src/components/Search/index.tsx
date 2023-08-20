@@ -5,7 +5,8 @@ import SearchCard from "@/components/Search/SearchCard";
 import {Search} from "react-feather";
 import {Scrollbar} from "react-scrollbars-custom";
 import pageScrollDisabled from "@/utils/pageScrollDisabled";
-import {Button, Text, Box, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
+import {Button, Text, Box, Input, InputGroup, InputLeftElement, Kbd} from "@chakra-ui/react";
+import {useHotkeys} from "@mantine/hooks";
 
 export default function SearchComponent() {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,13 +20,17 @@ export default function SearchComponent() {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
+    useHotkeys([
+        ['ctrl+k', () => toggleIsOpen()]
+    ])
+
     const closeSearchModal = () => {
         setIsOpen(false)
         setSearchAnime([])
-        pageScrollDisabled(false)
+        // pageScrollDisabled(false)
     }
     const toggleIsOpen = () => {
-        pageScrollDisabled(!isOpen)
+        // pageScrollDisabled(!isOpen)
 
         setIsOpen(!isOpen)
     }
@@ -36,7 +41,6 @@ export default function SearchComponent() {
         setSearch(target.value)
 
         if (target.value.length >= 3) {
-            console.log('Get search req')
 
 
             if (!isLoading) {
@@ -70,7 +74,7 @@ export default function SearchComponent() {
                     setIsOpen(false)
                     setSearch('')
                     setSearchAnime([])
-                    pageScrollDisabled(false)
+                    // pageScrollDisabled(false)
                     // document.body.style.overflow = 'auto'
                 }
             }
@@ -84,7 +88,6 @@ export default function SearchComponent() {
         }
     }, []);
 
-    console.log(search.length >= 3 , searchAnime.length >= 1)
 
     useEffect(() => {
         if (isOpen && inputRef.current){
@@ -96,62 +99,46 @@ export default function SearchComponent() {
         <>
             <Box
                 borderRadius={12}
-                backdropFilter={'blur(60px)'}
-                overflow={'hidden'}
-                position={'relative'}
-                zIndex={3}
+                // backdropFilter={'blur(60px)'}
             >
+                    <Button
+                        variant={'outlined'}
+                        ref={buttonRef}
+                        onClick={toggleIsOpen}
+                        leftIcon={<Search size={16} /> }
+                        position={'relative'}
+                        size={'xl'}
+                        color={'textSecondary'}
+                        w={'100%'}
+                        colorScheme={'search'}
+                        justifyContent={'flex-start'}
+                        display={{base: 'none', md: 'flex'}}
+
+                    >
+                        <Text m={0}>Search the anime...</Text>
+                        <Box
+                            position={'absolute'}
+                            right={'16px'}
+                            top={'50%'}
+                            transform={'translateY(-65%)'}
+                        >
+
+                            <Kbd>Ctrl</Kbd>
+                            <Kbd>K</Kbd>
+                        </Box>
+                    </Button>
                 <Button
-                    ref={buttonRef}
                     onClick={toggleIsOpen}
-                    leftIcon={<Search size={16}/> }
-                    bg={'none'}
-                    width={'100%'}
-                    h={'40px'}
-                    backdropFilter={'blur(60px)'}
-                    borderWidth={'1px'}
-                    borderRadius={'12px'}
-                    backgroundColor={'searchBackground'}
-                    borderColor={'searchOutline'}
-                    padding={'6px 16px'}
-                    zIndex={'auto'}
-                    display={'flex'}
-                    gap={'12px'}
-                    justifyContent={'flex-start'}
-                    _before={{
-                        opacity: 0,
-                        transition: 'opacity .25s ease-out',
-                        bg: 'linear-gradient(91.46deg,#4673fa,#9646fa 100.13%) border-box',
-                        border: '1px solid transparent',
-                        content: '" "',
-                        position: 'absolute',
-                        inset: '-1px',
-                        ['-webkit-mask']: 'linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0)',
-                        maskComposite: 'exclude',
-                        w: '100%',
-                        h: '100%',
-                        borderRadius: 'inherit'
-
-
-
-
-                    }}
-                    _hover = {{
-                        _before:{
-                            opacity: 1
-                        }
-                    }}
-
+                    display={{base: 'flex', md: 'none'}}
                 >
-                    <Text mb={0} fontWeight={300} color={'textSecondary'}>
-                        Search the anime...
-                    </Text>
 
+                    <Search size={16} />
                 </Button>
+
             </Box>
 
             {isOpen && (
-                <div style={{width: '$'}} className={styles.modal}>
+                <div  className={styles.modal}>
                     <div className={styles.modal_content} ref={contentRef}>
                         <div className={styles.modal_content_searchBar}>
 

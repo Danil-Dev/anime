@@ -12,9 +12,6 @@ export const navLinks : INavLink[] = [
         name: 'Ongoing',
         path: '/ongoing'
     },
-    {
-        name: 'Manga',
-        path: '/manga'
-    }
+
 
 ]

@@ -11,6 +11,8 @@ export default async function WatchPage({params: {id}}: {params: {id: string, ep
 
     const anime = await AnimeService.getAnime(id)
 
+    console.log('Anime', anime)
+
 
 
     return(

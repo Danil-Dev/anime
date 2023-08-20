@@ -19,13 +19,13 @@ interface ControlsOverlayProps{
 
 export function ControlsOverlay({start, end, onEnd, isLastEpisode}: ControlsOverlayProps){
 
-    const [isHiddenControl, setIsHiddenControl] = useState<boolean>(true)
+    const [isHiddenControl, setIsHiddenControl] = useState<boolean>(false)
 
     const handleMouseMove = () => {
         if (isHiddenControl){
             setIsHiddenControl(false)
             setTimeout(() => {
-                setIsHiddenControl(true)
+                // setIsHiddenControl(true)
             }, 4000)
         }
     }
@@ -35,9 +35,8 @@ export function ControlsOverlay({start, end, onEnd, isLastEpisode}: ControlsOver
             <div className={styles.player_overlay_content} data-visible={!isHiddenControl}>
                 <SkipControl start={start} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode}/>
                 <VideoController/>
-                <div className={styles.control_timeline_wrapper}>
+
                     <TimelineControl/>
-                </div>
                 <div className={styles.control_panel}>
                     <div>
                         <PlaybackControl/>

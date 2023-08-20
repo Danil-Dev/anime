@@ -6,7 +6,7 @@ import { CacheProvider } from '@chakra-ui/next-js'
 import {ChakraProvider} from "@chakra-ui/react";
 import theme from "@/theme/theme";
 
-
+import {SessionProvider} from "next-auth/react";
 
 
 
@@ -17,15 +17,19 @@ export function Providers({
     children: ReactNode
 } ){
     return(
+        <SessionProvider>
+            <ReduxProvider>
 
-        <ReduxProvider>
-            <ShakaProvider>
-                <CacheProvider>
-                    <ChakraProvider theme={theme}>
-                        {children}
-                    </ChakraProvider>
-                </CacheProvider>
-            </ShakaProvider>
-        </ReduxProvider>
+                    <ShakaProvider>
+                        <CacheProvider>
+                            <ChakraProvider theme={theme}>
+                                {children}
+                            </ChakraProvider>
+                        </CacheProvider>
+                    </ShakaProvider>
+
+
+            </ReduxProvider>
+        </SessionProvider>
     )
 }

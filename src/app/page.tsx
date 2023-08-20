@@ -3,13 +3,14 @@ import {AnimeService, IBannerData} from "@/services/Anime";
 import {AnimeList} from "@/components/AnimeList";
 import styles from  "./main.module.scss"
 import ComingAnimes from "@/components/ComingAnimes";
+import SingleComingAnimeCard from "@/components/ComingAnimes/SingleComingAnimeCard";
 
-export default async function Home() {
+export default async function Home()    {
 
     const all_anime = await AnimeService.getAllAnime()
 
-    const popular = await AnimeService.getCategory('popular')
-    const ongoing= await AnimeService.getCategory('ongoing')
+    const popular = await AnimeService.getCatalog('popular')
+    const ongoing= await AnimeService.getCatalog('ongoing')
 
     console.log(popular)
 
@@ -44,15 +45,15 @@ export default async function Home() {
 
     const banners = [bannerData, bannerData2, bannerData3]
   return (
-    <main>
-      <MainBanner/>
+    <>
+        <MainBanner/>
         <div className={styles.main_anime_section}>
-            <AnimeList animeList={ongoing} title={'Ongoings'} link={'/anime/category'} />
-            <AnimeList animeList={popular} title={'Popular'}  link={'/anime/category'}/>
-            <ComingAnimes banners={banners}/>
-            <AnimeList animeList={all_anime} title={'All anime'} link={'/anime/category'}/>
+            <AnimeList animeList={ongoing} title={'Ongoings'} link={'/catalog/categories/ongoing'} />
+            <AnimeList animeList={popular} title={'Popular'}  link={'/catalog/categories/popular'}/>
+            <SingleComingAnimeCard data={banners[2]}/>
+            <AnimeList animeList={all_anime} title={'All anime'} link={'/categoriesries'}/>
         </div>
 
-    </main>
+    </>
   )
 }

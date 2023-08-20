@@ -26,7 +26,9 @@ export function useVideoTracks({onSelect}: UseVideoTracksConfig = {}) {
     }
 
     const selectTrack = useCallback(
+
         (track: shaka.extern.Track) => {
+
             const config = {
                 abr: {
                     enabled: false,

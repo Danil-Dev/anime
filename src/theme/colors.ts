@@ -108,6 +108,7 @@ export const darkTheme = {
     ...colors,
 
     textPrimary: colors.white,
+    textYellow: colors.yellow["100"],
     textSecondary: colors.gray["300"],
     textTertiary: colors.gray["500"],
 
@@ -117,17 +118,20 @@ export const darkTheme = {
     accentWarning: '#EEB317',
     accentFailure: colors.red["300"],
     accentCritical: colors.red["300"],
-
+    backgroundHeader: opacify(0.7, colors.white),
     background: colors.gray["800"],
+    backgroundAccent: colors.blue['600'],
     backgroundBackdrop: colors.gray["950"],
     backgroundSurface: colors.gray["900"],
     backgroundModule: colors.gray["800"],
     backgroundInteractive: colors.gray["700"],
     backgroundFloating: opacify(12, colors.black),
+    backgroundInteractiveFloating: opacify(56, colors.gray["500"]),
     backgroundOutline: opacify(24, colors.gray["300"]),
     backgroundScrim: opacify(72, colors.gray["900"]),
     backgroundScrolledSurface: opacify(72, colors.gray["900"]),
-
+    backgroundOutlinePink: opacify(24,'#9646FA'),
+    backgroundOutlineBlack: opacify(60, colors.black),
     accentActionSoft: opacify(24, colors.blue["400"]),
     accentActiveSoft: opacify(24, colors.blue["400"]),
     accentSuccessSoft: opacify(24, colors.green["400"]),

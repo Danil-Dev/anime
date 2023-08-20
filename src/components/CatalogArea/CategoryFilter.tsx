@@ -1,49 +1,88 @@
-import {useParams} from "next/navigation";
-import styles from './catalogArea.module.scss'
-import Link from "next/link";
 import {useRef, useState} from "react";
 import {Minus, Plus} from "react-feather";
+import {Box} from "@chakra-ui/layout";
+import {Flex, Link, Spacer, Text} from "@chakra-ui/react";
+import NextLink from "next/link";
 
-interface CategoryFilterProps{
-    genres: string[],
+
+interface CategoryFilterProps {
+    genres: { id: string, title: string }[]
     title: string,
-    defaultIsOpen?: boolean
+    type: string,
+    defaultIsOpen?: boolean,
+    current?: string
 }
-export default function CategoryFilter({genres, title, defaultIsOpen = false} : CategoryFilterProps){
+
+export default function CategoryFilter({genres, title, type, defaultIsOpen = false, current}: CategoryFilterProps) {
 
     const contentRef = useRef<HTMLDivElement>(null)
     const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen)
-    const params = useParams()
-    const currentCategory = params.genre && typeof params.genre === 'string' ? params.genre : null
+
 
     const toggleOpenFilter = () => {
+        console.log('toggle')
         setIsOpen(!isOpen)
     }
 
 
-    console.log(currentCategory === genres[4])
-
     return (
-        <div className={styles.catalog_filter}>
-
-            <div className={`${styles.catalog_filter_head} ${isOpen && styles.catalog_filter_head_open}`} onClick={toggleOpenFilter}>
-                <h3>{title}</h3>
-                {isOpen ? <Minus size={18}/> : <Plus size={18}/> }
-
-            </div>
-
-            <div className={!isOpen ? styles.hidden + ' ' + styles.catalog_filter_content : styles.catalog_filter_content} ref={contentRef} style={{height: isOpen ? 37 * genres.length + 20 : 0, paddingTop: isOpen ? 15 : 0 }}>
-                {genres.map((genre, idx) => (
-                    <div key={idx} className={styles.catalog_filter_item}>
-                        <Link href={`/catalog/${genre}`} className={currentCategory && decodeURIComponent(currentCategory) === genre ? styles.catalog_filter_active : null}>
-                            {genre}
+        <Box
+            bg={'background'}
+            borderRadius={'8px'}
+            borderColor={'backgroundOutline'}
+            borderWidth={1}
+        >
+            <Flex
+                align={'center'}
+                p={'18px 18px 18px 26px'}
+                cursor={'pointer'}
+                borderColor={'backgroundOutline'}
+                borderBottomWidth={isOpen ? 1 : 0}
+                onClick={toggleOpenFilter}
+                mb={isOpen ? '15px' : '0px'}
+            >
+                <Text as={'h3'} fontSize={'md'} m={0}>
+                    {title}
+                </Text>
+                <Spacer/>
+                {isOpen ? <Minus size={18}/> : <Plus size={18}/>}
+            </Flex>
+            <Box
+                transition={'all .3s ease-in-out'}
+                visibility={isOpen ? 'visible' : 'hidden'}
+                opacity={isOpen ? 1 : 0}
+                height={isOpen ? 37 * genres.length + 35 : 0}
+                overflow={'hidden'}
+                ref={contentRef}
+            >
+                {genres.map((item, index) => (
+                    <Box
+                        key={index}
+                        fontSize={'lg'}
+                        mb={'6px'}
+                    >
+                        <Link
+                            as={NextLink}
+                            href={`/${type}/${item.id}`}
+                            p={'5px 12px 5px 26px'}
+                            borderRadius={'5px'}
+                            display={'block'}
+                            transition={'background-color .2s ease-in-out, color .2s ease-in-out'}
+                            color={current == item.id ? 'accentActive' : 'textSecondary'}
+                            bg={current == item.id ? 'accentActionSoft' : 'transparent'}
+                            _hover={{
+                                color: 'accentActive',
+                                bg: 'accentActionSoft'
+                            }}
+                        >{item.title}
                         </Link>
-                    </div>
+                    </Box>
                 ))}
-            </div>
+            </Box>
+
+        </Box>
 
 
-        </div>
     )
 
 }
