@@ -16,6 +16,8 @@ interface AnimeCardProps{
 export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
 
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <LinkBox as={'div'} >
             <Box mb={5} >
@@ -36,7 +38,7 @@ export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
             <Box borderRadius={'md'}>
                 <Heading>
                     <LinkOverlay href={`/anime/${anime.id}/`}>
-                        <Text  noOfLines={{base: '3', md: '1'}} fontSize={{base: 'sm', md: 'lg'}}>{anime.title}</Text>
+                        <Text noOfLines={1} fontSize={{base: 'sm', md: 'lg'}}>{anime.title}</Text>
                     </LinkOverlay>
                 </Heading>
             </Box>

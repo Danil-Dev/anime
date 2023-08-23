@@ -70,11 +70,12 @@ export const authOptions: AuthOptions = {
             }
         },
         async session({session, token, user}){
-            if (session?.user) {
+            if (session.user) {
+                // @ts-ignore
                 session.user.id = token.uid
             }
 
-            return session
+            return Promise.resolve(session)
         },
         async jwt({token, user}) {
             if (user){

@@ -44,8 +44,8 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
 
     }
     const onEnd = () => {
-        setCurrentEpisode(currentEpisode + 1)
-
+        // setCurrentEpisode(currentEpisode + 1)
+        router.push(`/anime/${anime.id}/${currentEpisode + 1}/watch`)
     }
     const onPlay = (video: HTMLVideoElement) => {
 

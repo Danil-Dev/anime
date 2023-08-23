@@ -116,7 +116,7 @@ export default function SignInForm() {
                                     Submit
                                 </Button>
                                 <Text color={'textSecondary'}>
-                                    Don't have an account? <Link fontWeight={'bold'} as={NextLink} href={'/auth/register'}>Sign Up</Link>
+                                    Dont have an account? <Link fontWeight={'bold'} as={NextLink} href={'/auth/register'}>Sign Up</Link>
                                 </Text>
 
                             </VStack>

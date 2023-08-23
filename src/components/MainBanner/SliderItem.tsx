@@ -1,6 +1,4 @@
 'use client'
-import styled from "styled-components";
-import {inspect} from "util";
 import styles from './mainBanner.module.scss'
 
 
