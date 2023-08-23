@@ -14,9 +14,11 @@ export function useTimeline({updateInterval = 250}: UseTimelineConfig){
 
     const {video, player} = useShaka()
 
-    const [currentTime, setCurrentTime] = useState<number>(0)
+
+    // console.log('useTimeline', video.currentTime, player)
+    const [currentTime, setCurrentTime] = useState<number>(video.currentTime || 0)
     const [currentProgress, setCurrentProgress] = useState<number>(0)
-    const [duration, setDuration, durationRef] = useStateRef<number>(0)
+    const [duration, setDuration, durationRef] = useStateRef<number>(video.duration || 0)
     const [buffer, setBuffer] = useState<number>(0)
     const [seekRange, setSeekRange] = useState<SeekRange>({
         start: 0,
@@ -37,24 +39,32 @@ export function useTimeline({updateInterval = 250}: UseTimelineConfig){
 
     useEffect(() => {
         const updateSeekRange = () => {
-            clearInterval(timerId.current)
 
-            timerId.current = window.setInterval(() => {
-                if (video.readyState === 0) return;
+            try {
+                clearInterval(timerId.current)
 
-                if (durationRef.current !== video.duration)
-                    setDuration(video.duration);
-                setSeekRange(player.seekRange())
-                setCurrentTime(video.currentTime)
+                timerId.current = window.setInterval(() => {
+                    if (video.readyState === 0) return;
 
 
-                const bufferInfo = player.getBufferedInfo()
-                const videoBuffer = bufferInfo.video
-                if (videoBuffer && videoBuffer.length > 0 ){
-                    setBuffer(videoBuffer[0].end * 100 / video.duration)
-                }
+                    if (duration !== video.duration)
+                        setDuration(video.duration);
+                    setSeekRange(player.seekRange())
+                    setCurrentTime(video.currentTime)
 
-            }, updateInterval)
+
+                    const bufferInfo = player.getBufferedInfo()
+                    const videoBuffer = bufferInfo.video
+                    if (videoBuffer && videoBuffer.length > 0 ){
+                        setBuffer(videoBuffer[0].end * 100 / video.duration)
+                    }
+
+                }, updateInterval)
+            }
+            catch (e) {
+                console.log('updateSeekRangeError', e)
+            }
+
         }
 
 

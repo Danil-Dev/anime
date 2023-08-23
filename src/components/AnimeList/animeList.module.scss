@@ -6,4 +6,20 @@
   z-index: 1;
 
 
+  &_head{
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2{
+      font-size: 38px;
+      font-weight: bold;
+    }
+  }
+
+}
+
+.slide{
+  max-width: 300px;
 }

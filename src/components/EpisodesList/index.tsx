@@ -3,6 +3,7 @@ import styles from './episodesList.module.scss'
 import {EpisodeItem} from "@/components/EpisodesList/EpisodeItem";
 import Scrollbar from "react-scrollbars-custom";
 import {PlayCircle} from "react-feather";
+import {Box} from "@chakra-ui/layout";
 
 interface EpisodesListProps {
     episodes: IEpisodeData[],
@@ -24,6 +25,7 @@ export const EpisodesList = ({episodes, handleChangeEpisode}: EpisodesListProps)
 
             </ul>
         </div>
+
 
     )
 }

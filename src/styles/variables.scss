@@ -1,13 +1,17 @@
 $text-color: #fff;
 $second-text-color: rgba(255, 255, 255, 0.6);
 $primary-color: #e4d804;
-$bg-primary: #191B1F;
+$hover-primary: rgba(228, 216, 4, 0.7);
+$$bg-primarybg-primary: #191B1F;
 $bg-secondary: rgba(255, 255, 255, 0.02);
 $border-color: rgba(255, 255, 255, 0.19);
 $black: #000;
 $dark: #040406;
 $gray: #242426;
 $light: #c8c8c8;
+
+$ubuntu: var(--font-ubuntu);
+$russo: var(--fort-russo-one);
 
 :export{
   primaryColor: $primary-color;

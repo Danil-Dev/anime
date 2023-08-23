@@ -5,38 +5,41 @@ import shaka from "shaka-player";
 
 
 export function useShakaPlayer() {
-    const {video, setPlayer, player} = useShaka()
+    const {video, setPlayer, player, setVideo} = useShaka()
 
     const [error, setError] = useState<shaka.util.Error | null>()
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
-    console.log('[ShakaPlayerHook]: Hooked', video)
+
 
     useEffect(() => {
 
-        console.log('[ShakaPlayerHook]: Mounting with props', video)
 
         const errorHandler = (event: shaka.util.Error | Event) => {
-            console.log('[ShakaPlayerHook]: Error', event)
+
+            console.log('errorHandler', event)
             if (event instanceof Event) return;
             setError(event)
         }
 
-        if (video){
-            console.log('[ShakaPlayerHook]: VideoElement found, start create Player')
+
+        if (video && shaka){
             const _player = new shaka.Player(video)
-            console.log('[ShakaPlayerHook]: Player created', _player)
             setPlayer(_player)
             _player.addEventListener('error', errorHandler)
             setIsLoaded(true)
         }
 
         return ()=> {
-            console.log('[ShakaPlayerHook]: Unmount', video, player)
             setIsLoaded(false)
             setError(null)
             if(player){
-                player.destroy()
+
+                console.log('playerDestroy', )
+                const _playerCurr = player
+                _playerCurr.removeEventListener('error', errorHandler)
+                _playerCurr.destroy()
+                setVideo(null)
                 setPlayer(null)
             }
         }

@@ -11,7 +11,7 @@ export interface AutoplayControlProps{
 
 export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayControlProps) {
 
-    const autoplay = useAutoplay()
+    const autoplay = false
 
     const {currentTime, updateCurrentTime} = useTimeline({
         updateInterval: 250
@@ -48,7 +48,7 @@ export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayContro
             <button className={styles.control_skip}  onClick={handleSkipIntro}>Skip</button>
         )
 
-    if (currentTime > end)
+    if (currentTime > end && !isLastEpisode)
         return <button className={styles.control_skip} data-location={'right'} onClick={handleSkipOutro}>Skip outro</button>
 
 

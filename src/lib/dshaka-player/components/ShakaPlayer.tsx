@@ -1,20 +1,23 @@
-import {useShakaPlayer} from "@/lib/dshaka-player/hooks/useShakaPlayer";
-import {useEffect, useRef, useState} from "react";
-import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
-import styles from './player.module.scss'
+import styles from "@/lib/dshaka-player/components/player.module.scss";
 import {ControlsOverlay} from "@/lib/dshaka-player/components/controls";
-import {useAppDispatch} from "@/store/hooks";
+import {useEffect, useRef} from "react";
+import {useShakaPlayer} from "@/lib/dshaka-player/hooks/useShakaPlayer";
+import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {usePlayerState} from "@/store/player/hooks";
-
+import mux from 'mux.js';
 interface ShakaPlayerProps {
     url: string,
     currentTime?: number,
-    onOnmountPlayer?: (video: HTMLVideoElement) => void,
+    onOnmountPlayer?: (number: number) => void,
     start: number,
     end: number,
     onEnd?: () => void,
-    isLastEpisode?: boolean
+    isLastEpisode?: boolean,
+    onPlay?: (video: HTMLVideoElement) => void,
+    onPause?: (video: HTMLVideoElement) => void,
+    onSeeked?: (video: HTMLVideoElement) => void,
 }
+
 
 export function ShakaPlayer({
     url,
@@ -23,33 +26,35 @@ export function ShakaPlayer({
     start,
     end,
     onEnd,
-    isLastEpisode
+    isLastEpisode,
+    onPlay,
+    onPause,
+    onSeeked
 }: ShakaPlayerProps) {
-    const videoRef = useRef<HTMLVideoElement>(null)
-    const containerRef = useRef<HTMLDivElement>(null);
-    const {video, player, error, isLoaded} = useShakaPlayer()
-    const [height, setHeight] = useState(0)
 
-    const {setVideo, setContainer} = useShaka()
+    const videoRef = useRef<HTMLVideoElement | null>(null)
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    const { error, isLoaded} = useShakaPlayer()
+    const {setVideo, setContainer, video, player} = useShaka()
+
     const {track, speed, volume} = usePlayerState()
-    const dispatch = useAppDispatch()
-
-
 
 
     useEffect(() => {
+        console.log('[ShakaPlayer]: Mount Player', currentTime)
         setVideo(videoRef.current)
         setContainer(containerRef.current)
 
-    }, []);
-
-    useEffect(() => {
-
         if (isLoaded && player && video){
+            // console.log('[ShakaPlayer]: Configure')
 
+            if (!window.muxjs){
+                window.muxjs = mux
+            }
 
             const localConfig = {
-                abr: { enabled: track === 'auto' },
+                abr: { enabled: track === 'auto'},
                 manifest: { dash: { ignoreMinBufferTime: true } },
                 streaming: {
                     useNativeHlsOnSafari: true,
@@ -60,50 +65,75 @@ export function ShakaPlayer({
 
 
 
-            player.load(url).then(() => {
-                if (videoRef.current){
+                player.load(url, currentTime).then(() => {
+                    console.log('[ShakaPlayer]: Load Complete')
 
-                    const height = (videoRef.current.offsetWidth / 16) * 9
-                    setHeight(height)
                     if (track !== 'auto'){
                         const findTrack = player.getVariantTracks().find(trackVariant => trackVariant.height === track)
+
+
+                        const langs = player.getAudioLanguages()
+                        const subs = player.getTextTracks()
+                        const subsLangs = player.getTextLanguages()
+
+                        console.log('langs', langs, subs, subsLangs)
                         if (findTrack){
                             player.selectVariantTrack(findTrack)
                         }
-                    }
-                    video.playbackRate = speed
-                    console.log('[ShakaPlayer]: Current time', currentTime)
-                    if (currentTime){
-                        video.currentTime = currentTime
+                        video.playbackRate = speed
+                        video.volume = volume
+                        if (onPlay && typeof onPlay === 'function' && video){
+                            video.addEventListener('play', () => onPlay(video))
+                        }
+                        if (onPause && typeof onPause === 'function' && video){
+                            video.addEventListener('pause', () => onPause(video))
+                        }
+                        if (onSeeked && typeof onSeeked === 'function' && video){
+                            video.addEventListener('seeked', () => onSeeked(video))
+                        }
                     }
 
-                }
-            })
-
+                }).catch((e) => {
+                    console.log(e, error)
+                })
 
         }
+
 
         return () => {
-             if (onOnmountPlayer && typeof onOnmountPlayer === 'function'){
-                 if (isLoaded){
-                     onOnmountPlayer(video)
-                 }
-             }
+
+            const _currentVideo = video
+            setVideo(null)
+
+            if (_currentVideo){
+                if(onPlay && typeof onPlay === 'function'){
+                    _currentVideo.removeEventListener('play', () => onPlay(_currentVideo))
+                }
+                if(onPause && typeof onPause === 'function'){
+                    _currentVideo.removeEventListener('pause', () => onPause(_currentVideo))
+                }
+                if(onSeeked && typeof onSeeked === 'function'){
+                    _currentVideo.removeEventListener('seeked', () => onSeeked(_currentVideo))
+                }
+                if (onOnmountPlayer && typeof onOnmountPlayer === 'function'){
+                    _currentVideo.pause()
+                    onOnmountPlayer(_currentVideo.currentTime)
+                }
+            }
+
+
         }
-    }, [player, error, isLoaded, url]);
 
 
+    },[video, player, url])
 
-
-
-
-
-
-    return (
-        <div className={styles.player} ref={containerRef} style={{height: height}}>
+    return(
+        <div className={styles.player} ref={containerRef}
+             // style={{height: height}}
+        >
             <video controls={false} id={'shaka-player'}  ref={videoRef} width={'100%'} height={'100%'}></video>
 
-            {isLoaded && (
+            {isLoaded &&  (
                 <div className={styles.player_overlay_container} >
                     <ControlsOverlay start={start} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode} />
                 </div>

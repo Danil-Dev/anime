@@ -1,8 +1,8 @@
-
+'use client'
 import styles from './controls.module.scss'
 import {Maximize, Minimize} from "react-feather";
-import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {useFullscreen} from "@/lib/dshaka-player/hooks/useFullscreen";
+import { useHotkeys } from '@mantine/hooks';
 
 
 export function FullscreenControl() {
@@ -12,6 +12,10 @@ export function FullscreenControl() {
         isFullScreen,
         toggleFullscreen
     } = useFullscreen()
+    useHotkeys([
+        ['f', () => toggleFullscreen()],
+    ]);
+
 
     return (
         <div className={styles.control_fullscreen}>

@@ -1,9 +1,12 @@
+'use client'
 import {IAnimeData, IAnimeList, IAnimeSingle} from "@/services/Anime";
 
 import Link from "next/link";
 import Image from "next/image";
 import {FC} from "react";
 import styles from './animeCard.module.scss'
+import {Box} from "@chakra-ui/layout";
+import {Heading, LinkBox, LinkOverlay, Text} from "@chakra-ui/react";
 
 interface AnimeCardProps{
     anime: IAnimeData,
@@ -12,20 +15,31 @@ interface AnimeCardProps{
 
 export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
 
-    const short_title = anime.title.length > 20 ? anime.title.substring(0, 20) + '...' : anime.title
 
     return (
-        <div className={'col-md-3  col-sm-6'}>
-            <div className={styles.anime_card}>
-                <div className={styles.anime_card_poster}>
-                    <Link href={'#'}>
-                        <Image src={anime.image} alt={anime.title} width={width} height={width / 3 * 4}/>
-                    </Link>
-                </div>
-                <div className={styles.anime_card_content}>
-                    <h2>{short_title}</h2>
-                </div>
-            </div>
-         </div>
+        <LinkBox as={'div'} >
+            <Box mb={5} >
+                <LinkOverlay href={`/anime/${anime.id}/`}>
+                    <Box rounded={'md'}
+                         overflow={'hidden'}
+                         // display={'inline-block'}
+                         sx={{
+                             '& > img': {
+                                 width: '100%',
+                             }
+                         }}
+                    >
+                        <Image  src={anime.image} alt={anime.title}  width={width} height={width / 3 * 4}/>
+                    </Box>
+                </LinkOverlay>
+            </Box>
+            <Box borderRadius={'md'}>
+                <Heading>
+                    <LinkOverlay href={`/anime/${anime.id}/`}>
+                        <Text  noOfLines={{base: '3', md: '1'}} fontSize={{base: 'sm', md: 'lg'}}>{anime.title}</Text>
+                    </LinkOverlay>
+                </Heading>
+            </Box>
+        </LinkBox>
     )
 }
