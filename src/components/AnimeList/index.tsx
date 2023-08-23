@@ -28,12 +28,26 @@ export const AnimeList: FC<IAnimeList> = ({animeList, title, link}) => {
                             as={NextLink}
                             href={link}
                             size={'md'}
+                            display={{base: 'none', md: 'block'}}
                         >
                             Каталог
                         </Button>
                     </Box>
                 </Flex>
                 <AnimeListSlider animeList={animeList}/>
+                <Button
+                    variant={'primary'}
+                    colorScheme={'blue'}
+                    rightIcon={<ChevronRight size={18}/> }
+                    as={NextLink}
+                    href={link}
+                    justifySelf={'center'}
+                    display={{base: 'flex', md: 'none'}}
+                    mt={10}
+                >
+                    Catalog
+
+                </Button>
             </Container>
         </section>
 

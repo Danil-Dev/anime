@@ -33,8 +33,9 @@ export interface IAnimeData {
     release_date: string,
     image_banner: string,
     episodes: IEpisodeData[],
-    isInWatchlist: boolean,
-    last?: number
+    auth: boolean,
+    isInWatchlist?: boolean,
+    lastWatchedEpisode?: number
 }
 
 export interface IBannerData{
@@ -73,13 +74,21 @@ export const AnimeService = {
         return res.json()
     },
 
-    async getAnime(animeId : string): Promise<IAnimeData>{
-        const res = await fetch(`${BASE_API_URL}/anime/${animeId}`, {
-            next: {
-                revalidate: 60
-            }
+    async getAnime(animeId : string, userId?: string): Promise<IAnimeData>{
+        console.log('Get anime', animeId, userId, `${BASE_API_URL}/get/anime`)
+        const res = await fetch(`${BASE_API_URL}/get/anime`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            cache: "no-store",
+            body: JSON.stringify({animeId, userId: userId || null}),
         })
-        return res.json()
+
+        // console.log(res)
+        const data =  await res.json()
+
+        console.log('Get anime data', data);
+
+        return data
     },
     async getAnimeWithCredentials(animeId : string, userId: string): Promise<UserData>{
 

@@ -16,7 +16,7 @@ export const Tags: FC<ITags> = ({tags, size = 'regular'}) => {
                     key={index}
                     bg={'textYellow'}
                     color={'black'}
-                    size={'lg'}
+                    size={'md'}
                 >{value}</Tag>
             ))}
         </HStack>

@@ -53,8 +53,8 @@ const primaryVariant = defineStyle((props) => {
         const hoverColor = darken(0.05, backgroundInteractive);
         const activeColor = darken(0.1, backgroundInteractive);
         return {
-            bg,
-            color: 'textSecondary',
+            backgroundColor: 'backgroundModule',
+            color: 'textPrimary',
             _hover: {
                 backgroundColor: hoverColor
             },

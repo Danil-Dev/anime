@@ -20,13 +20,18 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const session = await getServerSession(authOptions)
 
-    const anime = await AnimeService.getAnime(id)
+    console.log('single page', id)
+
+    const anime = await AnimeService.getAnime(id, session?.user?.id)
+
+
+    console.log('anime', anime)
 
     const pretty_date = new Date(anime.release_date).getFullYear()
 
 
-    const userData : UserData = await AnimeService.getAnimeWithCredentials( anime.id, session.user.id)
-    console.log(userData)
+    // const userData : UserData = await AnimeService.getAnimeWithCredentials( anime.id, session?.user?.id)
+    // console.log(userData)
 
 
 
@@ -96,7 +101,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     <Box w={'60%'}>
                         <Heading fontSize={'26px'}>{anime.title}</Heading>
                         <Box>
-                            <AddToWatchListButton disable={ !userData} isInWatchlist={userData?.isInWatchlist} id={anime._id}/>
+                            <AddToWatchListButton disable={ !anime.auth} isInWatchlist={anime.isInWatchlist} id={anime._id}/>
                         </Box>
                         <AnimeInfo anime={anime}/>
                     </Box>
@@ -105,7 +110,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         <Heading fontSize={'24px'}>
                             Current episode
                         </Heading>
-                        <EpisodeCard episode={anime.episodes[0]} animeId={anime.id}/>
+                        <EpisodeCard episode={anime.episodes[anime.lastWatchedEpisode | 0]} animeId={anime.id}/>
                     </Box>
                 </Flex>
             </Container>

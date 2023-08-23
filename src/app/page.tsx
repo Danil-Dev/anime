@@ -39,7 +39,7 @@ export default async function Home()    {
         description: 'Історія переносить глядачів на 12 років назад, у 2006, коли найсильніший маг Ґоджьо Сатору був звичайнісіньким учнем старшої школи. Разом зі своїм другом, Ґето Суґуру, вони вирушають на місію, від якої залежить доля всього світу. Перші виклики і перешкоди, перші помилки й втрати. Із цієї подорожі вони повернуться зовсім іншими людьми.',
         link: '#',
         image_banner:'/assets/img/banner/mushoku_banner.avif',
-        image: '/assets/img/poster/mushoku.webp'
+        image: '/assets/img/banner/rudeus_silfi.png'
 
     }
 

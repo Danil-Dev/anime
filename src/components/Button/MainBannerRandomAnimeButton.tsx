@@ -4,7 +4,7 @@ import {Button} from "@chakra-ui/react";
 import {useRouter} from "next/navigation";
 
 
-export default function RandomAnimeButton( ) {
+export default function MainBannerRandomAnimeButton( ) {
     const [loading, setLoading] = useState<boolean>(false)
     const Router = useRouter()
     const RandomAnime = () => {
@@ -18,8 +18,8 @@ export default function RandomAnimeButton( ) {
 
     return (
         <Button
-            variant={'outlined'}
-            colorScheme={'gray'}
+            variant={'primary'}
+            colorScheme={'blue'}
             isLoading={loading}
             onClick={RandomAnime}
         >

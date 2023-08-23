@@ -81,7 +81,7 @@ export default function GenresLayout( props: {
             <Container maxW={'container.xl'}>
 
                 <Grid
-                    templateColumns='1fr 3fr'
+                    templateColumns={{base: 'repeat(1, 1fr)', md: '1fr 3fr'}}
                     gap={8}
                     marginTop={'20px'}
                 >

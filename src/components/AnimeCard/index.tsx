@@ -17,12 +17,17 @@ export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
 
 
     return (
-        <LinkBox maxW={300} as={'div'} >
+        <LinkBox as={'div'} >
             <Box mb={5} >
                 <LinkOverlay href={`/anime/${anime.id}/`}>
                     <Box rounded={'md'}
                          overflow={'hidden'}
-                         display={'inline-block'}
+                         // display={'inline-block'}
+                         sx={{
+                             '& > img': {
+                                 width: '100%',
+                             }
+                         }}
                     >
                         <Image  src={anime.image} alt={anime.title}  width={width} height={width / 3 * 4}/>
                     </Box>
@@ -31,7 +36,7 @@ export const AnimeCard: FC<AnimeCardProps> = ({anime, width = 300}) => {
             <Box borderRadius={'md'}>
                 <Heading>
                     <LinkOverlay href={`/anime/${anime.id}/`}>
-                        <Text noOfLines={1} fontSize={'lg'}>{anime.title}</Text>
+                        <Text  noOfLines={{base: '3', md: '1'}} fontSize={{base: 'sm', md: 'lg'}}>{anime.title}</Text>
                     </LinkOverlay>
                 </Heading>
             </Box>

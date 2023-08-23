@@ -1,9 +1,10 @@
 'use client'
 import React, {useRef, useState} from "react";
 import {Box, Flex} from "@chakra-ui/layout";
-import {Link, Text} from "@chakra-ui/react";
+import {Link, Spacer, Text} from "@chakra-ui/react";
 import NextLink from "next/link";
 import {useParams} from "next/navigation";
+import {Minus, Plus} from "react-feather";
 
 
 interface CatalogFilterProps {
@@ -46,6 +47,10 @@ export default function CatalogFilter({filter, title, type, defaultIsOpen, curre
                 <Text as={'h3'} fontSize={'md'} m={0}>
                     {title}
                 </Text>
+                <Spacer/>
+
+                {isOpen ? <Minus size={18}/>: <Plus size={18}/>}
+
             </Flex>
             <Box
                 transition={'all .3s ease-in-out'}

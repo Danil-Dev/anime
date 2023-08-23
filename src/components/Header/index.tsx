@@ -62,11 +62,11 @@ export default function Header () {
 
         >
             <Container maxW={'container.xl'}>
-                <Grid templateColumns='repeat(3, 1fr)' gap={6}
+                <Grid templateColumns={{base: '2fr 1fr', md:'repeat(3, 1fr)'}} gap={6}
                 >
                     <GridItem
                         w='100%'
-                        display={'flex'}
+                        display={{base: 'flex', md: 'flex'}}
                     >
                         <Link
                             href={'/'} as={NextLink}
@@ -74,7 +74,16 @@ export default function Header () {
                             alignItems={'center'}
                             mr={'15px'}
                         >
-                            <Image src={'/assets/img/banner/102.png'} alt={'Logo'} width={50} height={50} />
+                            <Image src={'/assets/img/banner/101.png'} alt={'Logo'} width={45} height={45} />
+                            <Heading
+                                mb={0}
+                                size={'lg'}
+                                display={{base: 'block', md: 'none'}}
+                                sx={{
+                                    fontFamily: 'var(--font-rubik-mono-one)',
+                                }}
+                            >
+                                Aniverse</Heading>
                         </Link>
                         <Box as={'nav'}
                             display={{base: 'none', md: 'flex'}}
@@ -97,22 +106,21 @@ export default function Header () {
                             <RandomAnimeButton/>
                         </Box>
                     </GridItem>
-                    <GridItem alignSelf={'center'}>
+                    <GridItem
+
+                        justifySelf={{base: 'flex-end', md:'stretch'}}
+                        alignSelf={'center'}
+                    >
+
                         <SearchComponent/>
                     </GridItem>
                     <GridItem
+                        display={{base: 'none', md: 'flex'}}
                         w={'auto'}
                         justifySelf={'flex-end'}
                         alignSelf={'center'}
 
                     >
-                        {/*<Button*/}
-                        {/*    variant={'outlined'}*/}
-                        {/*    colorScheme={'purple-gradient'}*/}
-                        {/*    fontSize={'14px'}*/}
-                        {/*    size={'md'}*/}
-                        {/*>*/}
-                        {/*    РЕГИСТРАЦИИ</Button>*/}
 
                         <AuthButton/>
                     </GridItem>

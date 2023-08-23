@@ -4,7 +4,7 @@ import {useEffect, useRef} from "react";
 import {useShakaPlayer} from "@/lib/dshaka-player/hooks/useShakaPlayer";
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {usePlayerState} from "@/store/player/hooks";
-
+import mux from 'mux.js';
 interface ShakaPlayerProps {
     url: string,
     currentTime?: number,
@@ -49,6 +49,10 @@ export function ShakaPlayer({
         if (isLoaded && player && video){
             // console.log('[ShakaPlayer]: Configure')
 
+            if (!window.muxjs){
+                window.muxjs = mux
+            }
+
             const localConfig = {
                 abr: { enabled: track === 'auto'},
                 manifest: { dash: { ignoreMinBufferTime: true } },
@@ -66,6 +70,13 @@ export function ShakaPlayer({
 
                     if (track !== 'auto'){
                         const findTrack = player.getVariantTracks().find(trackVariant => trackVariant.height === track)
+
+
+                        const langs = player.getAudioLanguages()
+                        const subs = player.getTextTracks()
+                        const subsLangs = player.getTextLanguages()
+
+                        console.log('langs', langs, subs, subsLangs)
                         if (findTrack){
                             player.selectVariantTrack(findTrack)
                         }

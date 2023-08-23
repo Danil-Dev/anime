@@ -3,6 +3,7 @@ import {IAnimeData} from "@/services/Anime";
 
 import {AnimeCard} from "@/components/AnimeCard";
 import {Box} from "@chakra-ui/layout";
+import {Grid} from "@chakra-ui/react";
 
 interface CatalogItemsProps{
     animeList: IAnimeData[]
@@ -14,17 +15,17 @@ export default function CatalogItems({animeList}: CatalogItemsProps) {
         <>
 
             {animeList.length >=1 && (
-                <Box>
+                <Grid templateColumns={{base: '1fr 1fr', md: 'repeat(3, 1fr)'}} gap={'10px'}>
                     {animeList.map((anime, idx) => (
-                        <AnimeCard anime={anime} key={idx} width={210}/>
+                        <AnimeCard anime={anime} key={idx} />
                     ))}
                     {animeList.map((anime, idx) => (
-                        <AnimeCard anime={anime} key={idx} width={210}/>
+                        <AnimeCard anime={anime} key={idx} />
                     ))}
                     {animeList.map((anime, idx) => (
-                        <AnimeCard anime={anime} key={idx} width={210}/>
+                        <AnimeCard anime={anime} key={idx} />
                     ))}
-                </Box>
+                </Grid>
             )}
         </>
     )

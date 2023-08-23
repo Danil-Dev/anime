@@ -5,6 +5,7 @@ import {Tags} from "@/components/Tags";
 import {Calendar, Star} from "react-feather";
 import buildDateString from "@/utils/buildDateString";
 import Link from "next/link";
+import {AspectRatio, Box, LinkBox,LinkOverlay, Flex, Text, Heading} from "@chakra-ui/layout";
 
 interface SearchCardProps {
     data: IAnimeFoundData,
@@ -18,31 +19,50 @@ export default function SearchCard({data, onClick}: SearchCardProps) {
 
     }
     return (
-        <Link onClick={handleClick} className={styles.searchCard} href={`/anime/${data.id}`}>
-            <div className={styles.searchCard_wrapper}>
-                <div className={styles.searchCard_img_wrapper}>
-                    <Image src={data.image} alt={data.title} width={90} height={130}/>
-                </div>
-                <div className={styles.searchCard_info}>
-                    <h1 className={styles.searchCard_header}>{data.title}</h1>
-                    <div className={styles.searchCard_info_metaData_wrapper}>
+        <LinkBox
+
+            p={'15px'}
+        >
+            <LinkOverlay
+                display={{base: 'none', md: 'flex'}}
+                href={`/anime/${data.id}`}
+            >
+                    <Flex gap={5} >
+                        <Box
+                            rounded={'md'}
+                            overflow={'hidden'}
+                            minW={'120px'}
+
+                        >
+                            <Image  src={data.image} alt={data.title} width={120} height={160}/>
+                        </Box>
+                        <Box mb={5}>
+                            <Heading size={"md"}>{data.title}</Heading>
+                            <Flex
+                                gap={2}
+                                alignItems={'center'}
+                                alignContent={'center'}
+                            >
+                                <Tags size={'small'} tags={data.genre}/>
+                                <Calendar size={12} />
+                                <Text m={0}>{buildDateString(data.release_date)}</Text>
+                                <Star size={12} />
+                                <Text m={0}>{data.rating}</Text>
+                            </Flex>
+                            <Text mt={'10px'}>{data.description}</Text>
+                        </Box>
+                    </Flex>
+            </LinkOverlay>
+            <LinkOverlay
+                display={{base: 'flex', md: 'none'}}
+                href={`/anime/${data.id}`}
+            >
+                    <Box mb={5}>
+                        <Heading size={"sm"}>{data.title}</Heading>
                         <Tags size={'small'} tags={data.genre}/>
-                        <div className={styles.searchCard_info_metaData_wrapper_date}>
-                            <Calendar size={12}/>
-                            <p>{buildDateString(data.release_date)}</p>
-                        </div>
-                        <div className={styles.searchCard_info_metaData_wrapper_rating}>
-                            <Star size={12}/>
-                            <p>{data.rating}</p>
-                        </div>
-                    </div>
-                    <div className={styles.searchCard_info_desc}>
-                        <p><strong>Опис: </strong>{data.description}</p>
-                    </div>
-                </div>
+                    </Box>
+            </LinkOverlay>
+        </LinkBox>
 
-            </div>
-        </Link>
     )
-
 }

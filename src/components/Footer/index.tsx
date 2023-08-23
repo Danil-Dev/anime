@@ -30,13 +30,22 @@ export default function Footer() {
                     </HStack>
 
                     <Spacer />
-
-                    <HStack spacing={5}>
+                    <HStack
+                        display={{ base: "none", md: "flex" }}
+                        spacing={5}>
                         <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">
                             Здесь будут ссылки на соц сети
                         </Link>
                     </HStack>
+
                 </Flex>
+                <Box
+                    display={{ base: "flex", md: "none" }}
+                    mb={5}>
+                    <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">
+                        Здесь будут ссылки на соц сети
+                    </Link>
+                </Box>
 
                 <Text fontSize="14px" color="accentTextLightSecondary">
                     © 2023 Aniverse - danilmarc4uk.grf@gmail.com
