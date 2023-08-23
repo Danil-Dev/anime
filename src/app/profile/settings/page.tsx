@@ -8,7 +8,7 @@ export default function ProfileSettings() {
             <Container maxW="container.lg">
                 <Box>
                     <VStack align={'left'}>
-                        <Image/>
+
                         <Box>
                             <Heading>USER NAME</Heading>
                             <Text>subscribtion status</Text>

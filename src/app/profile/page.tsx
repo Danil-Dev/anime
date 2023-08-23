@@ -1,5 +1,6 @@
-import {getServerSession} from "next-auth";
+
 import {authOptions} from "@/configs/auth";
+import {getServerSession} from "next-auth/next";
 
 export default async function ProfilePage() {
 

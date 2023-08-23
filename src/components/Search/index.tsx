@@ -125,7 +125,7 @@ export default function SearchComponent() {
                     aria-label='Search database'
                     icon={<Search size={16} />}
                     size='lg'
-                    po
+
                     display={{base: 'flex', md: 'none'}}
                 />
 

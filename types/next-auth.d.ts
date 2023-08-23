@@ -1,3 +1,4 @@
+import {ISODateString} from "next-auth/core/types";
 
 declare module "next-auth" {
 
@@ -7,6 +8,7 @@ declare module "next-auth" {
         user: {
             id: string,
             token: string
-        }
+        } & DefaultSession['user']
+        expires: ISODateString;
     }
 }

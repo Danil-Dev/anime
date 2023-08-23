@@ -12,12 +12,12 @@ import {SessionProvider} from "next-auth/react";
 
 
 export function Providers({
-    children
+    children,
 }: {
     children: ReactNode
 } ){
     return(
-        <SessionProvider>
+        <SessionProvider >
             <ReduxProvider>
 
                     <ShakaProvider>
