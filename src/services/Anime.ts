@@ -1,3 +1,4 @@
+import {BASE_API_URL} from '@/configs/constants'
 
 export interface IAnimeFoundData {
     title: string,
@@ -61,7 +62,7 @@ export interface UserData   {
     lastEpisode: number
 }
 
- export const BASE_API_URL = 'http://localhost:3301'
+
 
 export const AnimeService = {
     async getAllAnime () : Promise<IAnimeData[]> {

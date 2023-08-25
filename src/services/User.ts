@@ -1,5 +1,5 @@
 
-
+import {BASE_API_URL} from '@/configs/constants'
 
 export interface EpisodeHistory {
     episode_number:number,
@@ -26,7 +26,7 @@ export interface ExtendedAnimeHistory  {
 
 export const UserServices = {
     async updateUserWatchedHistory(animeId: string, userId: string,  currentTime: number, episodeId: string, episodeNumber: number) {
-        const res = await fetch(`http://localhost:3301/update/user/history`, {
+        const res = await fetch(`${BASE_API_URL}/update/user/history`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({animeId, userId, currentTime, episodeId, episodeNumber})
@@ -36,7 +36,7 @@ export const UserServices = {
     },
 
     async getWatchlist(userId: string) {
-        const res = await fetch(`http://localhost:3301/user/${userId}/watchlist`, {
+        const res = await fetch(`${BASE_API_URL}/user/${userId}/watchlist`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             next: {
@@ -47,7 +47,7 @@ export const UserServices = {
         return await res.json()
     },
     async getHistory(userId: string) {
-        const res = await fetch(`http://localhost:3301/user/${userId}/history`, {
+        const res = await fetch(`${BASE_API_URL}/user/${userId}/history`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             cache: "no-store",
@@ -59,7 +59,7 @@ export const UserServices = {
     async getUserEpisodeHistory(userId: string, episodeId: string) {
 
         console.log(userId, episodeId, 'saveEpisode')
-      const res = await fetch(`http://localhost:3301/user/${userId}/episode/${episodeId}`, {
+      const res = await fetch(`${BASE_API_URL}/user/${userId}/episode/${episodeId}`, {
           method: "GET",
           cache: "no-store",
           headers: {"Content-Type": "application/json"},
@@ -69,7 +69,7 @@ export const UserServices = {
     },
     async getLastWatchedEpisode(userId: string, animeId: string) {
         console.log(userId, animeId, 'getLastWatchedEpisode');
-        const res = await fetch(`http://localhost:3301/user/${userId}/${animeId}/lastWatched`, {
+        const res = await fetch(`${BASE_API_URL}/user/${userId}/${animeId}/lastWatched`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -83,7 +83,7 @@ export const UserServices = {
     async addToWatchlist(userId: string, animeId: string) {
 
         console.log(userId, animeId, 'addToWatchlist')
-        const res = await fetch(`http://localhost:3301/update/user/watchlist`, {
+        const res = await fetch(`${BASE_API_URL}/update/user/watchlist`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({userId, animeId}),
@@ -91,7 +91,7 @@ export const UserServices = {
         return res.status === 200
     },
     async removeFromWatchlist( animeId: string, userId: string, ){
-        const res = await fetch(`http://localhost:3301/remove/user/watchlist`, {
+        const res = await fetch(`${BASE_API_URL}/remove/user/watchlist`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             cache: "no-store",
