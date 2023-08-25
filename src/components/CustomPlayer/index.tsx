@@ -29,7 +29,7 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
     const [loading, setLoading] = useState<boolean>(true)
     const [episodeSaved, setEpisodeSaved] = useState<AnimeHistory | null>(null)
     const isLastEpisode = !Boolean(anime.episodes[currentEpisode + 1])
-    const episodeData = anime.episodes[currentEpisode]
+    const episodeData = anime.episodes.find(episode => episode.episode_number === currentEpisode)
 
     const handleOnmountPlayer = (currentTime: number) => {
         console.log('OnmountPlayer', currentTime, episodeData, currentEpisode, anime._id)

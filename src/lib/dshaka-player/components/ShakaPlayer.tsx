@@ -68,15 +68,18 @@ export function ShakaPlayer({
                 player.load(url, currentTime).then(() => {
                     console.log('[ShakaPlayer]: Load Complete')
 
+                    //92bXpCZKY_5P7StgCoZt2dVnSNB44rl2wfYEtSJX
+                    const langs = player.getAudioLanguages()
+                    const subs = player.getTextTracks()
+                    const subsLangs = player.getTextLanguages()
+                    console.log('tracks', player.getVariantTracks())
+                    console.log('langs', langs, subs, subsLangs)
+
                     if (track !== 'auto'){
                         const findTrack = player.getVariantTracks().find(trackVariant => trackVariant.height === track)
 
 
-                        const langs = player.getAudioLanguages()
-                        const subs = player.getTextTracks()
-                        const subsLangs = player.getTextLanguages()
 
-                        console.log('langs', langs, subs, subsLangs)
                         if (findTrack){
                             player.selectVariantTrack(findTrack)
                         }

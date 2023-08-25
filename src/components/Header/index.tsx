@@ -5,17 +5,14 @@ import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import {navLinks} from "@/routing";
 import {usePathname} from "next/navigation";
-import styles from './header.module.scss'
-import {Lilita_One} from "next/font/google";
 import SearchComponent from '../Search'
 import {Box} from "@chakra-ui/layout";
-import {Button, Container, Flex, Grid, GridItem, Heading, Link, Spacer, Text} from "@chakra-ui/react";
+import {Button, Container, Grid, GridItem, Heading, Link} from "@chakra-ui/react";
 import NextLink from "next/link";
 import AuthButton from "@/components/AuthButton";
 import RandomAnimeButton from "@/components/Button/RandomAnimeButton";
 
 
-const lilita = Lilita_One({subsets: ['latin'], weight: ['400']})
 
 
 export default function Header () {
@@ -49,7 +46,7 @@ export default function Header () {
     return (
         <Box
             p={'12px 0'}
-            position={isFixed? 'fixed' : 'relative'}
+            position={"fixed"}
             top={0}
             zIndex={100}
             left={0}
@@ -107,7 +104,6 @@ export default function Header () {
                         </Box>
                     </GridItem>
                     <GridItem
-
                         justifySelf={{base: 'flex-end', md:'stretch'}}
                         alignSelf={'center'}
                     >
@@ -119,7 +115,6 @@ export default function Header () {
                         w={'auto'}
                         justifySelf={'flex-end'}
                         alignSelf={'center'}
-
                     >
 
                         <AuthButton/>
