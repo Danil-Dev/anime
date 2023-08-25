@@ -23,6 +23,7 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                             </Td>
                             <Td textAlign={'right'}>
                                 Amanogawa, Amanogawa, Amanogawa
+
                             </Td>
                         </Tr>
                         <Tr>

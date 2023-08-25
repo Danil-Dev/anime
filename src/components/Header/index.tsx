@@ -71,7 +71,7 @@ export default function Header () {
                             alignItems={'center'}
                             mr={'15px'}
                         >
-                            <Image src={'/assets/img/banner/101.png'} alt={'Logo'} width={45} height={45} />
+                            <Image src={'/assets/img/bgImages/101.png'} alt={'Logo'} width={45} height={45} />
                             <Heading
                                 mb={0}
                                 size={'lg'}
