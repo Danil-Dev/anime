@@ -20,7 +20,7 @@ export default async function Home()    {
         studio: 'Cтудiя: MAPPA',
         description: 'ОПИСАНИЕ ОЧЕНЬ МНОГА ТЕКСТА ВОТ',
         link: '/',
-        image_banner:'/assets/img/banner/comingAnimeMagicBattleSliderItem.jpg',
+        image_banner:'/assets/img/bgImages/comingAnimeMagicBattleSliderItem.jpg',
         image: '/assets/img/poster/mushoku.webp'
     }
     const bannerData2 : IBannerData = {
@@ -29,7 +29,7 @@ export default async function Home()    {
         studio: 'Cтудiя: MAPPA',
         description: 'ОПИСАНИЕ ОЧЕНЬ МНОГА ТЕКСТА ВОТ',
         link: '/',
-        image_banner:'/assets/img/banner/comingAnimeMagicBattleSliderItem.jpg',
+        image_banner:'/assets/img/bgImages/comingAnimeMagicBattleSliderItem.jpg',
         image: '/assets/img/poster/mushoku.webp'
     }
     const bannerData3 : IBannerData = {
@@ -38,8 +38,8 @@ export default async function Home()    {
         studio: 'Cтудiя: Studio Bind',
         description: 'Історія переносить глядачів на 12 років назад, у 2006, коли найсильніший маг Ґоджьо Сатору був звичайнісіньким учнем старшої школи. Разом зі своїм другом, Ґето Суґуру, вони вирушають на місію, від якої залежить доля всього світу. Перші виклики і перешкоди, перші помилки й втрати. Із цієї подорожі вони повернуться зовсім іншими людьми.',
         link: '#',
-        image_banner:'/assets/img/banner/mushoku_banner.avif',
-        image: '/assets/img/banner/rudeus_silfi.png'
+        image_banner:'/assets/img/bgImages/mushoku_banner.avif',
+        image: '/assets/img/bgImages/rudeus_silfi.png'
 
     }
 

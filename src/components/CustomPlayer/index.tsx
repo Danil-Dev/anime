@@ -209,24 +209,26 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                     mt={'40px'}
                     mb={'24px'}
                 >
-                 <Box width={'65%'}>
+                 <Box width={{base: '100%' ,md:'65%'}}>
                      <VStack
                          spacing={5}
                          align={'left'}>
                          <Link
                              color={'textYellow'}
                              as={NextLink}
-                             href={`/anime/${anime.id}/`}>
+                             href={`/anime/${anime.id}/`}
+                             fontSize={'18px'}
+                         >
                              {anime.title}
+
                          </Link>
                          <Heading>
                              E{episodeData.episode_number} - {episodeData.title}
                          </Heading>
-                         <Tags tags={anime.genre}/>
                          <Text fontSize={'18px'}>{episodeData.description}</Text>
                      </VStack>
                  </Box>
-                    <Box>
+                    <Box display={{base:'none', md:'block'}} >
                         <VStack spacing={5} align={'left'}>
                             {!isLastEpisode && (
                                 <Box>
@@ -242,6 +244,24 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                         </VStack>
                     </Box>
                 </Flex>
+                <Box
+                    display={{base:'inline-block', md:'none'}}
+                     mb={'15px'}
+                >
+                    <VStack spacing={5} align={'left'}>
+                        {!isLastEpisode && (
+                            <Box>
+                                <Heading size={'16px'}>Next Episode </Heading>
+                                <EpisodeItem episode={anime.episodes[currentEpisode + 1]} handleChangeEpisode={handleChangeEpisode}/>
+                            </Box>)}
+                        {currentEpisode !== 0 && (
+                            <Box>
+                                <Heading size={'16px'}>Prev Episode </Heading>
+                                <EpisodeItem episode={anime.episodes[currentEpisode - 1]} handleChangeEpisode={handleChangeEpisode}/>
+                            </Box>)}
+                        <Button as={NextLink} href={`/anime/${anime.id}/`}>More Episodes</Button>
+                    </VStack>
+                </Box>
             </Container>
         </>
 

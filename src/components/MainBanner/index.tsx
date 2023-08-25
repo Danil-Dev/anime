@@ -16,10 +16,10 @@ export default function MainBanner () {
     const pathname = usePathname()
     return (
         <Box
-            h={{base:'100vh',md:'80vh'}}
+            h={{base:'100vh',md:'90vh'}}
             bgRepeat={'no-repeat'}
             w={'100%'}
-            bgImage={{base:'/assets/img/banner/mainbannermobile.png',md:'/assets/img/banner/anime_bg2.jpg'}}
+            bgImage={{base:'/assets/img/bgImages/mainbannermobile.png',md:'/assets/img/bgImages/anime_bg2.jpg'}}
             backdropFilter={{base:'blur(10px)',md:'none'}}
             bgSize={{base:'auto 100%',md:'cover'}}
             bgPosition={{base:'top center',md:'center'}}
