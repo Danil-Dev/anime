@@ -19,13 +19,13 @@ interface ControlsOverlayProps{
 
 export function ControlsOverlay({start, end, onEnd, isLastEpisode}: ControlsOverlayProps){
 
-    const [isHiddenControl, setIsHiddenControl] = useState<boolean>(false)
+    const [isHiddenControl, setIsHiddenControl] = useState<boolean>(true)
 
     const handleMouseMove = () => {
         if (isHiddenControl){
             setIsHiddenControl(false)
             setTimeout(() => {
-                // setIsHiddenControl(true)
+                setIsHiddenControl(true)
             }, 4000)
         }
     }

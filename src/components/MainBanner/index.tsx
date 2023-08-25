@@ -23,7 +23,7 @@ export default function MainBanner () {
             backdropFilter={{base:'blur(10px)',md:'none'}}
             bgSize={{base:'auto 100%',md:'cover'}}
             bgPosition={{base:'top center',md:'center'}}
-            mt={'-140px'}
+            // mt={'-140px'}
             position={'relative'}
             _before={{
                 position: 'absolute',

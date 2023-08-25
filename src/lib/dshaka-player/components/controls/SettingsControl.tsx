@@ -1,15 +1,17 @@
 import {useEffect, useRef, useState} from "react";
 import styles from './controls.module.scss'
-import {Settings, Image, ChevronsRight, ChevronLeft, Check} from "react-feather";
+import {Settings, Image, ChevronsRight, ChevronLeft, Check, Music} from "react-feather";
 import {useVideoTracks} from "@/lib/dshaka-player/hooks/useVideoTracks";
 import {useAppDispatch} from "@/store/hooks";
 import {updateSpeed, updateTrack} from "@/store/player/reducer";
 import {usePlaybackRate} from "@/lib/dshaka-player/hooks/usePlaybackRate";
+import {useAudioTracks} from "@/lib/dshaka-player/hooks/useAudioTracks";
 enum SettingsType {
     NONE,
     ALL,
     QUALITY,
-    SPEED
+    SPEED,
+    AUDIO
 }
 
 export function SettingsControl(){
@@ -65,6 +67,7 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
             dispatch(updateTrack(selectedTrack.height))
         }
     })
+    const {selectAudioTrack} = useAudioTracks()
     const {currentRate, selectRate} = usePlaybackRate({
         onSelect: (selectedRate) => {
             dispatch(updateSpeed(selectedRate))
@@ -106,6 +109,11 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                             <div className={styles.control_settings_menu_item_icon}><ChevronsRight size={24}/> </div>
                             <div className={styles.control_settings_menu_item_label}>Speed</div>
                             <div className={styles.control_settings_menu_item_content}>x{currentRate}</div>
+                        </div>
+                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.AUDIO)}}>
+                            <div className={styles.control_settings_menu_item_icon}><Music size={24}/> </div>
+                            <div className={styles.control_settings_menu_item_label}>Audio</div>
+                            <div className={styles.control_settings_menu_item_content}>Original</div>
                         </div>
                     </>
                 )}
@@ -154,6 +162,38 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                             </div>
                         ))}
                     </>
+                )}
+
+                {type === SettingsType.AUDIO && (
+                  <>
+                      <div className={styles.control_settings_menu_head} onClick={() => setMenuType(SettingsType.ALL)}>
+                          <ChevronLeft size={18}/> Озвучка
+                      </div>
+                      {/*{rateVariants.map((rate, index) => (*/}
+                        <div
+                          className={styles.control_settings_menu_item}
+
+                          onClick={() => selectAudioTrack('Amanogava')}
+                        >
+                            <div className={styles.control_settings_menu_item_icon}>
+                                {/*{rate === currentRate && <Check size={24}/>}*/}
+                            </div>
+                            <div className={styles.control_settings_menu_item_label}>Amanogava</div>
+
+                        </div>
+                      <div
+                        className={styles.control_settings_menu_item}
+
+                        onClick={() => selectAudioTrack('original')}
+                      >
+                          <div className={styles.control_settings_menu_item_icon}>
+                              {/*{rate === currentRate && <Check size={24}/>}*/}
+                          </div>
+                          <div className={styles.control_settings_menu_item_label}>original</div>
+
+                      </div>
+                      {/*))}*/}
+                  </>
                 )}
             </div>
         </div>
