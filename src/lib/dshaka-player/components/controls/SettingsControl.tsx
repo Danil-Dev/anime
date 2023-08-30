@@ -1,17 +1,19 @@
 import {useEffect, useRef, useState} from "react";
 import styles from './controls.module.scss'
-import {Settings, Image, ChevronsRight, ChevronLeft, Check, Music} from "react-feather";
+import {Settings, Image, ChevronsRight, ChevronLeft, Check, Music, Type} from "react-feather";
 import {useVideoTracks} from "@/lib/dshaka-player/hooks/useVideoTracks";
 import {useAppDispatch} from "@/store/hooks";
 import {updateSpeed, updateTrack} from "@/store/player/reducer";
 import {usePlaybackRate} from "@/lib/dshaka-player/hooks/usePlaybackRate";
 import {useAudioTracks} from "@/lib/dshaka-player/hooks/useAudioTracks";
+import {useTextTracks} from "@/lib/dshaka-player/hooks/useTextTracks";
 enum SettingsType {
     NONE,
     ALL,
     QUALITY,
     SPEED,
-    AUDIO
+    AUDIO,
+    SUBTITLES
 }
 
 export function SettingsControl(){
@@ -68,6 +70,14 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
         }
     })
     const {selectAudioTrack, audioTracks} = useAudioTracks()
+
+    const {
+        selectedTrack: selectedTextTrack,
+        tracks: subtitleTracks,
+        selectTrack: selectSubtitleTrack,
+        isVisible,
+        toggleVisibility
+    } = useTextTracks()
     const {currentRate, selectRate} = usePlaybackRate({
         onSelect: (selectedRate) => {
             dispatch(updateSpeed(selectedRate))
@@ -114,6 +124,11 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                             <div className={styles.control_settings_menu_item_icon}><Music size={24}/> </div>
                             <div className={styles.control_settings_menu_item_label}>Audio</div>
                             <div className={styles.control_settings_menu_item_content}>Original</div>
+                        </div>
+                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.SUBTITLES)}}>
+                            <div className={styles.control_settings_menu_item_icon}><Type size={24}/> </div>
+                            <div className={styles.control_settings_menu_item_label}>Subs</div>
+                            <div className={styles.control_settings_menu_item_content}>off</div>
                         </div>
                     </>
                 )}
@@ -179,6 +194,27 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                                 {selectedTrack.label === audio && <Check size={24}/>}
                             </div>
                             <div className={styles.control_settings_menu_item_label}>{audio}</div>
+
+                        </div>
+                      ))}
+                  </>
+                )}
+
+                {type === SettingsType.SUBTITLES && (
+                  <>
+                      <div className={styles.control_settings_menu_head} onClick={() => setMenuType(SettingsType.ALL)}>
+                          <ChevronLeft size={18}/> Субтитри
+                      </div>
+                      {subtitleTracks.map((subTrack, index) => (
+                        <div
+                          className={styles.control_settings_menu_item}
+                          key={index}
+                          onClick={() => selectSubtitleTrack(subTrack)}
+                        >
+                            <div className={styles.control_settings_menu_item_icon}>
+                                {/*{selectedTrack?.track.language === && <Check size={24}/>}*/}
+                            </div>
+                            <div className={styles.control_settings_menu_item_label}>{subTrack.display}</div>
 
                         </div>
                       ))}
