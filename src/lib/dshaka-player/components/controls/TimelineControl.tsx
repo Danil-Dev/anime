@@ -5,7 +5,7 @@ import styles from './controls.module.scss'
 import {AbsoluteCenter, Fade, Grid, GridItem, Text, useDisclosure} from "@chakra-ui/react";
 import {Box, HStack} from "@chakra-ui/layout";
 import {useHotkeys} from "@mantine/hooks";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ChevronsLeft, ChevronsRight} from "react-feather";
 
 export function TimelineControl() {
@@ -14,7 +14,9 @@ export function TimelineControl() {
         updateInterval: 250
     })
 
-
+    const backRef = useRef<HTMLDivElement | null>(null)
+    const forwardRef = useRef<HTMLDivElement | null>(null)
+    const lastTapRef = useRef<number>(0)
     const timeOutRef = useRef(null)
 
     const [changeValue, setChangeValue] = useState<number>(0)
@@ -68,6 +70,22 @@ export function TimelineControl() {
 
     }
 
+    const handleDoubleTap = (e: any) => {
+        const now = new Date().getTime()
+        const DOUBLE_TAP_DELAY = 300
+        if (lastTapRef.current && (now - lastTapRef.current) < DOUBLE_TAP_DELAY) {
+          console.log('Double touch detected');
+        }
+        lastTapRef.current = now
+
+    }
+
+    useEffect(() => {
+      if (backRef.current){
+        backRef.current.addEventListener('touchstart',handleDoubleTap)
+      }
+    }, [])
+
 
     return(
         <>
@@ -97,6 +115,7 @@ export function TimelineControl() {
                             h: '100%',
                         }
                     }}
+                    ref={backRef}
                 >
                     <Fade in={isBack}>
                         <Box

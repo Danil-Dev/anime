@@ -19,6 +19,7 @@ export function useAudioTracks(){
   const updateAudioHandler = () => {
     const audioTags = player.getAudioLanguages()
     const tracks = player.getVariantTracks()
+    console.log ('Update audio handler', audioTags, tracks)
     let audioTracksByLabel: string[] = []
     for (const audio of audioTags){
       audioTracksByLabel.push(tracks.find((track) => track.language === audio).label)

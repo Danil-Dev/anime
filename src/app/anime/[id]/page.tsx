@@ -170,7 +170,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                 pb={'50px'}
             >
                 <Heading>Episodes</Heading>
-                <Grid templateColumns={{base: 'repeat(2, 1fr)' ,md:'repeat(4, 1fr)'}} gap={6}>
+                <Grid templateColumns={{base: 'repeat(2, 1fr)' ,md:'repeat(3, 1fr)'}} gap={6}>
                     {anime.episodes.map((episode , idx)=> (
                         <GridItem key={idx}>
                             <EpisodeCard episode={episode}  animeId={anime.id}/>

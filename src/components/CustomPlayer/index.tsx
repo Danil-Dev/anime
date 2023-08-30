@@ -238,12 +238,12 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                             {!isLastEpisode && (
                                 <Box>
                                     <Heading size={'16px'}>Next Episode </Heading>
-                                    <EpisodeItem episode={anime.episodes[currentEpisode + 1]} handleChangeEpisode={handleChangeEpisode}/>
+                                    <EpisodeItem episode={anime.episodes.find(ep => ep.episode_number === currentEpisode+1)} handleChangeEpisode={handleChangeEpisode}/>
                                 </Box>)}
-                            {currentEpisode !== 0 && (
+                            {anime.episodes.findIndex(ep => ep.episode_number === currentEpisode) !== 0 && (
                                 <Box>
                                     <Heading size={'16px'}>Prev Episode </Heading>
-                                    <EpisodeItem episode={anime.episodes[currentEpisode - 1]} handleChangeEpisode={handleChangeEpisode}/>
+                                    <EpisodeItem episode={anime.episodes.find(ep => ep.episode_number === currentEpisode - 1)} handleChangeEpisode={handleChangeEpisode}/>
                                 </Box>)}
                             <Button as={NextLink} href={`/anime/${anime.id}/`}>More Episodes</Button>
                         </VStack>

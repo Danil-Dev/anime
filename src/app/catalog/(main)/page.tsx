@@ -10,6 +10,8 @@ export default async function CatalogPage() {
 
     return (
             <>
+
+
                 <CatalogItems animeList={animeList} />
             </>
     )

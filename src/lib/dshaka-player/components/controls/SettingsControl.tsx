@@ -72,12 +72,15 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
     const {selectAudioTrack, audioTracks} = useAudioTracks()
 
     const {
-        selectedTrack: selectedTextTrack,
+        selectedTrack: selectedSubtitleTrack,
         tracks: subtitleTracks,
         selectTrack: selectSubtitleTrack,
         isVisible,
         toggleVisibility
     } = useTextTracks()
+
+
+
     const {currentRate, selectRate} = usePlaybackRate({
         onSelect: (selectedRate) => {
             dispatch(updateSpeed(selectedRate))
@@ -96,6 +99,10 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
         selectRate(rate)
         setMenuType(SettingsType.NONE)
     }
+
+    useEffect(() => {
+        console.log (selectedSubtitleTrack, subtitleTracks, audioTracks)
+    }, [selectedSubtitleTrack, subtitleTracks, audioTracks])
 
 
 
@@ -120,16 +127,22 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                             <div className={styles.control_settings_menu_item_label}>Speed</div>
                             <div className={styles.control_settings_menu_item_content}>x{currentRate}</div>
                         </div>
-                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.AUDIO)}}>
-                            <div className={styles.control_settings_menu_item_icon}><Music size={24}/> </div>
-                            <div className={styles.control_settings_menu_item_label}>Audio</div>
-                            <div className={styles.control_settings_menu_item_content}>Original</div>
-                        </div>
-                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.SUBTITLES)}}>
-                            <div className={styles.control_settings_menu_item_icon}><Type size={24}/> </div>
-                            <div className={styles.control_settings_menu_item_label}>Subs</div>
-                            <div className={styles.control_settings_menu_item_content}>off</div>
-                        </div>
+                        {audioTracks.length > 1 && (
+                          <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.AUDIO)}}>
+                              <div className={styles.control_settings_menu_item_icon}><Music size={24}/> </div>
+                              <div className={styles.control_settings_menu_item_label}>Audio</div>
+                              <div className={styles.control_settings_menu_item_content}>{selectedTrack.label || 'Original'}</div>
+                          </div>
+                        )}
+
+                        {subtitleTracks.length > 0 && (
+                          <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.SUBTITLES)}}>
+                              <div className={styles.control_settings_menu_item_icon}><Type size={24}/> </div>
+                              <div className={styles.control_settings_menu_item_label}>Subs</div>
+                              <div className={styles.control_settings_menu_item_content}>{selectedSubtitleTrack?.display || 'off'}</div>
+                          </div>
+                        )}
+
                     </>
                 )}
                 {type === SettingsType.QUALITY && (
@@ -205,6 +218,16 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                       <div className={styles.control_settings_menu_head} onClick={() => setMenuType(SettingsType.ALL)}>
                           <ChevronLeft size={18}/> Субтитри
                       </div>
+                      <div
+                        className={styles.control_settings_menu_item}
+                        onClick={() => toggleVisibility()}
+                      >
+                          <div className={styles.control_settings_menu_item_icon}>
+                              {!isVisible && <Check size={24}/>}
+                          </div>
+                          <div className={styles.control_settings_menu_item_label}>Off</div>
+
+                      </div>
                       {subtitleTracks.map((subTrack, index) => (
                         <div
                           className={styles.control_settings_menu_item}
@@ -212,7 +235,7 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                           onClick={() => selectSubtitleTrack(subTrack)}
                         >
                             <div className={styles.control_settings_menu_item_icon}>
-                                {/*{selectedTrack?.track.language === && <Check size={24}/>}*/}
+                                {selectedSubtitleTrack && selectedSubtitleTrack.language === subTrack.language && <Check size={24}/>}
                             </div>
                             <div className={styles.control_settings_menu_item_label}>{subTrack.display}</div>
 
