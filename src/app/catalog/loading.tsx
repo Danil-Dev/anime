@@ -1,5 +1,82 @@
+'use client'
+import {SimpleGrid, Skeleton} from "@chakra-ui/react";
 
 export default function Loading() {
     // Or a custom loading skeleton component
-    return <p>Loading...</p>
+    return <>
+        <SimpleGrid columns={{base: 2, md: 3}} spacing={'15px'}>
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+            <Skeleton
+              h={'260px'}
+              w={'200px'}
+              borderRadius={'lg'}
+              fadeDuration={4}
+              startColor={'backgroundOutline'}
+              endColor={'stateOverlayHover'}
+              speed={2}
+            />
+        </SimpleGrid>
+    </>
 }

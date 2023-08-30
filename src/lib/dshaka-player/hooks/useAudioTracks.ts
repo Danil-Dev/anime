@@ -1,7 +1,6 @@
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {useCallback, useEffect, useRef, useState} from "react";
-import useStateRef from "react-usestateref";
-import {useVideoTracks} from "@/lib/dshaka-player/hooks/useVideoTracks";
+
 
 
 export function useAudioTracks(){
@@ -10,35 +9,48 @@ export function useAudioTracks(){
   const [audioTracks, setAudioTracks] = useState([])
 
 
-  const {selectedTrack} = useVideoTracks()
   const selectAudioTrack = useCallback(
-      (audioTrackId: string)=> {
-        // console.log(audioTrackId)
-        // let currentTracks = player.getVariantTracks();
-        //   const currentSelectedTrack = currentTracks.find((track) => track.active)
-        //
-        // console.log('video Track ', currentSelectedTrack)
-        //
-        // if (currentSelectedTrack){
-        //   const audioTrack = currentTracks.find((track) => track.originalAudioId === audioTrackId && track.height === currentSelectedTrack.height)
-        //   console.log(audioTrack)
-        //   player.selectVariantTrack(audioTrack, true, 0)
-        // }
-        player.selectVariantsByLabel(audioTrackId)
-
-
-
-
-      },
+    (audioTrackId: string)=> {
+      player.selectVariantsByLabel(audioTrackId)
+    },
     []
   )
 
-  useEffect(() => {
+  const updateAudioHandler = () => {
+    const audioTags = player.getAudioLanguages()
+    const tracks = player.getVariantTracks()
+    let audioTracksByLabel: string[] = []
+    for (const audio of audioTags){
+      audioTracksByLabel.push(tracks.find((track) => track.language === audio).label)
+    }
+    setAudioTracks(audioTracksByLabel)
+  }
 
-  }, [])
+
+  useEffect(() => {
+    const events = [
+      'variantchanged',
+      'abrstatuschanged',
+      'trackschanged',
+      'adaptation',
+    ];
+
+    events.forEach((event) => {
+      player.addEventListener(event, updateAudioHandler);
+    });
+
+    return () => {
+      if (player) {
+        events.forEach((event) => {
+          player.removeEventListener(event, updateAudioHandler);
+        });
+      }
+    };
+  }, [updateAudioHandler]);
 
 
   return {
+    audioTracks,
     selectAudioTrack
   } as const
 }

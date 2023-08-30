@@ -67,7 +67,7 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
             dispatch(updateTrack(selectedTrack.height))
         }
     })
-    const {selectAudioTrack} = useAudioTracks()
+    const {selectAudioTrack, audioTracks} = useAudioTracks()
     const {currentRate, selectRate} = usePlaybackRate({
         onSelect: (selectedRate) => {
             dispatch(updateSpeed(selectedRate))
@@ -169,30 +169,19 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                       <div className={styles.control_settings_menu_head} onClick={() => setMenuType(SettingsType.ALL)}>
                           <ChevronLeft size={18}/> Озвучка
                       </div>
-                      {/*{rateVariants.map((rate, index) => (*/}
+                      {audioTracks.map((audio, index) => (
                         <div
                           className={styles.control_settings_menu_item}
-
-                          onClick={() => selectAudioTrack('Amanogava')}
+                          key={index}
+                          onClick={() => selectAudioTrack(audio)}
                         >
                             <div className={styles.control_settings_menu_item_icon}>
-                                {/*{rate === currentRate && <Check size={24}/>}*/}
+                                {selectedTrack.label === audio && <Check size={24}/>}
                             </div>
-                            <div className={styles.control_settings_menu_item_label}>Amanogava</div>
+                            <div className={styles.control_settings_menu_item_label}>{audio}</div>
 
                         </div>
-                      <div
-                        className={styles.control_settings_menu_item}
-
-                        onClick={() => selectAudioTrack('original')}
-                      >
-                          <div className={styles.control_settings_menu_item_icon}>
-                              {/*{rate === currentRate && <Check size={24}/>}*/}
-                          </div>
-                          <div className={styles.control_settings_menu_item_label}>original</div>
-
-                      </div>
-                      {/*))}*/}
+                      ))}
                   </>
                 )}
             </div>

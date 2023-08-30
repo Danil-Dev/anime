@@ -9,7 +9,6 @@ export function AnimeCardSkeleton({isLoading} : {isLoading: boolean}) {
         <Box w={'100%'}>
             <Skeleton
                 h={'260px'}
-                w={'200px'}
                 borderRadius={'lg'}
                 fadeDuration={4}
                 isLoaded={!isLoading}

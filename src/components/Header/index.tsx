@@ -52,6 +52,7 @@ export default function Header () {
             left={0}
             w={'100%'}
             as={'header'}
+            maxH={'75px'}
             background={!isFixed? 'backgroundFloating' : 'background'}
             backdropFilter={!isFixed? 'blur(10px)' : 'none'}
             transition={'all .2s cubic-bezier(.4,0,1,1)'}

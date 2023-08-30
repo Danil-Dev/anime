@@ -1,6 +1,6 @@
 import {useTimeline} from "@/lib/dshaka-player/hooks/useTimeline";
 import styles from './controls.module.scss'
-import {useAutoplay} from "@/store/player/hooks";
+import {useAutoplay, usePlayerState} from "@/store/player/hooks";
 import {useEffect, useRef} from "react";
 export interface AutoplayControlProps{
     start: number,
@@ -11,7 +11,7 @@ export interface AutoplayControlProps{
 
 export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayControlProps) {
 
-    const autoplay = false
+    const {autoplay} = usePlayerState()
 
     const {currentTime, updateCurrentTime} = useTimeline({
         updateInterval: 250
@@ -35,6 +35,8 @@ export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayContro
         }
     }
 
+
+
     useEffect(() => {
         return () => {
             if (timeoutRef.current){
@@ -42,6 +44,12 @@ export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayContro
             }
         }
     }, []);
+
+    useEffect (() => {
+        if (autoplay && currentTime > start + 5 && currentTime < start + 80){
+            handleSkipIntro()
+        }
+    }, [currentTime, autoplay]);
 
     if (currentTime > start && currentTime < start + 85)
         return (

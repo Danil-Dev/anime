@@ -190,18 +190,23 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                     </AbsoluteCenter>
                 </Box>
              ) : (
-                <ShakaPlayer
-                    url={episodeData.video}
-                    start={episodeData.start}
-                    end={episodeData.end}
-                    onOnmountPlayer={handleOnmountPlayer}
-                    onEnd={onEnd}
-                    currentTime={episodeSaved?.currentTime || 0}
-                    isLastEpisode={isLastEpisode}
-                    onPlay={onPlay}
-                    onPause={onPause}
-                    onSeeked={onSeeked}
-                />
+               <Box
+                 mt={'75px'}
+               >
+                   <ShakaPlayer
+                     url={episodeData.video}
+                     start={episodeData.start}
+                     end={episodeData.end}
+                     onOnmountPlayer={handleOnmountPlayer}
+                     onEnd={onEnd}
+                     currentTime={episodeSaved?.currentTime || 0}
+                     isLastEpisode={isLastEpisode}
+                     onPlay={onPlay}
+                     onPause={onPause}
+                     onSeeked={onSeeked}
+                   />
+               </Box>
+
             )}
             <Container maxW={'container.xl'}>
                 <Flex

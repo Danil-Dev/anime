@@ -73,7 +73,7 @@ export default function GenresLayout( props: {
     return (
 
         <Box minHeight={'85vh'}
-            mt={'20px'}
+            mt={'95px'}
         >
             <Container maxW={'container.xl'}>
                 <CatalogHead/>
