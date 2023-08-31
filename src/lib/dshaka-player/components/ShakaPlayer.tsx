@@ -18,6 +18,7 @@ interface ShakaPlayerProps {
     onPlay?: (video: HTMLVideoElement) => void,
     onPause?: (video: HTMLVideoElement) => void,
     onSeeked?: (video: HTMLVideoElement) => void,
+    poster?: string
 }
 
 
@@ -31,7 +32,9 @@ export function ShakaPlayer({
     isLastEpisode,
     onPlay,
     onPause,
-    onSeeked
+    onSeeked,
+    poster
+
 }: ShakaPlayerProps) {
 
     const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -111,6 +114,8 @@ export function ShakaPlayer({
                         video.addEventListener('seeked', () => onSeeked(video))
                     }
 
+                    video.play()
+
 
                 }).catch((e) => {
                     console.log(e, error)
@@ -170,7 +175,14 @@ export function ShakaPlayer({
                     }
                 }}
             >
-                <video controls={false} id={'shaka-player'} width={'100%'} height={'100%'}  ref={videoRef}  ></video>
+                <video
+                  controls={false}
+                  id={'shaka-player'}
+                  width={'100%'}
+                  height={'100%'}
+                  ref={videoRef}
+                  poster={poster}
+                ></video>
             </Box>
 
 

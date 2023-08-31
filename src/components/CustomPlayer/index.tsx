@@ -206,6 +206,7 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                      onPlay={onPlay}
                      onPause={onPause}
                      onSeeked={onSeeked}
+                     poster={episodeData.image_thumb}
                    />
                </Box>
 
