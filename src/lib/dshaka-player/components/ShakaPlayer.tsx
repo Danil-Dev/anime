@@ -5,6 +5,8 @@ import {useShakaPlayer} from "@/lib/dshaka-player/hooks/useShakaPlayer";
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {usePlayerState} from "@/store/player/hooks";
 import mux from 'mux.js';
+import { Box } from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/layout";
 interface ShakaPlayerProps {
     url: string,
     currentTime?: number,
@@ -34,6 +36,11 @@ export function ShakaPlayer({
 
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null);
+
+    if (containerRef.current){
+        console.log (containerRef.current.clientWidth, containerRef.current.clientHeight)
+    }
+
 
     const { error, isLoaded} = useShakaPlayer()
     const {setVideo, setContainer, video, player} = useShaka()
@@ -140,16 +147,38 @@ export function ShakaPlayer({
     },[video, player, url])
 
     return(
-        <div className={styles.player} ref={containerRef}
-             // style={{height: height}}
+        <Flex
+          width={'100%'}
+          transition={' width .2s cubic-bezier(.4,0,1,1)'}
+          position={'relative'}
+          alignItems={'center'}
+          justifyContent={'center'}
+          overflow={'hidden'}
+          background={'black'}
+          height={containerRef.current ? containerRef.current.clientWidth / 16 * 9 : '300px'}
+          maxH={'90vh'}
+          ref={containerRef}
         >
-            <video controls={false} id={'shaka-player'}  ref={videoRef} width={'100%'} height={'100%'}></video>
+
+            <Box
+                position={'relative'}
+                width={'auto'}
+                height={'100%'}
+                sx={{
+                    '& > video': {
+                        height: '100% !important',
+                    }
+                }}
+            >
+                <video controls={false} id={'shaka-player'} width={'100%'} height={'100%'}  ref={videoRef}  ></video>
+            </Box>
+
 
             {isLoaded &&  (
                 <div className={styles.player_overlay_container} >
                     <ControlsOverlay intro={intro} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode} />
                 </div>
             )}
-        </div>
+        </Flex>
     )
 }

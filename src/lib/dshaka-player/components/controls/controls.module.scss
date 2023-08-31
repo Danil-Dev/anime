@@ -170,6 +170,8 @@
       border: none;
       background: transparent;
       color: #fff;
+      display: flex;
+        align-items: center;
     }
   }
 
@@ -179,6 +181,8 @@
       background: none;
       border: none;
       color: #fff;
+      display: flex;
+        align-items: center;
     }
 
     &_menu{

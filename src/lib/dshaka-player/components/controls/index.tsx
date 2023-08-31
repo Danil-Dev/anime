@@ -85,7 +85,9 @@ export function ControlsOverlay({intro, end, onEnd, isLastEpisode}: ControlsOver
                         <TimeControl/>
                     </Flex>
 
-                    <Flex>
+                    <Flex
+                      alignItems={'center'}
+                    >
                         <AutoPlayControl/>
                         <SettingsControl/>
                         <FullscreenControl/>
