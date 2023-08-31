@@ -2,23 +2,26 @@ import {useTimeline} from "@/lib/dshaka-player/hooks/useTimeline";
 import styles from './controls.module.scss'
 import {useAutoplay, usePlayerState} from "@/store/player/hooks";
 import {useEffect, useRef} from "react";
+import {Button} from "@chakra-ui/react";
 export interface AutoplayControlProps{
-    start: number,
+    intro: string,
     end: number,
     onEnd?: () => void,
     isLastEpisode?: boolean
 }
 
-export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayControlProps) {
+export function SkipControl ({intro = '', end, onEnd, isLastEpisode} : AutoplayControlProps) {
 
     const {autoplay} = usePlayerState()
+    const [introStart, introEnd] = intro.split(':').map((item) => parseInt(item))
+
 
     const {currentTime, updateCurrentTime} = useTimeline({
         updateInterval: 250
     })
     const timeoutRef = useRef(null)
     const handleSkipIntro = () => {
-        updateCurrentTime(start + 85)
+        updateCurrentTime(introEnd)
     }
 
     const handleSkipOutro = () => {
@@ -30,8 +33,8 @@ export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayContro
 
     if (autoplay && onEnd && typeof onEnd === 'function' && currentTime > end && !isLastEpisode){
         if (!timeoutRef.current){
-            console.log('[SkipControl]: Skip outro before 10 seconds')
-            timeoutRef.current = window.setTimeout(onEnd, 10000)
+            console.log('[SkipControl]: Skip outro before 3 seconds')
+            timeoutRef.current = window.setTimeout(onEnd, 3000)
         }
     }
 
@@ -46,18 +49,36 @@ export function SkipControl ({start, end, onEnd, isLastEpisode} : AutoplayContro
     }, []);
 
     useEffect (() => {
-        if (autoplay && currentTime > start + 5 && currentTime < start + 80){
+        if (intro.length > 0 && autoplay && currentTime > introStart + 3 && currentTime < introEnd - 5){
             handleSkipIntro()
         }
     }, [currentTime, autoplay]);
 
-    if (currentTime > start && currentTime < start + 85)
+    if (intro.length > 0 && currentTime > introStart && currentTime < introEnd)
         return (
-            <button className={styles.control_skip}  onClick={handleSkipIntro}>Skip</button>
+            // <button className={styles.control_skip}  onClick={handleSkipIntro}>Skip</button>
+          <Button
+            position={'absolute'}
+            zIndex={101}
+            bottom={'80px'}
+            left={'8px'}
+            variant={'outlined'}
+            onClick={handleSkipIntro}
+          >
+              Пропустити
+          </Button>
         )
 
     if (currentTime > end && !isLastEpisode)
-        return <button className={styles.control_skip} data-location={'right'} onClick={handleSkipOutro}>Skip outro</button>
+        return <Button
+          position={'absolute'}
+          zIndex={101}
+          bottom={'80px'}
+          right={'8px'}
+          variant={'outlined'}
+          onClick={handleSkipOutro}>
+            Наступний епізод
+        </Button>
 
 
 }

@@ -1,5 +1,5 @@
 'use client'
-import {createContext, MutableRefObject, ReactNode, useContext, useMemo, useRef} from "react";
+import {createContext, MutableRefObject, ReactNode, useContext} from "react";
 import useState from 'react-usestateref'
 
 interface ShakaProviderContextType{

@@ -9,18 +9,26 @@ import {VideoController} from "@/lib/dshaka-player/components/controls/VideoCont
 import {useState} from "react";
 import {AutoPlayControl} from "@/lib/dshaka-player/components/controls/AutoPlayControl";
 import {SkipControl} from "@/lib/dshaka-player/components/controls/SkipControl";
+import {EventsControl} from "@/lib/dshaka-player/components/controls/EventsControl";
+import {isMobile} from "react-device-detect";
+
+import {Box, Flex} from "@chakra-ui/layout";
+import {usePlayback} from "@/lib/dshaka-player/hooks/usePlayback";
+import {useTimeout} from "@mantine/hooks";
 
 interface ControlsOverlayProps{
-    start: number,
+    intro: string,
     end: number,
     onEnd?: () => void,
     isLastEpisode?: boolean
 }
 
-export function ControlsOverlay({start, end, onEnd, isLastEpisode}: ControlsOverlayProps){
+export function ControlsOverlay({intro, end, onEnd, isLastEpisode}: ControlsOverlayProps){
 
     const [isHiddenControl, setIsHiddenControl] = useState<boolean>(true)
+    const {isPlaying} = usePlayback()
 
+    const {start: startTimeout, clear} = useTimeout(() => setIsHiddenControl(true), 4000)
     const handleMouseMove = () => {
         if (isHiddenControl){
             setIsHiddenControl(false)
@@ -29,29 +37,63 @@ export function ControlsOverlay({start, end, onEnd, isLastEpisode}: ControlsOver
             }, 4000)
         }
     }
+    const handleViewControl = () => {
+        if (isHiddenControl){
+            setIsHiddenControl(false)
+            startTimeout()
+        }
+    }
+
+
 
     return(
-        <div className={styles.player_overlay_wrapper} onMouseMove={handleMouseMove} data-visible={!isHiddenControl}>
-            <div className={styles.player_overlay_content} data-visible={!isHiddenControl}>
-                <SkipControl start={start} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode}/>
+      <Box
+        position={'absolute'}
+        top={0}
+        left={0}
+        w={'100%'}
+        h={'100%'}
+        zIndex={5}
+        overflow={"hidden"}
+        cursor={isHiddenControl ? 'none' : 'unset'}
+        onMouseMove={handleMouseMove}
+      >
+            <EventsControl isHiddenControls={isHiddenControl} handleViewControl={handleViewControl}/>
+          <Box
+            visibility={!isPlaying && isMobile ? 'visible': isHiddenControl ? 'hidden' : 'visible'}
+            opacity={!isPlaying && isMobile? 1 :isHiddenControl ? 0 : 1}
+            transition={'visibility 0s, opacity 0.5s linear'}
+          >
+                <SkipControl intro={intro} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode}/>
                 <VideoController/>
 
                     <TimelineControl/>
-                <div className={styles.control_panel}>
-                    <div>
+              <Flex
+                position={'absolute'}
+                bottom={'8px'}
+                left={'0'}
+                height={'36px'}
+                p={'0 12px'}
+                w={'100%'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                zIndex={101}
+              >
+                    <Flex>
                         <PlaybackControl/>
                         <VolumeControl/>
                         <TimeControl/>
-                    </div>
+                    </Flex>
 
-                    <div>
+                    <Flex>
                         <AutoPlayControl/>
                         <SettingsControl/>
                         <FullscreenControl/>
-                    </div>
-                </div>
-            </div>
+                    </Flex>
+              </Flex>
+          </Box>
 
-        </div>
+      </Box>
+
     )
 }
