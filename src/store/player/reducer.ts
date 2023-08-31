@@ -1,15 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-export enum PlayerLayoutType{
-    NORMAL,
-    WIDE
-}
 
 export interface PlayerState {
     track: number | 'auto',
     volume: number,
     speed: number,
-    layout: PlayerLayoutType,
+    audio: string,
+    subtitle: string | null,
     autoplay: boolean
 }
 
@@ -17,8 +14,9 @@ const initialState: PlayerState = {
     track: "auto",
     volume: 1,
     speed: 1,
-    layout: PlayerLayoutType.NORMAL,
-    autoplay: false
+    autoplay: false,
+    audio: 'Amanogawa',
+    subtitle: null
 }
 
 const playerSlice = createSlice({
@@ -34,8 +32,11 @@ const playerSlice = createSlice({
         updateVolume(state , action: PayloadAction<number>){
             state.volume = action.payload
         },
-        updateLayout(state , action: PayloadAction<PlayerLayoutType>){
-            state.layout = action.payload
+        updateAudio(state , action: PayloadAction<string>){
+            state.audio = action.payload
+        },
+        updateSubtitle(state , action: PayloadAction<string | null>){
+            state.subtitle = action.payload
         },
         updatePlayer(state , action: PayloadAction<PlayerState>){
 
@@ -54,8 +55,9 @@ export const {
     updateTrack,
     updateVolume,
     updateSpeed,
-    updateLayout,
     updatePlayer,
+    updateAudio,
+    updateSubtitle,
     toggleAutoplay
 } = playerSlice.actions
 

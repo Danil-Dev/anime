@@ -11,7 +11,8 @@ export interface IAnimeFoundData {
 }
 export interface IEpisodeData {
     episode_number: number,
-    start: number,
+    // start: number,
+    intro: string,
     end: number,
     title: string,
     description: string,

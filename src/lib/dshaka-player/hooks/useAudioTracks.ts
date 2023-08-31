@@ -1,9 +1,11 @@
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {useCallback, useEffect, useRef, useState} from "react";
 
+interface UseAudioTrackConfig{
+  onSelect?: (selectedAudioTrack: string) => void
+}
 
-
-export function useAudioTracks(){
+export function useAudioTracks({onSelect}: UseAudioTrackConfig = {}){
   const {player} = useShaka()
 
   const [audioTracks, setAudioTracks] = useState([])
@@ -12,8 +14,11 @@ export function useAudioTracks(){
   const selectAudioTrack = useCallback(
     (audioTrackId: string)=> {
       player.selectVariantsByLabel(audioTrackId)
+      if (onSelect && typeof onSelect === 'function'){
+        onSelect(audioTrackId)
+      }
     },
-    []
+    [onSelect, player]
   )
 
   const updateAudioHandler = () => {

@@ -12,7 +12,7 @@ interface SeekRange {
 
 export function useTimeline({updateInterval = 250}: UseTimelineConfig){
 
-    const {video, player} = useShaka()
+    const {video,videoRef, player} = useShaka()
 
 
     // console.log('useTimeline', video.currentTime, player)
@@ -25,6 +25,13 @@ export function useTimeline({updateInterval = 250}: UseTimelineConfig){
         end: 0
     })
     const timerId = useRef<number>(-1)
+
+    const getCurrentTime = useCallback(() => {
+        if (videoRef.current){
+            if (videoRef.current.readyState === 0) return 0;
+            return videoRef.current.currentTime
+        }
+    }, [videoRef])
 
     const updateCurrentTime = useCallback((time: number) => {
 
@@ -96,6 +103,7 @@ export function useTimeline({updateInterval = 250}: UseTimelineConfig){
         currentProgress,
         seekRange,
         buffer,
-        updateCurrentTime
+        updateCurrentTime,
+        getCurrentTime
     }
 }

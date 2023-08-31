@@ -11,7 +11,11 @@ interface SubtitleTrack {
   language: string;
 }
 
-export function useTextTracks() {
+interface UseTextTrackConfig {
+  onSelect?: (selectedTextTrack: string) => void;
+}
+
+export function useTextTracks({onSelect}: UseTextTrackConfig = {}) {
   const {player} = useShaka();
   const [tracks, setTracks] = useState<SubtitleTrack[]>([]);
   const [selectedTrack, setSelectedTrack, selectedTrackRef] =
@@ -21,13 +25,18 @@ export function useTextTracks() {
 
   const selectTrack = useCallback((track: SubtitleTrack) => {
 
-    console.log ('Select track', track)
+
     player.selectTextTrack(track.track);
     player.setTextTrackVisibility(true);
-
-    console.log ('Select track', player.getVariantTracks())
+    if (onSelect && typeof onSelect === 'function') {
+      onSelect(track.track.language);
+    }
     console.log (player.isTextTrackVisible())
   }, []);
+
+  const offSubtitle = () => {
+    player.setTextTrackVisibility(false);
+  }
 
   const toggleVisibility = () => {
     player.setTextTrackVisibility(!isVisible);
@@ -100,5 +109,6 @@ export function useTextTracks() {
     isVisible,
     selectTrack,
     toggleVisibility,
+    offSubtitle
   } as const;
 }

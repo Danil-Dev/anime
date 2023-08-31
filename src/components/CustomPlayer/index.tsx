@@ -61,10 +61,12 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
         }, 10000)
     }
     const onPause = (video: HTMLVideoElement) => {
+
+        console.log ('pause')
         if (timerRef.current) {
             clearInterval(timerRef.current)
-            saveEpisodeDataToLocalStorage(video.currentTime)
         }
+        saveEpisodeDataToLocalStorage(video.currentTime)
     }
     const handleChangeEpisode = ( number : number) => {
         setLoading(true)
@@ -195,7 +197,7 @@ export function CustomPlayer ({anime}: CustomPlayerProps) {
                >
                    <ShakaPlayer
                      url={episodeData.video}
-                     start={episodeData.start}
+                     intro={episodeData?.intro}
                      end={episodeData.end}
                      onOnmountPlayer={handleOnmountPlayer}
                      onEnd={onEnd}

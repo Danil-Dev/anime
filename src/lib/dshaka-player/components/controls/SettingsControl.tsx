@@ -3,7 +3,7 @@ import styles from './controls.module.scss'
 import {Settings, Image, ChevronsRight, ChevronLeft, Check, Music, Type} from "react-feather";
 import {useVideoTracks} from "@/lib/dshaka-player/hooks/useVideoTracks";
 import {useAppDispatch} from "@/store/hooks";
-import {updateSpeed, updateTrack} from "@/store/player/reducer";
+import {updateAudio, updateSpeed, updateSubtitle, updateTrack} from "@/store/player/reducer";
 import {usePlaybackRate} from "@/lib/dshaka-player/hooks/usePlaybackRate";
 import {useAudioTracks} from "@/lib/dshaka-player/hooks/useAudioTracks";
 import {useTextTracks} from "@/lib/dshaka-player/hooks/useTextTracks";
@@ -69,15 +69,24 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
             dispatch(updateTrack(selectedTrack.height))
         }
     })
-    const {selectAudioTrack, audioTracks} = useAudioTracks()
+    const {selectAudioTrack, audioTracks} = useAudioTracks({
+        onSelect: (selectedTrack) => {
+            dispatch(updateAudio(selectedTrack))
+        }
+    })
 
     const {
         selectedTrack: selectedSubtitleTrack,
         tracks: subtitleTracks,
         selectTrack: selectSubtitleTrack,
         isVisible,
-        toggleVisibility
-    } = useTextTracks()
+        toggleVisibility,
+        offSubtitle
+    } = useTextTracks({
+        onSelect: (selectedTrack) => {
+            dispatch(updateSubtitle(selectedTrack))
+        }
+    })
 
 
 
@@ -103,6 +112,12 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
     useEffect(() => {
         console.log (selectedSubtitleTrack, subtitleTracks, audioTracks)
     }, [selectedSubtitleTrack, subtitleTracks, audioTracks])
+
+    const handleOffSubtitle = () =>{
+        offSubtitle()
+        setMenuType(SettingsType.NONE)
+        dispatch(updateSubtitle(null))
+    }
 
 
 
@@ -131,7 +146,7 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                           <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.AUDIO)}}>
                               <div className={styles.control_settings_menu_item_icon}><Music size={24}/> </div>
                               <div className={styles.control_settings_menu_item_label}>Audio</div>
-                              <div className={styles.control_settings_menu_item_content}>{selectedTrack.label || 'Original'}</div>
+                              <div className={styles.control_settings_menu_item_content}>{selectedTrack?.label || 'Original'}</div>
                           </div>
                         )}
 
@@ -220,7 +235,7 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
                       </div>
                       <div
                         className={styles.control_settings_menu_item}
-                        onClick={() => toggleVisibility()}
+                        onClick={() => handleOffSubtitle()}
                       >
                           <div className={styles.control_settings_menu_item_icon}>
                               {!isVisible && <Check size={24}/>}

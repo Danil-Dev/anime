@@ -9,7 +9,7 @@ interface ShakaPlayerProps {
     url: string,
     currentTime?: number,
     onOnmountPlayer?: (number: number) => void,
-    start: number,
+    intro: string,
     end: number,
     onEnd?: () => void,
     isLastEpisode?: boolean,
@@ -23,7 +23,7 @@ export function ShakaPlayer({
     url,
     currentTime = 0,
     onOnmountPlayer,
-    start,
+    intro,
     end,
     onEnd,
     isLastEpisode,
@@ -38,7 +38,7 @@ export function ShakaPlayer({
     const { error, isLoaded} = useShakaPlayer()
     const {setVideo, setContainer, video, player} = useShaka()
 
-    const {track, speed, volume} = usePlayerState()
+    const {track, speed, volume, audio, subtitle} = usePlayerState()
 
 
     useEffect(() => {
@@ -69,32 +69,41 @@ export function ShakaPlayer({
                     console.log('[ShakaPlayer]: Load Complete')
 
                     //92bXpCZKY_5P7StgCoZt2dVnSNB44rl2wfYEtSJX
-                    const langs = player.getAudioLanguages()
-                    const subs = player.getTextTracks()
-                    const subsLangs = player.getTextLanguages()
-                    console.log('tracks', player.getVariantTracks())
-                    console.log('langs', langs, subs, subsLangs)
 
+                    const tracks = player.getVariantTracks()
                     if (track !== 'auto'){
-                        const findTrack = player.getVariantTracks().find(trackVariant => trackVariant.height === track)
-
-
-
+                        const findTrack = tracks.find(trackVariant => trackVariant.height === track)
                         if (findTrack){
                             player.selectVariantTrack(findTrack)
                         }
-                        video.playbackRate = speed
-                        video.volume = volume
-                        if (onPlay && typeof onPlay === 'function' && video){
-                            video.addEventListener('play', () => onPlay(video))
-                        }
-                        if (onPause && typeof onPause === 'function' && video){
-                            video.addEventListener('pause', () => onPause(video))
-                        }
-                        if (onSeeked && typeof onSeeked === 'function' && video){
-                            video.addEventListener('seeked', () => onSeeked(video))
-                        }
                     }
+
+
+                    const findAudio = tracks.find(trackVariant => trackVariant.label === audio)
+
+                    if (findAudio){
+                        player.selectVariantsByLabel(audio)
+                    }
+                    const findSubtitle = player.getTextTracks().find(track => track.language === subtitle)
+
+                    if (findSubtitle){
+                        player.selectTextTrack(findSubtitle)
+                        player.setTextTrackVisibility(true)
+                    }
+
+                    video.playbackRate = speed
+                    video.volume = volume
+                    if (onPlay && typeof onPlay === 'function' && video){
+                        video.addEventListener('play', () => onPlay(video))
+                    }
+                    if (onPause && typeof onPause === 'function' && video){
+                        console.log ('[ShakaPlayer]: Add Pause Event')
+                        video.addEventListener('pause', () => onPause(video))
+                    }
+                    if (onSeeked && typeof onSeeked === 'function' && video){
+                        video.addEventListener('seeked', () => onSeeked(video))
+                    }
+
 
                 }).catch((e) => {
                     console.log(e, error)
@@ -138,7 +147,7 @@ export function ShakaPlayer({
 
             {isLoaded &&  (
                 <div className={styles.player_overlay_container} >
-                    <ControlsOverlay start={start} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode} />
+                    <ControlsOverlay intro={intro} end={end} onEnd={onEnd} isLastEpisode={isLastEpisode} />
                 </div>
             )}
         </div>

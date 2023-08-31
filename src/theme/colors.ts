@@ -128,6 +128,7 @@ export const darkTheme = {
     backgroundFloating: opacify(12, colors.black),
     backgroundInteractiveFloating: opacify(56, colors.gray["500"]),
     backgroundOutline: opacify(24, colors.gray["300"]),
+    sliderBackground: opacify(36, colors.gray["500"]),
     backgroundScrim: opacify(72, colors.gray["900"]),
     backgroundScrolledSurface: opacify(72, colors.gray["900"]),
     backgroundOutlinePink: opacify(24,'#9646FA'),
