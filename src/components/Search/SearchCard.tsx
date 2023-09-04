@@ -43,7 +43,7 @@ export default function SearchCard({data, onClick}: SearchCardProps) {
                                 alignItems={'center'}
                                 alignContent={'center'}
                             >
-                                <Tags size={'small'} tags={data.genre}/>
+                                <Tags size={'small'} tags={data.genres}/>
                                 <Calendar size={12} />
                                 <Text m={0}>{buildDateString(data.release_date)}</Text>
                                 <Star size={12} />
@@ -59,7 +59,7 @@ export default function SearchCard({data, onClick}: SearchCardProps) {
             >
                     <Box mb={5}>
                         <Heading size={"sm"}>{data.title}</Heading>
-                        <Tags size={'small'} tags={data.genre}/>
+                        <Tags size={'small'} tags={data.genres}/>
                     </Box>
             </LinkOverlay>
         </LinkBox>

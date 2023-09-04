@@ -22,7 +22,18 @@ export default async function Home()    {
 
     const bannerData : IBannerData = {
         title: 'Магічна битва (2 сезон)',
-        genre: ['Бойовик', 'Драма', 'Надприродне'],
+        genres: [
+            {
+                title: 'Бойовик',
+                name: 'action'
+            }, {
+                title: 'Драма',
+                name: 'drama'
+            }, {
+                title: 'Надприродне',
+                name: 'supernatural'
+            }
+        ],
         studio: 'Cтудiя: MAPPA',
         description: 'ОПИСАНИЕ ОЧЕНЬ МНОГА ТЕКСТА ВОТ',
         link: '/',
@@ -31,7 +42,18 @@ export default async function Home()    {
     }
     const bannerData2 : IBannerData = {
         title: 'Магічна битва (3 сезон)',
-        genre: ['Бойовик', 'Драма', 'Надприродне'],
+        genres: [
+            {
+                title: 'Бойовик',
+                name: 'action'
+            }, {
+                title: 'Драма',
+                name: 'drama'
+            }, {
+                title: 'Надприродне',
+                name: 'supernatural'
+            }
+        ],
         studio: 'Cтудiя: MAPPA',
         description: 'ОПИСАНИЕ ОЧЕНЬ МНОГА ТЕКСТА ВОТ',
         link: '/',
@@ -40,7 +62,24 @@ export default async function Home()    {
     }
     const bannerData3 : IBannerData = {
         title: 'Mushoku Tensei',
-        genre: ['Пригоди', 'Драма', 'Еччі','Фентезі'],
+        genres: [
+            {
+                title: 'Пригоди',
+                name: 'adventure'
+            },
+            {
+                title: 'Драма',
+                name: 'drama'
+            },
+            {
+                title: 'Еччі',
+                name: 'echi'
+            },
+            {
+                title: 'Фентезі',
+                name: 'fantasy'
+            }
+        ],
         studio: 'Cтудiя: Studio Bind',
         description: 'Історія переносить глядачів на 12 років назад, у 2006, коли найсильніший маг Ґоджьо Сатору був звичайнісіньким учнем старшої школи. Разом зі своїм другом, Ґето Суґуру, вони вирушають на місію, від якої залежить доля всього світу. Перші виклики і перешкоди, перші помилки й втрати. Із цієї подорожі вони повернуться зовсім іншими людьми.',
         link: '#',
