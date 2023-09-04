@@ -1,12 +1,17 @@
 import {BASE_API_URL} from '@/configs/constants'
 
+export interface Genre{
+    title: string,
+    name: string
+}
+
 export interface IAnimeFoundData {
     title: string,
     id: string,
     rating: number,
     description: string,
     image: string,
-    genre: string[],
+    genres: Genre[],
     release_date: string,
 }
 export interface IEpisodeData {
@@ -31,7 +36,7 @@ export interface IAnimeData {
     rating: number,
     description: string,
     image: string,
-    genre: string[],
+    genres: Genre[],
     release_date: string,
     image_banner: string,
     episodes: IEpisodeData[],
@@ -42,7 +47,7 @@ export interface IAnimeData {
 
 export interface IBannerData{
     title: string,
-    genre: string[],
+    genres: Genre[],
     studio: string,
     description: string,
     link: string,

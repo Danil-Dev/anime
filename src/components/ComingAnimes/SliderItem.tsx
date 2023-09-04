@@ -51,7 +51,7 @@ export default function SliderItem ({data}: {data: IBannerData}) {
                             НАЙОЧІКУВАНІШИЙ РЕЛІЗ СЕЗОНУ!
                     </Text>
                     <Heading size={'xl'} mt={'20px'}>{data.title}</Heading>
-                    <Tags tags={data.genre}/>
+                    <Tags tags={data.genres}/>
                     <Text size={'xl'} mt={'20px'} mb={'20px'}>{data.studio}</Text>
                     <Text size={'xl'} mt={'20px'} mb={'20px'} noOfLines={[1, 2, 3]}>{data.description}</Text>
                         <Button

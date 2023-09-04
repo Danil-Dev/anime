@@ -29,7 +29,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
 
     const pretty_date = new Date(anime.release_date).getFullYear()
-
+    console.log (anime)
 
     // const userData : UserData = await AnimeService.getAnimeWithCredentials( anime.id, session?.user?.id)
     // console.log(userData)
@@ -76,7 +76,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                             display={{base: 'block', md: 'none'}}
                         >
                             <Heading fontSize={'18px'}>{anime.title}</Heading>
-                            <Tags tags={anime.genre}/>
+                            <Tags tags={anime.genres}/>
                         </Box>
                     </Box>
                     <Flex
@@ -103,7 +103,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                                     display={{base:'none',md:'flex'}}
                             >
                                 <HStack spacing={2} alignItems={'center'}>
-                                    <Tags tags={anime.genre}/>
+                                    <Tags tags={anime.genres}/>
                                     <Calendar size={16}/>
                                     <Text mb={0}>{pretty_date}</Text>
                                     <Star size={16}/>
