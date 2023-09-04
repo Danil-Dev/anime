@@ -9,10 +9,16 @@ export default async function Home()    {
 
     const all_anime = await AnimeService.getAllAnime()
 
-    const popular = await AnimeService.getCatalog('popular')
-    const ongoing= await AnimeService.getCatalog('ongoing')
 
-    console.log(popular)
+
+
+    const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'drama'])
+
+
+
+
+    console.log ('Anime List',animeLists)
+
 
     const bannerData : IBannerData = {
         title: 'Магічна битва (2 сезон)',
@@ -48,10 +54,10 @@ export default async function Home()    {
     <>
         <MainBanner/>
         <div className={styles.main_anime_section}>
-            <AnimeList animeList={ongoing} title={'Ongoings'} link={'/catalog/categories/ongoing'} />
-            <AnimeList animeList={popular} title={'Popular'}  link={'/catalog/categories/popular'}/>
+            <AnimeList animeList={animeLists['ongoing']} title={'Ongoings'} link={'/catalog/categories/ongoing'} />
+            <AnimeList animeList={animeLists['popular']} title={'Popular'}  link={'/catalog/categories/popular'}/>
             <SingleComingAnimeCard data={banners[2]}/>
-            <AnimeList animeList={all_anime} title={'All anime'} link={'/categoriesries'}/>
+            <AnimeList animeList={animeLists['drama']} title={'Drama'} link={'/catalog'}/>
         </div>
 
     </>

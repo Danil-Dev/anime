@@ -28,23 +28,7 @@ export default function AnimeListSlider({animeList}: {animeList: IAnimeData[]}) 
                     <AnimeCard anime={anime} width={300}/>
                 </SwiperSlide>
             ))}
-            {animeList.map((anime, idx) => (
-                <SwiperSlide className={styles.slide} key={idx}>
-                    <AnimeCard anime={anime} width={300}/>
-                </SwiperSlide>
-            ))}
 
-
-            {animeList.map((anime, idx) => (
-                <SwiperSlide  className={styles.slide} key={idx}>
-                    <AnimeCard anime={anime} width={300}/>
-                </SwiperSlide>
-            ))}
-            {animeList.map((anime, idx) => (
-                <SwiperSlide className={styles.slide} key={idx}>
-                    <AnimeCard anime={anime} width={300}/>
-                </SwiperSlide>
-            ))}
 
 
         </Swiper>

@@ -2,6 +2,7 @@ import type {AuthOptions, User} from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import Credential from "next-auth/providers/credentials";
+import * as process from "process";
 export const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
@@ -18,7 +19,7 @@ export const authOptions: AuthOptions = {
                 if (!credentials.email || !credentials.password) return null
 
                 try {
-                    const res = await fetch(`http://localhost:3301/login`, {
+                    const res = await fetch(`${process.env.BASE_API_URL}/login`, {
                         method: "POST",
                         body: JSON.stringify({...credentials, isGoogleAuth: false}),
                         headers: {"Content-Type": "application/json"}
@@ -50,7 +51,7 @@ export const authOptions: AuthOptions = {
     callbacks: {
         async signIn({user, account, profile}) {
             if (account.provider === "google") {
-                const res = await fetch(`http://localhost:3301/login`, {
+                const res = await fetch(`${process.env.BASE_API_URL}/login`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({email: profile.email, isGoogleAuth: true})

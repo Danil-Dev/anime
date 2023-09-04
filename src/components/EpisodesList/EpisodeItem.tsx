@@ -3,9 +3,15 @@ import styles from './episodesList.module.scss'
 import Image from "next/image";
 
 
-export const EpisodeItem = ({episode, handleChangeEpisode} : {episode: IEpisodeData, handleChangeEpisode: (number : number) => void}) => {
+interface  EpisodeItemProps {
+  title: string,
+  episode_number: number,
+  image_thumb: string,
+}
 
-    const time = episode.duration.split(':')
+export const EpisodeItem = ({episode, handleChangeEpisode} : {episode: EpisodeItemProps, handleChangeEpisode: (number : number) => void}) => {
+
+
 
 
     return (
