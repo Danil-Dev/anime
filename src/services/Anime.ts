@@ -77,7 +77,7 @@ export const AnimeService = {
     },
 
     async getAnime(animeId : string, userId?: string): Promise<IAnimeData>{
-        console.log('Get anime', animeId, userId, `${BASE_API_URL}/get/anime`)
+
         const res = await fetch(`${BASE_API_URL}/get/anime`, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -88,10 +88,26 @@ export const AnimeService = {
         // console.log(res)
         const data =  await res.json()
 
-        console.log('Get anime data', data);
 
         return data
     },
+
+    async getAnimeLists(animeLists: string[]): Promise<[string, IAnimeData[]]>{
+        const res = await fetch(`${BASE_API_URL}/get/anime/lists`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            next: {
+                revalidate: 60
+            },
+            body: JSON.stringify({animeLists}),
+        })
+
+        const data = await res.json()
+
+        console.log (data)
+
+        return data
+    } ,
     async getAnimeWithCredentials(animeId : string, userId: string): Promise<UserData>{
 
         const res = await fetch(`${BASE_API_URL}/anime/${animeId}/${userId}`, {
@@ -147,6 +163,32 @@ export const AnimeService = {
         return res.json()
 
     },
+
+    async getEpisodes(url: string): Promise<IEpisodeData[]>{
+
+        console.log ('Get episodes', url)
+        const res = await fetch(`${BASE_API_URL}/${url}`, {
+            next: {
+                revalidate: 60
+            }
+        })
+
+        return res.json()
+    },
+
+    async getEpisodeData(animeId: string,episodeNumber: number ){
+        const res = await fetch(`${BASE_API_URL}/get/episode`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            next: {
+                revalidate: 60
+            },
+            body: JSON.stringify({animeId, episodeNumber}),
+
+        })
+
+        return await res.json()
+    }
 
 
 }

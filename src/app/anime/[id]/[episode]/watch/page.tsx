@@ -7,13 +7,17 @@ export default async function WatchPage({params: {id, episode}}: {params: {id: s
 
     const anime = await AnimeService.getAnime(id)
 
-    console.log('Anime', anime)
+    const episodeData = await AnimeService.getEpisodeData(id, +episode)
+
+    // console.log('Anime', anime)
+
+    console.log ('Episode', episodeData)
 
 
 
     return(
 
-        <CustomPlayer anime={anime}/>
+        <CustomPlayer episodeData={episodeData}/>
 
 
     )

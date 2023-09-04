@@ -11,6 +11,7 @@ import AnimeInfo from "@/components/AnimeInfo";
 import {authOptions} from "@/configs/auth";
 import {getServerSession} from "next-auth/next";
 import ContinueWatchingButton from "@/components/Button/ContinueWatchingButton";
+import {EpisodesList} from "@/components/EpisodesList";
 
 
 
@@ -26,7 +27,6 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
     const anime = await AnimeService.getAnime(id, session?.user?.id)
 
 
-    console.log('anime', anime)
 
     const pretty_date = new Date(anime.release_date).getFullYear()
 
@@ -164,21 +164,22 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     </Box>
                 </Flex>
             </Container>
-            <Container
-                maxW={'container.xl'}
-                pt={{base:'25px' ,md:'50px'}}
-                pb={'50px'}
-            >
-                <Heading>Episodes</Heading>
-                <Grid templateColumns={{base: 'repeat(2, 1fr)' ,md:'repeat(3, 1fr)'}} gap={6}>
-                    {anime.episodes.map((episode , idx)=> (
-                        <GridItem key={idx}>
-                            <EpisodeCard episode={episode}  animeId={anime.id}/>
-                        </GridItem>
+            <EpisodesList/>
+            {/*<Container*/}
+            {/*    maxW={'container.xl'}*/}
+            {/*    pt={{base:'25px' ,md:'50px'}}*/}
+            {/*    pb={'50px'}*/}
+            {/*>*/}
+            {/*    <Heading>Episodes</Heading>*/}
+            {/*    <Grid templateColumns={{base: 'repeat(2, 1fr)' ,md:'repeat(3, 1fr)'}} gap={6}>*/}
+            {/*        {anime.episodes.map((episode , idx)=> (*/}
+            {/*            <GridItem key={idx}>*/}
+            {/*                <EpisodeCard episode={episode}  animeId={anime.id}/>*/}
+            {/*            </GridItem>*/}
 
-                    ))}
-                </Grid>
-            </Container>
+            {/*        ))}*/}
+            {/*    </Grid>*/}
+            {/*</Container>*/}
         </>
     )
 

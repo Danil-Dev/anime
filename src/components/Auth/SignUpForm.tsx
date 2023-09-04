@@ -17,6 +17,7 @@ import NextLink from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
+import * as process from "process";
 export default function SignUpForm() {
 
     const [show, setShow] = useState(false)
@@ -38,7 +39,7 @@ export default function SignUpForm() {
                         async (values) => {
                             console.log('register', values)
                             console.log(values)
-                            const res = await fetch('http://localhost:3301/auth/register', {
+                            const res = await fetch(`${process.env.BASE_API_URL}/auth/register`, {
                                 method: 'POST',
                                 headers: {
                                     "Content-Type": 'application/json'

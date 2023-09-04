@@ -19,12 +19,7 @@ export default function CatalogItems({animeList}: CatalogItemsProps) {
                     {animeList.map((anime, idx) => (
                         <AnimeCard anime={anime} key={idx} />
                     ))}
-                    {animeList.map((anime, idx) => (
-                        <AnimeCard anime={anime} key={idx} />
-                    ))}
-                    {animeList.map((anime, idx) => (
-                        <AnimeCard anime={anime} key={idx} />
-                    ))}
+
                 </Grid>
             )}
         </>

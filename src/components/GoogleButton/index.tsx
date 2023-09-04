@@ -2,12 +2,13 @@
 import {Button} from "@chakra-ui/react";
 import {signIn} from "next-auth/react";
 import {useSearchParams} from "next/navigation";
+import * as process from "process";
 
 export function GoogleButton() {
 
     const searchParams = useSearchParams();
 
-    const callbackUrl = searchParams.get("callbackUrl") || "http://localhost:3000/";
+    const callbackUrl = searchParams.get("callbackUrl") || `${process.env.BASE_API_URL}/`;
     return (
         <Button
             onClick={() => {
