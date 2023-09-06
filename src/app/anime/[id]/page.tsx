@@ -22,17 +22,16 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const session = await getServerSession(authOptions)
 
-    console.log('single page', id)
+
 
     const anime = await AnimeService.getAnime(id, session?.user?.id)
 
 
 
     const pretty_date = new Date(anime.release_date).getFullYear()
-    console.log (anime)
 
-    // const userData : UserData = await AnimeService.getAnimeWithCredentials( anime.id, session?.user?.id)
-    // console.log(userData)
+
+
 
 
 

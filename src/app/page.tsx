@@ -4,20 +4,15 @@ import {AnimeList} from "@/components/AnimeList";
 import styles from  "./main.module.scss"
 import ComingAnimes from "@/components/ComingAnimes";
 import SingleComingAnimeCard from "@/components/ComingAnimes/SingleComingAnimeCard";
+import * as process from "process";
 
 export default async function Home()    {
-
-    const all_anime = await AnimeService.getAllAnime()
-
 
 
 
     const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'drama'])
 
 
-
-
-    console.log ('Anime List',animeLists)
 
 
     const bannerData : IBannerData = {

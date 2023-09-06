@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Providers} from "@/app/providers";
 import {Metadata} from "next";
 import MobileMenu from "@/components/Header/MobileMenu";
+import {Analytics} from "@vercel/analytics/react";
 
 // const inter = Inter({subsets: ['latin']})
 const ubuntu = Ubuntu({subsets: ['cyrillic', 'latin'], weight: ['300', '400', '500', '700'], variable: '--font-ubuntu'})
@@ -36,6 +37,7 @@ export default function RootLayout({
                 <Footer/>
               <MobileMenu/>
             </Providers>
+         <Analytics/>
         </body>
         </html>
     )

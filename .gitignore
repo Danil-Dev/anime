@@ -165,3 +165,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 >>>>>>> 48f4861 (Initial commit from Create Next App)
+!/.env.local
+!/.env.local
