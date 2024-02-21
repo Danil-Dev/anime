@@ -29,7 +29,7 @@ interface CustomPlayerProps {
 
 export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
-
+    console.log (episodeData)
 
     const params = useParams();
     const session = useSession();
@@ -46,7 +46,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
             });
         }
     };
-
+    console.log ("Episode Data", episodeData)
     const onEnd = () => {
         router.push(`/anime/${params.id}/${currentEpisode + 1}/watch`);
     };

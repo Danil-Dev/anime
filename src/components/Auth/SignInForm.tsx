@@ -42,6 +42,8 @@ export default function SignInForm() {
                                 redirect: false
                             })
 
+                            console.log (res)
+
                             if (res && !res.error){
                                 router.push('/')
                             }

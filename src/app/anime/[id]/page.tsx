@@ -30,7 +30,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const pretty_date = new Date(anime.release_date).getFullYear()
 
-
+    console.log ("Last Episode", anime.lastWatchedEpisode)
 
 
 
@@ -149,7 +149,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         w={{base:'100%',md:'30%'}}
                     >
                         <Box display={{base: 'block', md:'none'}}>
-                            <ContinueWatchingButton episode={anime.episodes[anime.lastWatchedEpisode | 0]} animeId={anime.id}/>
+                            <ContinueWatchingButton episode={anime.episodes[anime.lastWatchedEpisode - 1 | 0]} animeId={anime.id}/>
 
                         </Box>
                         <Box display={{base: 'none', md:'block'}}>
@@ -158,7 +158,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                             </Heading>
                         </Box>
                         <Box display={{base: 'none', md:'block'}}>
-                            <EpisodeCard episode={anime.episodes[anime.lastWatchedEpisode | 0]} animeId={anime.id}/>
+                            <EpisodeCard episode={anime.episodes[anime.lastWatchedEpisode -1 | 0]} animeId={anime.id}/>
                         </Box>
                     </Box>
                 </Flex>

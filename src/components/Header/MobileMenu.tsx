@@ -1,8 +1,9 @@
 'use client'
 
-import {Hide} from "@chakra-ui/react";
+import {Hide, Link} from "@chakra-ui/react";
 import {Box, Container, Flex, Text} from "@chakra-ui/layout";
 import {Film, Home, User} from "react-feather";
+import NextLink from "next/link";
 
 export default function MobileMenu() {
 
@@ -20,33 +21,59 @@ export default function MobileMenu() {
             >
               <Container maxW={'container.xl'}>
                 <Flex
+                  as={'nav'}
                   alignItems={"center"}
                   h={'100%'}
                   justifyContent={'space-around'}
                 >
                   <Box
-                    flexDir={'column'}
-                    alignItems={'center'}
-                    display={"flex"}
+                    as={'li'}
                   >
-                    <Home size={24}/>
-                    <Text fontSize={'12px'} m={0}> Home</Text>
+                    <Link
+                      href={'/'}
+                      as={NextLink}
+                      display={'inline-flex'}
+                      flexDir={'column'}
+                      alignItems={'center'}
+                    >
+                      <Home size={24}/>
+
+                      <Text fontSize={'12px'} m={0}> Home</Text>
+                    </Link>
+
                   </Box>
                   <Box
-                    flexDir={'column'}
-                    alignItems={'center'}
-                    display={"flex"}
+                    as={'li'}
                   >
-                    <Film size={24}/>
-                    <Text fontSize={'12px'} m={0}> Catalog</Text>
+
+                    <Link
+                      href={'/catalog'}
+                      as={NextLink}
+                      display={'inline-flex'}
+                      flexDir={'column'}
+                      alignItems={'center'}
+                    >
+                      <Film size={24}/>
+                      <Text fontSize={'12px'} m={0}> Catalog</Text>
+                    </Link>
+
+
                   </Box>
                   <Box
-                    flexDir={'column'}
-                    alignItems={'center'}
-                    display={"flex"}
+                    as={'li'}
                   >
-                    <User size={24}/>
-                    <Text fontSize={'12px'} m={0}> Profile</Text>
+
+                    <Link
+                      href={'/profile/history'}
+                      as={NextLink}
+                      display={'inline-flex'}
+                      flexDir={'column'}
+                      alignItems={'center'}
+                    >
+                      <User size={24}/>
+                      <Text fontSize={'12px'} m={0}> Profile</Text>
+                    </Link>
+
                   </Box>
                 </Flex>
               </Container>

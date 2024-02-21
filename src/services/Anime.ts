@@ -63,6 +63,11 @@ export interface IAnimeList{
 export interface IAnimeSingle {
     anime: IAnimeData
 }
+
+export interface ICategory {
+    title: string,
+    name: string
+}
 export interface UserData   {
     isInWatchlist: boolean,
     lastEpisode: number
@@ -190,6 +195,18 @@ export const AnimeService = {
             },
             body: JSON.stringify({animeId, episodeNumber}),
 
+        })
+
+        return await res.json()
+    },
+
+    async getCategories(): Promise<ICategory[]> {
+        const res = await fetch(`${BASE_API_URL}/categories`, {
+            method: 'GET',
+            headers: {"Content-Type": "application/json"},
+            next: {
+                revalidate: 3600
+            }
         })
 
         return await res.json()

@@ -25,6 +25,9 @@ export const authOptions: AuthOptions = {
                         headers: {"Content-Type": "application/json"}
                     })
 
+
+                    console.log (res)
+
                     if (res.status === 200) {
                         const user = await res.json()
 

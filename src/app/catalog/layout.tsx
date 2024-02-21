@@ -3,6 +3,7 @@ import {Box, Heading,Container, Grid, GridItem, VStack } from "@chakra-ui/layout
 import Breadcrumbs from "@/components/ Breadcrumbs/Breadcrumbs";
 import CatalogFilter from "@/app/catalog/CatalogFilter";
 import CatalogHead from "@/components/CatalogHead";
+import CatalogFilter2 from './CatalogFilter2';
 
 
 export default function GenresLayout( props: {
@@ -98,7 +99,7 @@ export default function GenresLayout( props: {
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter filter={categoryList} type={'categories'} title={'Категори'} defaultIsOpen={true}/>
+                                <CatalogFilter2 filter={categoryList} type={'categories'} title={'Категори'} defaultIsOpen={true}/>
                             </Box>
 
                             <Box

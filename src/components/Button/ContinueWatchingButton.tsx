@@ -10,7 +10,7 @@ interface EpisodeCardProps {
     animeId: string
 }
 export default function ContinueWatchingButton({episode, animeId}: EpisodeCardProps){
-
+    console.log (episode)
     return(
         <Button
             as={NextLink}
