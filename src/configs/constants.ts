@@ -3,6 +3,6 @@ import * as process from "process";
 
 console.log ("env", process.env.BASE_API_URL)
 
-export const BASE_API_URL = process.env.BASE_API_URL
+export const BASE_API_URL = 'https://api.aniverse.website'
 
 
