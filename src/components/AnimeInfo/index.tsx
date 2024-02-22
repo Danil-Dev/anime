@@ -1,6 +1,7 @@
 'use client'
-import {Accordion, AccordionItem, Table, TableContainer, Tbody, Td, Text, Tr} from "@chakra-ui/react";
+import {Accordion, AccordionItem, Link, Table, TableContainer, Tbody, Td, Text, Tr} from "@chakra-ui/react";
 import {IAnimeData} from "@/services/Anime";
+import NextLink from "next/link";
 
 export default function AnimeInfo({anime}: { anime: IAnimeData }) {
 
@@ -14,7 +15,10 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                                 Studio:
                             </Td>
                             <Td textAlign={'right'}>
-                                Bind
+                                <Link as={NextLink} href={`${anime.studio.link}`}>
+                                    {anime.studio.title}
+                                </Link>
+
                             </Td>
                         </Tr>
                         <Tr>
@@ -22,18 +26,22 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                                 Audio:
                             </Td>
                             <Td textAlign={'right'}>
-                                Amanogawa, Amanogawa, Amanogawa
+                                {anime.audios.map((audio) => (
+                                  <Link key={audio.name} as={NextLink} display={'inline-block'} pl={'2'} href={'#'}>
+                                      {audio.title}
+                                  </Link>
+                                ))}
 
                             </Td>
                         </Tr>
-                        <Tr>
-                            <Td w={'50%'}>
-                                Language:
-                            </Td>
-                            <Td textAlign={'right'}>
-                                English, Ukrainian
-                            </Td>
-                        </Tr>
+                        {/*<Tr>*/}
+                        {/*    <Td w={'50%'}>*/}
+                        {/*        Language:*/}
+                        {/*    </Td>*/}
+                        {/*    <Td textAlign={'right'}>*/}
+                        {/*        English, Ukrainian*/}
+                        {/*    </Td>*/}
+                        {/*</Tr>*/}
                     </Tbody>
                 </Table>
             </TableContainer>

@@ -9,24 +9,25 @@ import useSWR from "swr";
 import {AnimeService} from "@/services/Anime";
 
 
+type FilterType = "categories" | "audios" | "genres";
+
 interface CatalogFilterProps {
-  filter: { id: string, title: string }[]
   title: string,
-  type: string,
+  type: FilterType,
   defaultIsOpen?: boolean,
   current?: string
 }
 
-export default function CatalogFilter2({filter, title, type, defaultIsOpen, current}: CatalogFilterProps) {
+export default function CatalogFilter2({ title, type, defaultIsOpen, current}: CatalogFilterProps) {
 
   const contentRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen)
   const params = useParams()
 
-  const {data, isLoading} = useSWR('categories', AnimeService.getCategories)
+  const {data, isLoading} = useSWR(type, AnimeService.getCatalogFilter)
 
 
-  console.log ('Categories', data, isLoading)
+  console.log ('Filter', data, isLoading)
 
 
   const toggleOpenFilter = () => {
@@ -63,12 +64,14 @@ export default function CatalogFilter2({filter, title, type, defaultIsOpen, curr
         transition={'all .3s ease-in-out'}
         visibility={isOpen ? 'visible' : 'hidden'}
         opacity={isOpen ? 1 : 0}
-        height={isOpen ? 37 * filter.length + 35 : 0}
+        height={isOpen && !isLoading ? 37 * data.length + 35 : 0}
         overflow={'hidden'}
         ref={contentRef}
       >
 
-        {!isLoading ? (
+        {!isLoading ? data.length > 0 ? (
+
+
           data.map((item, index) => {
 
               const isActive = item.name === Object.values(params)[0]
@@ -98,7 +101,14 @@ export default function CatalogFilter2({filter, title, type, defaultIsOpen, curr
                 </Box>
               )
             })
-        ) : null}
+        ):
+          <Box
+            fontSize={'lg'}
+
+            p={'0px 12px'}
+          >
+            <Text align={'center'}>No data</Text>
+          </Box> : null}
 
       </Box>
 

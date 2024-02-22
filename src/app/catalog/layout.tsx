@@ -92,21 +92,22 @@ export default function GenresLayout( props: {
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter filter={genres} type={'genres'} title={'Аніме за жанром'} defaultIsOpen={true}/>
+                                {/*<CatalogFilter filter={genres} type={'genres'} title={'Аніме за жанром'} defaultIsOpen={true}/>*/}
+                                <CatalogFilter2 title={'Жанри'} type={'genres'} defaultIsOpen={true}/>
                             </Box>
 
                             <Box
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter2 filter={categoryList} type={'categories'} title={'Категори'} defaultIsOpen={true}/>
+                                <CatalogFilter2 type={'categories'} title={'Категори'} defaultIsOpen={true}/>
                             </Box>
 
                             <Box
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter filter={voicingList} type={'sub'} title={'Озвучення'} defaultIsOpen={false}/>
+                                <CatalogFilter2 title={'Озвучення'} type={'audios'} defaultIsOpen={false}/>
                             </Box>
 
 

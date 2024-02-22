@@ -29,6 +29,19 @@ export interface IEpisodeData {
 }
 
 
+export interface IAudio{
+    title: string,
+    name: string,
+    language: string
+}
+
+export interface IStudio{
+    title: string,
+    id: string,
+    link: string
+}
+
+
 export interface IAnimeData {
     _id: string,
     title: string,
@@ -42,7 +55,9 @@ export interface IAnimeData {
     episodes: IEpisodeData[],
     auth: boolean,
     isInWatchlist?: boolean,
-    lastWatchedEpisode?: number
+    lastWatchedEpisode?: number,
+    audios: IAudio[],
+    studio: IStudio
 }
 
 export interface IBannerData{
@@ -200,8 +215,11 @@ export const AnimeService = {
         return await res.json()
     },
 
-    async getCategories(): Promise<ICategory[]> {
-        const res = await fetch(`${BASE_API_URL}/categories`, {
+    async getCatalogFilter(key: string): Promise<ICategory[]> {
+
+
+        console.log ('Key is ', key)
+        const res = await fetch(`${BASE_API_URL}/${key}`, {
             method: 'GET',
             headers: {"Content-Type": "application/json"},
             next: {
