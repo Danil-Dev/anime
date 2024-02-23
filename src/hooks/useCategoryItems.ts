@@ -4,7 +4,7 @@ import {AnimeService} from "@/services/Anime";
 
 export function useCategoryItems(category: string = 'all'){
 
-    const {data, isLoading, error} = useSWR(`anime/categories/${category}`, AnimeService.getCategory)
+    const {data, isLoading, error} = useSWR(`anime/categories/${category}`, AnimeService.getGenre)
 
 
     return {

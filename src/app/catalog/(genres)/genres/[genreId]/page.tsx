@@ -1,18 +1,15 @@
 import {AnimeService} from "@/services/Anime";
 import {Box} from "@chakra-ui/layout";
 import CatalogItems from "@/components/CatalogArea/CatalogItems";
+import CatalogItems2 from "@/components/CatalogArea/CatalogItems2";
 
 
-export default async function GenrePage({ params }: { params: {genreId: string} }) {
+export default function GenrePage({ params: { genreId } }: { params: {genreId: string} }) {
 
-
-    const animeList= await AnimeService.getCategory(params.genreId)
-
-
+  
     return (
         <Box>
-             <CatalogItems animeList={animeList} />
-
+             <CatalogItems2 type={'genre'} id={genreId}/>
         </Box>
     )
 }

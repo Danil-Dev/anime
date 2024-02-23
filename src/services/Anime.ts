@@ -1,5 +1,7 @@
 import {BASE_API_URL} from '@/configs/constants'
 
+
+
 export interface Genre{
     title: string,
     name: string
@@ -55,7 +57,7 @@ export interface IAnimeData {
     episodes: IEpisodeData[],
     auth: boolean,
     isInWatchlist?: boolean,
-    lastWatchedEpisode?: number,
+    lastWatchedEpisode?: IEpisodeData | null,
     audios: IAudio[],
     studio: IStudio
 }
@@ -165,9 +167,18 @@ export const AnimeService = {
         return res.json()
     },
 
-    async getCategory (key: string): Promise<IAnimeData[]>{
+    async getCatalogPage(url: string): Promise<IAnimeData[]>{
+        const res = await fetch(`${BASE_API_URL}/${url}`, {
+            next: {
+                revalidate: 60
+            }
+        })
 
-        console.log(`${BASE_API_URL}/category/${key}`)
+        return res.json()
+    },
+
+    async getGenre (key: string): Promise<IAnimeData[]>{
+
 
         const res = await fetch(`${BASE_API_URL}/anime/genre/${key}`, {
             next: {
@@ -177,6 +188,17 @@ export const AnimeService = {
         })
 
         return  res.json()
+    },
+
+    async getAudio (audioId: string): Promise<IAnimeData[]> {
+
+        const res = await fetch (`${BASE_API_URL}/anime/audio/${audioId}`, {
+            next: {
+                revalidate: 60
+            }
+        })
+
+        return res.json ()
     },
 
     async getRandomAnime (): Promise<IAnimeData>{

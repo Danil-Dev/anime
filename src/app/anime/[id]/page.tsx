@@ -151,20 +151,28 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         <Box display={{base: 'block', md:'none'}}>
                             {
                                 anime.lastWatchedEpisode ?
-                                  <ContinueWatchingButton episode={anime.episodes[anime.lastWatchedEpisode - 1 ]} animeId={anime.id}/> :
-                                  <ContinueWatchingButton episode={anime.episodes[0]} animeId={anime.id}/>
+                                  <ContinueWatchingButton episode={anime.lastWatchedEpisode} animeId={anime.id}/> :
+                                  // <ContinueWatchingButton episode={anime.episodes[0]} animeId={anime.id}/>
+                                  null
                             }
 
 
                         </Box>
-                        <Box display={{base: 'none', md:'block'}}>
-                            <Heading fontSize={'24px'}>
-                                Current episode
-                            </Heading>
-                        </Box>
-                        <Box display={{base: 'none', md:'block'}}>
-                            <EpisodeCard episode={anime.episodes[anime.lastWatchedEpisode - 1  | 0]} animeId={anime.id}/>
-                        </Box>
+
+                        {
+                            anime.lastWatchedEpisode ?
+                              <>
+                                  <Box display={{base: 'none', md:'block'}}>
+                                      <Heading fontSize={'24px'}>
+                                          Current episode
+                                      </Heading>
+                                  </Box>
+                                  <Box display={{base: 'none', md:'block'}}>
+                                      <EpisodeCard episode={anime.lastWatchedEpisode} animeId={anime.id}/>
+                                  </Box>
+                              </> : null
+                        }
+
                     </Box>
                 </Flex>
             </Container>

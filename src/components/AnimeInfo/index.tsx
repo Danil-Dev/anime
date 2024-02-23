@@ -27,7 +27,7 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                             </Td>
                             <Td textAlign={'right'}>
                                 {anime.audios.map((audio) => (
-                                  <Link key={audio.name} as={NextLink} display={'inline-block'} pl={'2'} href={'#'}>
+                                  <Link key={audio.name} as={NextLink} display={'inline-block'} pl={'2'} href={`/catalog/audios/${audio.name}`}>
                                       {audio.title}
                                   </Link>
                                 ))}

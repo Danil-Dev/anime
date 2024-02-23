@@ -1,18 +1,17 @@
 import React from "react";
 import {AnimeService} from "@/services/Anime";
 import CatalogItems from "@/components/CatalogArea/CatalogItems";
+import CatalogItems2 from "@/components/CatalogArea/CatalogItems2";
 
 
 
-export default async function CatalogPage() {
+export default function CatalogPage() {
 
-    const animeList= await AnimeService.getCatalog('all')
 
     return (
             <>
 
-
-                <CatalogItems animeList={animeList} />
+                <CatalogItems2 type={'catalog'} id={'all'}/>
             </>
     )
 }
