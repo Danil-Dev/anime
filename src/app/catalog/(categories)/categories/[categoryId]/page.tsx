@@ -12,7 +12,7 @@ export default async function CategoriesPage({ params: {categoryId} }: {params: 
 
   return (
     <>
-      <CatalogItems2/>
+      {/*<CatalogItems2 />*/}
       <CatalogItems animeList={animeList} />
     </>
   )
