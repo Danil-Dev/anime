@@ -8,10 +8,10 @@ export const navLinks : INavLink[] = [
         name: 'Catalog',
         path: '/catalog'
     },
-    {
-        name: 'Ongoing',
-        path: '/ongoing'
-    },
+    // {
+    //     name: 'Ongoing',
+    //     path: '/ongoing'
+    // },
 
 
 ]

@@ -63,12 +63,15 @@ export function SettingsControl(){
 export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuType: (type: SettingsType) => void}){
 
     const dispatch = useAppDispatch()
-    const {isAuto, selectedTrack, tracks, selectTrack} = useVideoTracks({
+    const {isAuto, selectedTrack, tracks, selectTrack, setAutoMode} = useVideoTracks({
         onSelect: (selectedTrack) => {
 
             dispatch(updateTrack(selectedTrack.height))
         }
     })
+
+
+    console.log ("TRACKS", tracks)
     const {selectAudioTrack, audioTracks} = useAudioTracks({
         onSelect: (selectedTrack) => {
             dispatch(updateAudio(selectedTrack))
@@ -178,7 +181,10 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
 
                             </div>
                         ))}
-                        <div className={styles.control_settings_menu_item}>
+                        <div
+                          className={styles.control_settings_menu_item}
+                          onClick={setAutoMode}
+                        >
                             <div className={styles.control_settings_menu_item_icon}>
                                 {isAuto && <Check size={24}/>}
                             </div>

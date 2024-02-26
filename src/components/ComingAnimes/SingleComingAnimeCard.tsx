@@ -74,11 +74,11 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                     </Grid>
                     <Box
                         position={'absolute'}
-                        right={'40px'}
+                        right={'-140px'}
                         bottom={'-20px'}
                         zIndex={'11'}>
 
-                        <Image src={data.image} alt={data.title} width={400} height={720}/>
+                        <Image src={data.image} alt={data.title} width={600} height={700}/>
                     </Box>
                 </Flex>
 

@@ -1,6 +1,7 @@
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 import {useCallback, useEffect, useRef, useState} from "react";
 import useStateRef from "react-usestateref";
+import log from "loglevel";
 
 export interface UseVideoTracksConfig{
     onSelect?: (selectedTrack: shaka.extern.Track) => void
@@ -69,6 +70,8 @@ export function useVideoTracks({onSelect}: UseVideoTracksConfig = {}) {
     const updateQualityHandler = useCallback(() => {
         const currentConfig = player.getConfiguration()
         let currentTracks = player.getVariantTracks();
+
+        console.log ("Curr Tracks", currentTracks)
         const currentSelectedTrack = currentTracks.find((track) => track.active)
 
         if (currentConfig.abr.enabled !== isAutoRef.current){

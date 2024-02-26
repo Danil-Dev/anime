@@ -6,6 +6,7 @@ import {AnimeHistory, ExtendedAnimeHistory} from "@/services/User";
 import Image from "next/image";
 import {Play} from "react-feather";
 import NextLink from "next/link";
+import buildTimeString from "@/utils/buildTimeString";
 
 
 export default function HistoryCard({historyItem}: {
@@ -14,6 +15,8 @@ export default function HistoryCard({historyItem}: {
 
     const date = new Date(historyItem.watchedOn);
     const pretty_date = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+
+
     const time = (historyItem.episodeId.duration / 60) - (historyItem.currentTime / 60);
 
     console.log(historyItem);
@@ -38,7 +41,7 @@ export default function HistoryCard({historyItem}: {
                             }
                         }}
                     >
-                        <LinkOverlay href={`/anime/${historyItem.animeId.id}/watch?ep=${historyItem.episodeNumber}`}>
+                        <LinkOverlay href={`/anime/${historyItem.animeId.id}/${historyItem.episodeNumber}/watch`}>
                             <Image src={historyItem.episodeId.image_thumb} alt={historyItem.animeId.title} width={300}
                                    height={300}/>
                             <Box
@@ -52,7 +55,7 @@ export default function HistoryCard({historyItem}: {
                             >
                                 <Text mb={0}>
                                     {historyItem.currentTime + 30 > historyItem.episodeId.duration ? "Finished" : (
-                                        <Text mb={0} fontSize={"sm"}> Залишилось {Math.round(time)}m</Text>
+                                        <Text mb={0} fontSize={"sm"}> Зупинились на {buildTimeString(historyItem.currentTime)} </Text>
                                     )}
                                 </Text>
                             </Box>

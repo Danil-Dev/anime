@@ -100,14 +100,14 @@ export default function GenresLayout( props: {
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter2 type={'categories'} title={'Категори'} defaultIsOpen={true}/>
+                                <CatalogFilter2 type={'categories'} title={'Категорії'} defaultIsOpen={true}/>
                             </Box>
 
                             <Box
                                 borderRadius={'8px'}
                                 w={'100%'}
                             >
-                                <CatalogFilter2 title={'Озвучення'} type={'audios'} defaultIsOpen={false}/>
+                                <CatalogFilter2 title={'Озвучка'} type={'audios'} defaultIsOpen={false}/>
                             </Box>
 
 
