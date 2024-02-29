@@ -74,7 +74,7 @@ export default function SearchComponent() {
                 justifyContent={'flex-start'}
                 display={{ base: 'none', md: 'flex' }}
               >
-                  <Text m={0}>Search the anime...</Text>
+                  <Text m={0}>Пошук аніме...</Text>
                   <Box position={'absolute'} right={'16px'} top={'50%'} transform={'translateY(-65%)'}>
                       <Kbd>Ctrl</Kbd>
                       <Kbd>K</Kbd>
@@ -102,7 +102,7 @@ export default function SearchComponent() {
                         size={'lg'}
                         variant={'unstyled'}
                         onChange={handleChangeSearch}
-                        placeholder={'Start typing anime...'}
+                        placeholder={'Почни писати аніме...'}
                         ref={inputRef}
                         h={'42px'}
                         _placeholder={{
@@ -111,7 +111,7 @@ export default function SearchComponent() {
                       />
                   </InputGroup>
                   <Box display={{ base: 'none', md: 'block' }} position={'relative'} h={`${searchResultHeight}px`}>
-                      {search.length >= 3 && searchAnime.length === 0 && <AbsoluteCenter><Text>Anime not found.</Text></AbsoluteCenter>}
+                      {search.length >= 3 && searchAnime.length === 0 && <AbsoluteCenter><Text>Аніме не знайдено.</Text></AbsoluteCenter>}
                       {!isLoading && searchAnime.length > 0 && (
                         <Scrollbar>
                             {searchAnime.map((anime, idx) => (
@@ -121,7 +121,7 @@ export default function SearchComponent() {
                       )}
                   </Box>
                   <Box display={{ base: 'block', md: 'none' }} position={'relative'} h={`${searchResultHeight}px`}>
-                      {search.length >= 3 && searchAnime.length === 0 && <AbsoluteCenter><Text>Anime not found.</Text></AbsoluteCenter>}
+                      {search.length >= 3 && searchAnime.length === 0 && <AbsoluteCenter><Text>Аніме не знайдено.</Text></AbsoluteCenter>}
                       {!isLoading && searchAnime.length > 0 && (
                         <Scrollbar>
                             {searchAnime.map((anime, idx) => (

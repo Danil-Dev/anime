@@ -61,7 +61,7 @@ export function EpisodesList() {
 
     return (
       <Container maxW={'container.xl'} pt={{ base: '25px', md: '50px' }} pb={'50px'}>
-          <Heading>Episodes</Heading>
+          <Heading>Епізоди</Heading>
           {isValidating && episodes.length === 0 ? (
             <Spinner />
           ) : (

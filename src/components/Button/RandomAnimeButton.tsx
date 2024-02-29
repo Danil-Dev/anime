@@ -10,7 +10,6 @@ export default function RandomAnimeButton( ) {
     const RandomAnime = () => {
         setLoading(true)
         AnimeService.getRandomAnime().then((res) => {
-            console.log('Random anime', res)
             setLoading(false)
             Router.push(`/anime/${res.id}/`)
         })
@@ -23,7 +22,7 @@ export default function RandomAnimeButton( ) {
             isLoading={loading}
             onClick={RandomAnime}
         >
-            Random
+            Рандомчик
         </Button>
     )
 }

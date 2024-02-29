@@ -164,7 +164,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                               <>
                                   <Box display={{base: 'none', md:'block'}}>
                                       <Heading fontSize={'24px'}>
-                                          Current episode
+                                          Продовжити перегляд
                                       </Heading>
                                   </Box>
                                   <Box display={{base: 'none', md:'block'}}>

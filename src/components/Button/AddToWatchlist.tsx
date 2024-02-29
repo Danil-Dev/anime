@@ -43,7 +43,7 @@ export default function AddToWatchlist({id, disable, isInWatchlist}: {id: string
             disabled={disable}
             onClick={!state? addToWatchlist: removeFromWatchlist}
         >
-            {state ? 'Remove from watchlist' : 'Add to watchlist'}
+            {state ? 'Видалити з закладок' : 'Додати до закладок'}
         </Button>
     );
 }

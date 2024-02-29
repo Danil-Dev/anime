@@ -12,7 +12,7 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                     <Tbody>
                         <Tr >
                             <Td w={'50%'}>
-                                Studio:
+                                Студія:
                             </Td>
                             <Td textAlign={'right'}>
                                 <Link as={NextLink} href={`${anime.studio.link}`}>
@@ -23,7 +23,7 @@ export default function AnimeInfo({anime}: { anime: IAnimeData }) {
                         </Tr>
                         <Tr>
                             <Td w={'50%'}>
-                                Audio:
+                                Аудіо:
                             </Td>
                             <Td textAlign={'right'}>
                                 {anime.audios.map((audio) => (

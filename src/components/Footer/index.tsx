@@ -48,7 +48,7 @@ export default function Footer() {
                 </Box>
 
                 <Text fontSize="14px" color="accentTextLightSecondary">
-                    © 2023 Aniverse - danilmarc4uk.grf@gmail.com
+                    © 2024 Aniverse - danilmarc4uk.grf@gmail.com
                 </Text>
             </Box>
         </footer>

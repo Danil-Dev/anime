@@ -17,16 +17,16 @@ export default function ProfileMenu() {
             pt={50}
             pb={50}
         >
-            <Heading mb={'30px'}>Profile</Heading>
+            <Heading mb={'30px'}>Профіль</Heading>
             <ButtonGroup spacing={4} colorScheme={'gray'} variant={'outlined'} size={'lg'}>
                 <Button as={NextLink} href={'/profile/watchlist'} isActive={pathname === '/profile/watchlist'}>
-                    Watchlist
+                    Закладки
                 </Button>
                 <Button as={NextLink} href={'/profile/history'} isActive={pathname === '/profile/history'}>
-                    History
+                    Історія
                 </Button>
                 <Button as={NextLink} href={'/profile/settings'} isActive={pathname === '/profile/settings'}>
-                    Settings
+                    Налаштування
                 </Button>
             </ButtonGroup>
         </Container>

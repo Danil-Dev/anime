@@ -10,8 +10,11 @@ import {clamp} from "lodash";
 
 export function VolumeControl() {
 
-    const {volume, updateCurrentVolume} = useVolume()
+    const {volume, updateCurrentVolume, muted, toggleMute} = useVolume()
     const dispatch = useAppDispatch()
+
+
+    console.log ("mute", muted)
     const handleVolumeChange = (vol: number) => {
         console.log('handleVolumeChange', vol)
         updateCurrentVolume(vol)
@@ -26,8 +29,8 @@ export function VolumeControl() {
 
     return(
         <div className={styles.control_volume}>
-            <button type={'button'}>
-                <VolumeIcon volume={volume}/>
+            <button type={'button'} onClick={toggleMute}>
+                <VolumeIcon mute={muted} volume={volume}/>
             </button>
             <div className={styles.control_volume_slider}>
                 <RangeSlider
@@ -44,8 +47,11 @@ export function VolumeControl() {
     )
 }
 
-function VolumeIcon({volume}: {volume: number}) {
-    if (volume === 0 ) return <VolumeX size={24}/>
+function VolumeIcon({volume, mute}: {volume: number, mute: boolean}) {
+
+
+    console.log (mute)
+    if ( volume === 0 ) return <VolumeX size={24}/>
     if (volume < 0.5) return <Volume1 size={24}/>
     return <Volume2 size={24}/>
 }

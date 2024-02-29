@@ -2,7 +2,7 @@
 
 import {Heading, Link, LinkBox, LinkOverlay, Text} from "@chakra-ui/react";
 import {Box} from "@chakra-ui/layout";
-import {AnimeHistory, ExtendedAnimeHistory} from "@/services/User";
+import {AnimeHistory, AnimeHistory2, ExtendedAnimeHistory} from "@/services/User";
 import Image from "next/image";
 import {Play} from "react-feather";
 import NextLink from "next/link";
@@ -10,14 +10,15 @@ import buildTimeString from "@/utils/buildTimeString";
 
 
 export default function HistoryCard({historyItem}: {
-    historyItem: ExtendedAnimeHistory
+    historyItem: AnimeHistory2
 }) {
 
-    const date = new Date(historyItem.watchedOn);
+  console.log (historyItem)
+
+    const date = new Date(historyItem.watchedEpisodes.watchedOn);
     const pretty_date = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
 
 
-    const time = (historyItem.episodeId.duration / 60) - (historyItem.currentTime / 60);
 
     console.log(historyItem);
     return (
@@ -41,8 +42,8 @@ export default function HistoryCard({historyItem}: {
                             }
                         }}
                     >
-                        <LinkOverlay href={`/anime/${historyItem.animeId.id}/${historyItem.episodeNumber}/watch`}>
-                            <Image src={historyItem.episodeId.image_thumb} alt={historyItem.animeId.title} width={300}
+                        <LinkOverlay href={`/anime/${historyItem.animeDetails.id}/${historyItem.episodeDetails.episode_number}/watch`}>
+                            <Image src={historyItem.episodeDetails.image_thumb} alt={historyItem.animeDetails.title} width={300}
                                    height={300}/>
                             <Box
                                 position={"absolute"}
@@ -54,9 +55,9 @@ export default function HistoryCard({historyItem}: {
                                 p={"6px 8px"}
                             >
                                 <Text mb={0}>
-                                    {historyItem.currentTime + 30 > historyItem.episodeId.duration ? "Finished" : (
-                                        <Text mb={0} fontSize={"sm"}> Зупинились на {buildTimeString(historyItem.currentTime)} </Text>
-                                    )}
+
+                                        <Text mb={0} fontSize={"sm"}> Зупинились на {buildTimeString(historyItem.watchedEpisodes.currentTime)} </Text>
+
                                 </Text>
                             </Box>
                             <Box
@@ -92,13 +93,13 @@ export default function HistoryCard({historyItem}: {
             </Box>
             <Box mt={"-10px"}>
                 <Text noOfLines={[1]} fontSize={"sm"} color={"textSecondary"}>
-                    {historyItem.animeId.title}
+                    {historyItem.animeDetails.title}
                 </Text>
                 <Heading mb={0}>
 
                         <Text mb={"2px"} fontSize={"md"}>
-                            <Link as={NextLink} href={`/anime/${historyItem.animeId.id}/watch?ep=${historyItem.episodeNumber}`}>
-                                E{historyItem.episodeNumber} - {historyItem.episodeId.title}
+                            <Link as={NextLink} href={`/anime/${historyItem.animeDetails.id}/watch?ep=${historyItem.episodeDetails.episode_number}`}>
+                                E{historyItem.episodeDetails.episode_number} - {historyItem.episodeDetails.title}
                             </Link>
 
                         </Text>

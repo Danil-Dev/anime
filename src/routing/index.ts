@@ -5,7 +5,7 @@ export interface INavLink {
 
 export const navLinks : INavLink[] = [
     {
-        name: 'Catalog',
+        name: 'Каталог',
         path: '/catalog'
     },
     // {

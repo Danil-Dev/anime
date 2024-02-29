@@ -15,7 +15,7 @@ export default function CatalogHead() {
     return (
             <>
                 <Heading>
-                    Каталог Аниме
+                    Каталог Аніме
                 </Heading>
                 <Breadcrumbs />
             </>

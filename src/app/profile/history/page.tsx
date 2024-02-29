@@ -3,6 +3,7 @@ import {authOptions} from "@/configs/auth";
 import {getServerSession} from "next-auth/next";
 import {ExtendedAnimeHistory, UserServices} from "@/services/User";
 import HistoryCard from "@/components/AnimeCard/HistoryCard";
+import HistoryList from "@/components/HistoryList";
 
 
 export default async function ProfileHistory() {
@@ -15,18 +16,7 @@ export default async function ProfileHistory() {
 
     return (
         <Container maxW={'container.xl'}>
-            <Grid templateColumns={'repeat(4,1fr)'}>
-                {history.success && (
-                    <>
-                        {history.list.map((historyItem: ExtendedAnimeHistory, idx: number)=>(
-                            <GridItem key={idx}>
-                                <HistoryCard historyItem={historyItem}/>
-                            </GridItem>
-                        ))}
-                    </>
-                )}
-
-            </Grid>
+            <HistoryList userId={session.user.id}/>
         </Container>
     );
 }

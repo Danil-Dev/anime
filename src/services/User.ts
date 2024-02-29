@@ -15,6 +15,13 @@ export interface AnimeHistory {
     watchedOn?: Date,
     episodeId?: string,
 }
+
+export interface AnimeHistory2{
+    success: boolean,
+    watchedEpisodes: { watchedOn: Date, currentTime: number},
+    episodeDetails: { episode_number: number, title: string, image_thumb: string },
+    animeDetails: { id: string, title: string}
+}
 export interface ExtendedAnimeHistory  {
     episodeId: EpisodeHistory,
     animeId: { id: string, title: string },
@@ -23,6 +30,7 @@ export interface ExtendedAnimeHistory  {
     currentTime: number,
     _id: string
 }
+
 
 export const UserServices = {
     async updateUserWatchedHistory(animeId: string, userId: string,  currentTime: number, episodeId: string, episodeNumber: number) {
@@ -56,6 +64,17 @@ export const UserServices = {
 
         return await res.json()
     },
+    async getDynamicHistory (url: string): Promise<AnimeHistory2[]> {
+
+        const res = await fetch(`${BASE_API_URL}/${url}`, {
+            next: {
+                revalidate: 60
+            }
+        })
+        return res.json()
+
+    },
+
     async getUserEpisodeHistory(userId: string, episodeId: string) {
 
         console.log(userId, episodeId, 'saveEpisode')
