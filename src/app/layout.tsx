@@ -9,6 +9,7 @@ import {Providers} from "@/app/providers";
 import {Metadata} from "next";
 import MobileMenu from "@/components/Header/MobileMenu";
 import {Analytics} from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // const inter = Inter({subsets: ['latin']})
 const ubuntu = Ubuntu({subsets: ['cyrillic', 'latin'], weight: ['300', '400', '500', '700'], variable: '--font-ubuntu'})
@@ -29,6 +30,7 @@ export default function RootLayout({
         <html lang="ua" className={`${ubuntu.variable} ${russoOne.variable} ${rubikMono.variable}`}>
         <body>
             <Providers>
+
                 <Header/>
                 <main>
                     {children}
@@ -38,6 +40,7 @@ export default function RootLayout({
               <MobileMenu/>
             </Providers>
          <Analytics/>
+        <SpeedInsights/>
         </body>
         </html>
     )
