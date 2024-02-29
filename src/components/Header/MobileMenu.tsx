@@ -38,7 +38,7 @@ export default function MobileMenu() {
                     >
                       <Home size={24}/>
 
-                      <Text fontSize={'12px'} m={0}> Home</Text>
+                      <Text fontSize={'12px'} m={0}> Головна</Text>
                     </Link>
 
                   </Box>
@@ -54,7 +54,7 @@ export default function MobileMenu() {
                       alignItems={'center'}
                     >
                       <Film size={24}/>
-                      <Text fontSize={'12px'} m={0}> Catalog</Text>
+                      <Text fontSize={'12px'} m={0}> Каталог</Text>
                     </Link>
 
 
@@ -71,7 +71,7 @@ export default function MobileMenu() {
                       alignItems={'center'}
                     >
                       <User size={24}/>
-                      <Text fontSize={'12px'} m={0}> Profile</Text>
+                      <Text fontSize={'12px'} m={0}> Профіль</Text>
                     </Link>
 
                   </Box>

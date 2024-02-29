@@ -17,7 +17,7 @@ export default async function WatchlistPage() {
 
     return (
         <Container maxW={'container.xl'}>
-            <Grid templateColumns={'repeat(4,1fr)'}>
+            <Grid templateColumns={{base:'repeat(2,1fr)', md: 'repeat(4,1fr)'}} gap={2}>
                 {watchlist.map((anime, idx)=>(
                     <GridItem key={idx}>
                         <AnimeCard anime={anime}/>

@@ -22,7 +22,7 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                     height={'100%'}
                     backgroundSize={'cover'}
                     backgroundRepeat={'no-repeat'}
-                    p={'50px'}
+                    p={{base: '20px', md: '50px'}}
                     backgroundImage={`url(${data.image_banner})`}
                     backgroundColor={'backgroundOutlineBlack'}
                     _before={{
@@ -37,7 +37,7 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                         bottom: "0",
                         backgroundColor: "backgroundOutlineBlack",
                         zIndex: "10",
-                        backdropFilter: "blur(10px)",
+                        backdropFilter: "blur(2px)",
                         borderRadius: "12px"
                     }}
                 >
@@ -46,33 +46,34 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                         templateRows={'1fr 1fr' }
                         zIndex={'11'}
                         flexDirection={'column'}
-                        maxW={'50%'}
+                        maxW={{base: '100%', md: '50%'}}
 
                     >
 
                         <GridItem >
 
-                            <Text>НАЙОЧІКУВАНІШИЙ РЕЛІЗ СЕЗОНУ!</Text>
+                            <Text textAlign={'center'} fontSize={{base: 18 }} fontWeight={'bold'}>НАЙОЧІКУВАНІШИЙ РЕЛІЗ СЕЗОНУ!</Text>
                         </GridItem>
                         <GridItem
                             justifySelf={'center'}
 
                         >
-                            <Heading>{data.title}</Heading>
-                            <Text noOfLines={[1, 2, 3]}>{data.description}</Text>
+                            <Heading size={{base: 'md', md: 'lg' }}>{data.title}</Heading>
+                            <Text noOfLines={[3, 2, 3]}>{data.description}</Text>
                             <Button
                                 variant={'primary'}
                                 colorScheme={'blue'}
                                 as={NextLink}
                                 href={data.link}
-                                size={'lg'}
-                                maxW={'220px'}
+                                size={{base: 'md', md: 'lg'}}
+                                maxW={{base: '100%', md:'220px'}}
                             >
                                 Дивитися
                             </Button>
                         </GridItem>
                     </Grid>
                     <Box
+                        display={{base: 'none', md: 'block'}}
                         position={'absolute'}
                         right={'-140px'}
                         bottom={'-20px'}

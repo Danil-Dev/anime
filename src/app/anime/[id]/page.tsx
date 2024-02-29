@@ -41,7 +41,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
     return (
         <>
             <Box
-                pt={{base:'20px', md:'175px'}}
+                pt={{base:'80px', md:'175px'}}
                 pb={{base:'20px', md:'120px'}}
                 bgImage={`url("${anime.image_banner}")`}
                 bgPosition={'top center'}
@@ -68,6 +68,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         borderRadius={'10px'}
                         overflow={'hidden'}
                         display={{base: 'inline-block', md: 'none'}}
+
                     >
                         <Image src={anime.image} alt={anime.title} width={300} height={430}/>
                         <Box

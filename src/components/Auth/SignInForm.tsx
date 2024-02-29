@@ -9,7 +9,7 @@ import {
     Heading,
     Input, Link,
     Spacer, VStack,
-    Text, InputGroup, InputRightElement, Alert, AlertIcon
+    Text, InputGroup, InputRightElement, Alert, AlertIcon, IconButton
 } from "@chakra-ui/react";
 import {Box} from "@chakra-ui/layout";
 import Image from "next/image";
@@ -17,6 +17,7 @@ import NextLink from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
+import {Eye, EyeOff} from "react-feather";
 export default function SignInForm() {
 
     const [show, setShow] = useState(false)
@@ -26,8 +27,8 @@ export default function SignInForm() {
     return (
 
         <Box position={'relative'} h={'calc(100vh - 140px)'}>
-            <AbsoluteCenter bg={'background'} w={'40%'} p={'40px 40px 60px'} borderRadius={'12px'}>
-                <Heading >Sign In</Heading>
+            <AbsoluteCenter bg={'background'} w={{base: '100%', md: '40%'}} p={'40px 40px 60px'} borderRadius={'12px'}>
+                <Heading >Логін</Heading>
                 <Formik
                     initialValues={{
                         email: '',
@@ -59,12 +60,12 @@ export default function SignInForm() {
                         console.log('validate', values)
 
                         if (!values.email) {
-                            errors.email = 'Required'
+                            errors.email = 'Обов\'язково'
                         } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
-                            errors.email = 'Invalid email address'
+                            errors.email = 'Невірна адреса електронної пошти'
                         }
                         else if (!values.password) {
-                            errors.password = 'Required'
+                            errors.password = 'Обов\'язково'
                         }
 
                         return errors
@@ -78,14 +79,14 @@ export default function SignInForm() {
                                 {error &&
                                   <Alert status="error">
                                       <AlertIcon/>
-                                      {error === 'CredentialsSignin' ? 'Invalid email or password' : 'Something went wrong'}
+                                      {error === 'CredentialsSignin' ? 'Неправильний email або пароль' : 'Щось пішло не так'}
                                   </Alert>
                                 }
                                 <Field name="email" type="email">
                                     {({field, form}) => (
                                         <FormControl isInvalid={form.errors.email && form.touched.email}>
                                             <FormLabel htmlFor="email">Email</FormLabel>
-                                            <Input {...field} id="email" placeholder="Enter email" />
+                                            <Input {...field} id="email" placeholder="Введіть email" />
                                             <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                         </FormControl>
                                     )}
@@ -93,13 +94,14 @@ export default function SignInForm() {
                                 <Field name="password" type="password">
                                     {({field, form}) => (
                                         <FormControl isInvalid={form.errors.password && form.touched.password}>
-                                            <FormLabel htmlFor="password">Password</FormLabel>
+                                            <FormLabel htmlFor="password">Пароль</FormLabel>
                                             <InputGroup size={'lg'}>
-                                                <Input {...field} placeholder={'Enter password'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
+                                                <Input {...field} placeholder={'Введіть пароль'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
                                                 <InputRightElement width="4.5rem" pr={'1rem'}>
-                                                    <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                                                        {show ? "Hide" : "Show"}
-                                                    </Button>
+                                                    {/*<Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>*/}
+                                                    {/*    {show ? "Hide" : "Показати"}*/}
+                                                    {/*</Button>*/}
+                                                    <IconButton onClick={() => setShow(!show)} aria-label={show ? 'Сховати' : 'Показати'}  icon={show ? <EyeOff/> : <Eye/>} />
                                                 </InputRightElement>
                                             </InputGroup>
 
@@ -115,10 +117,10 @@ export default function SignInForm() {
                                     type={'submit'}
                                     // size={'fullW'}
                                 >
-                                    Submit
+                                    Вхід
                                 </Button>
                                 <Text color={'textSecondary'}>
-                                    Dont have an account? <Link fontWeight={'bold'} as={NextLink} href={'/auth/register'}>Sign Up</Link>
+                                    Немає аккаунту? <Link fontWeight={'bold'} as={NextLink} href={'/auth/register'}>Реєстрація</Link>
                                 </Text>
 
                             </VStack>

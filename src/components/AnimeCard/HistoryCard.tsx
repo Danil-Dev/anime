@@ -56,7 +56,7 @@ export default function HistoryCard({historyItem}: {
                             >
                                 <Text mb={0}>
 
-                                        <Text mb={0} fontSize={"sm"}> Зупинились на {buildTimeString(historyItem.watchedEpisodes.currentTime)} </Text>
+                                        <Text mb={0} fontSize={{base: '12px', md: 'sm'}}> Зупинились на {buildTimeString(historyItem.watchedEpisodes.currentTime)} </Text>
 
                                 </Text>
                             </Box>
@@ -92,12 +92,12 @@ export default function HistoryCard({historyItem}: {
                 {/*</LinkOverlay>*/}
             </Box>
             <Box mt={"-10px"}>
-                <Text noOfLines={[1]} fontSize={"sm"} color={"textSecondary"}>
+                <Text noOfLines={[1]} mb={{base: 2, md: 4}} fontSize={{base:'12px', md:"sm"}} color={"textSecondary"}>
                     {historyItem.animeDetails.title}
                 </Text>
-                <Heading mb={0}>
+                <Heading mb={0} >
 
-                        <Text mb={"2px"} fontSize={"md"}>
+                        <Text mb={"2px"} fontSize={{base: '14px', md:"md"}}>
                             <Link as={NextLink} href={`/anime/${historyItem.animeDetails.id}/watch?ep=${historyItem.episodeDetails.episode_number}`}>
                                 E{historyItem.episodeDetails.episode_number} - {historyItem.episodeDetails.title}
                             </Link>

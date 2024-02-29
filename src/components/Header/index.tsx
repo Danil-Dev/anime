@@ -107,9 +107,17 @@ export default function Header () {
                     <GridItem
                         justifySelf={{base: 'flex-end', md:'stretch'}}
                         alignSelf={'center'}
+                        display={'flex'}
+                        gap={4}
                     >
+                        <Box width={{base: '100%'}}>
+                            <SearchComponent/>
+                        </Box>
 
-                        <SearchComponent/>
+
+                        <Box display={{base: 'block', md: 'none'}}>
+                            <AuthButton/>
+                        </Box>
                     </GridItem>
                     <GridItem
                         display={{base: 'none', md: 'flex'}}

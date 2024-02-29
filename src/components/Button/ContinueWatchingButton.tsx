@@ -21,7 +21,7 @@ export default function ContinueWatchingButton({episode, animeId}: EpisodeCardPr
             leftIcon={<Play size={18}/>}
             marginY={'30px'}
         >
-            Continue
+            Продовжити перегляд
 
         </Button>
     )

@@ -45,7 +45,7 @@ export const AnimeList: FC<IAnimeList> = ({animeList, title, link}) => {
                     display={{base: 'flex', md: 'none'}}
                     mt={10}
                 >
-                    Catalog
+                    Каталог
 
                 </Button>
             </Container>

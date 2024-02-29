@@ -21,7 +21,9 @@ export default function AuthButton() {
                       variant={'primary'}
                       icon={<User/>}
                       colorScheme={'primary'}
-                      p={2}
+                      w={'48px'}
+                      h={'48px'}
+                      size={'xl'}
                     />
                     <MenuList>
                             <MenuItem icon={<Clock/>} as={NextLink} href={'/profile/history'}>Історія</MenuItem>
@@ -39,7 +41,7 @@ export default function AuthButton() {
                     </MenuList>
                 </Menu>
             ) : (
-                <Button as={NextLink} href={'/auth/login'} variant={'primary'} colorScheme={'primary'}>Вхід</Button>
+                <Button as={NextLink} href={'/auth/login'} h={'48px'} variant={'primary'} colorScheme={'primary'}>Вхід</Button>
             )}
 
         </>

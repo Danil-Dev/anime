@@ -9,7 +9,7 @@ import {
     Heading,
     Input, Link,
     Spacer, VStack,
-    Text, InputGroup, InputRightElement, Alert, AlertIcon
+    Text, InputGroup, InputRightElement, Alert, AlertIcon, IconButton
 } from "@chakra-ui/react";
 import {Box} from "@chakra-ui/layout";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 
 import {BASE_API_URL} from "@/configs/constants";
+import {Eye, EyeOff} from "react-feather";
 export default function SignUpForm() {
 
     const [show, setShow] = useState(false)
@@ -27,8 +28,8 @@ export default function SignUpForm() {
     return (
 
         <Box position={'relative'} h={'calc(100vh - 140px)'}>
-            <AbsoluteCenter bg={'background'} w={'40%'} p={'40px 40px 60px'} borderRadius={'12px'}>
-                <Heading >Sign In</Heading>
+            <AbsoluteCenter bg={'background'} w={{base: '100%', md: '40%'}} p={'40px 40px 60px'} borderRadius={'12px'}>
+                <Heading >Реєстрація</Heading>
                 <Formik
                     initialValues={{
                         email: '',
@@ -70,16 +71,16 @@ export default function SignUpForm() {
                         console.log('validate', values)
 
                         if (!values.email) {
-                            errors.email = 'Required'
+                            errors.email = 'Обов\'язково'
                         } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
-                            errors.email = 'Invalid email address'
+                            errors.email = 'Невірна адреса електронної пошти'
                         }
                         else if (!values.password) {
-                            errors.password = 'Required'
+                            errors.password = 'Обов\'язково'
                         } else if (!values.reenterPassword) {
-                            errors.reenterPassword = 'Required'
+                            errors.reenterPassword = 'Обов\'язково'
                         } else if (values.password !== values.reenterPassword) {
-                            errors.reenterPassword = 'Passwords must match'
+                            errors.reenterPassword = 'Паролі мають співпадати'
                         }
 
 
@@ -101,7 +102,7 @@ export default function SignUpForm() {
                                     {({field, form}) => (
                                         <FormControl isInvalid={form.errors.email && form.touched.email}>
                                             <FormLabel htmlFor="email">Email</FormLabel>
-                                            <Input {...field} id="email" placeholder="Enter email" />
+                                            <Input {...field} id="email" placeholder="Введіть email" />
                                             <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                         </FormControl>
                                     )}
@@ -109,13 +110,11 @@ export default function SignUpForm() {
                                 <Field name="password" type="password">
                                     {({field, form}) => (
                                         <FormControl isInvalid={form.errors.password && form.touched.password}>
-                                            <FormLabel htmlFor="password">Password</FormLabel>
+                                            <FormLabel htmlFor="password">Пароль</FormLabel>
                                             <InputGroup size={'lg'}>
-                                                <Input {...field} placeholder={'Enter password'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
+                                                <Input {...field} placeholder={'Введіть пароль'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
                                                 <InputRightElement width="4.5rem" pr={'1rem'}>
-                                                    <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                                                        {show ? "Hide" : "Show"}
-                                                    </Button>
+                                                    <IconButton onClick={() => setShow(!show)} aria-label={show ? 'Сховати' : 'Показати'}  icon={show ? <EyeOff/> : <Eye/>} />
                                                 </InputRightElement>
                                             </InputGroup>
 
@@ -126,13 +125,11 @@ export default function SignUpForm() {
                                 <Field name="reenterPassword" type="password">
                                     {({field, form}) => (
                                         <FormControl isInvalid={form.errors.reenterPassword && form.touched.reenterPassword}>
-                                            <FormLabel htmlFor="reenterPassword">Password</FormLabel>
+                                            <FormLabel htmlFor="reenterPassword">Пароль повторно</FormLabel>
                                             <InputGroup size={'lg'}>
-                                                <Input {...field} placeholder={'Reenter password'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
+                                                <Input {...field} placeholder={'Повторно введіть пароль'} type={show ? 'text' : 'password'} id="password" pr={'5.5rem'} />
                                                 <InputRightElement width="4.5rem" pr={'1rem'}>
-                                                    <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                                                        {show ? "Hide" : "Show"}
-                                                    </Button>
+                                                    <IconButton onClick={() => setShow(!show)} aria-label={show ? 'Сховати' : 'Показати'}  icon={show ? <EyeOff/> : <Eye/>} />
                                                 </InputRightElement>
                                             </InputGroup>
 
@@ -148,10 +145,10 @@ export default function SignUpForm() {
                                     type={'submit'}
                                     // size={'fullW'}
                                 >
-                                    Submit
+                                    Реєстрація
                                 </Button>
                                 <Text color={'textSecondary'}>
-                                    Already have an account? <Link fontWeight={'bold'} as={NextLink} href={'/auth/login'}>Login</Link>
+                                    Вже маєте аккаунт? <Link fontWeight={'bold'} as={NextLink} href={'/auth/login'}>Вхід</Link>
                                 </Text>
 
                             </VStack>
