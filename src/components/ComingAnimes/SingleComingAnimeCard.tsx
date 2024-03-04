@@ -52,7 +52,7 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
 
                         <GridItem >
 
-                            <Text textAlign={'center'} fontSize={{base: 18 }} fontWeight={'bold'}>НАЙОЧІКУВАНІШИЙ РЕЛІЗ СЕЗОНУ!</Text>
+                            <Text textAlign={{base: 'center', md: 'left'}} fontSize={{base: 18 }} fontWeight={'bold'}>НАЙОЧІКУВАНІШИЙ РЕЛІЗ СЕЗОНУ!</Text>
                         </GridItem>
                         <GridItem
                             justifySelf={'center'}

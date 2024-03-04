@@ -10,7 +10,7 @@ export default async function Home()    {
 
 
 
-    const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'action'])
+    const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'action', 'complete'])
 
 
 
@@ -87,6 +87,8 @@ export default async function Home()    {
             <AnimeList animeList={animeLists['ongoing']} title={'Онґоїнґи'} link={'/catalog/categories/ongoing'} />
             <AnimeList animeList={animeLists['popular']} title={'Популярне'}  link={'/catalog/categories/popular'}/>
             <SingleComingAnimeCard data={banners[2]}/>
+
+            <AnimeList animeList={animeLists['complete']} title={'Завершенні'}  link={'/catalog/categories/complete'}/>
             <AnimeList animeList={animeLists['action']} title={'Бойовик'} link={'/catalog/genres/action'}/>
         </div>
 

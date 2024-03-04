@@ -12,6 +12,7 @@ import {authOptions} from "@/configs/auth";
 import {getServerSession} from "next-auth/next";
 import ContinueWatchingButton from "@/components/Button/ContinueWatchingButton";
 import {EpisodesList} from "@/components/EpisodesList";
+import NoFound from "@/components/NoFound";
 
 
 
@@ -26,6 +27,15 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const anime = await AnimeService.getAnime(id, session?.user?.id)
 
+    console.log (anime)
+
+    if (!anime){
+        return (
+          <>
+              <NoFound text={'Аніме не знайдено'}/>
+          </>
+        )
+    }
 
 
     const pretty_date = new Date(anime.release_date).getFullYear()

@@ -90,6 +90,17 @@ export interface UserData   {
     lastEpisode: number
 }
 
+export interface IComment{
+    user: {
+        _id: string,
+        email: string
+    },
+    content: string,
+    commentType: 'Anime' | 'Episode',
+    date: string,
+    forId: string
+}
+
 
 
 export const AnimeService = {
@@ -103,7 +114,7 @@ export const AnimeService = {
         return res.json()
     },
 
-    async getAnime(animeId : string, userId?: string): Promise<IAnimeData>{
+    async getAnime(animeId : string, userId?: string): Promise<IAnimeData | null>{
 
         const res = await fetch(`${BASE_API_URL}/get/anime`, {
             method: 'POST',
@@ -112,11 +123,12 @@ export const AnimeService = {
             body: JSON.stringify({animeId, userId: userId || null}),
         })
 
-        // console.log(res)
-        const data =  await res.json()
-
-
-        return data
+        if (res.status === 200){
+            return res.json()
+        }
+        else{
+            return null
+        }
     },
 
     async getAnimeLists(animeLists: string[]): Promise<[string, IAnimeData[]]>{
@@ -250,6 +262,15 @@ export const AnimeService = {
         })
 
         return await res.json()
+    },
+    async getComments (key: string): Promise<IComment[]>{
+        const res = await fetch(`${BASE_API_URL}/${key}`, {
+            next: {
+                revalidate: 60
+            },
+        })
+
+        return res.json()
     }
 
 

@@ -119,5 +119,25 @@ export const UserServices = {
 
         return await res.json()
 
+    },
+    async addComment(
+      user: string,
+      commentType: 'Anime' | 'Episode',
+      forId: string,
+      content: string
+    ): Promise<number>{
+        const res = await fetch(`${BASE_API_URL}/add/comment`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                user,
+                commentType,
+                forId,
+                content
+            })
+        })
+
+
+        return res.status
     }
 }

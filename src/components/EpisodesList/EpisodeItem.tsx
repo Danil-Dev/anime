@@ -22,7 +22,7 @@ export const EpisodeItem = ({episode, handleChangeEpisode} : {episode: EpisodeIt
 
             </div>
             <div className={styles.episodes_wrapper_episode_info}>
-                <h3>Episode {episode.episode_number}</h3>
+                <h3>Епізод {episode.episode_number}</h3>
                 <p>{episode.title}</p>
             </div>
         </li>
