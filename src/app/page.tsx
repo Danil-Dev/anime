@@ -5,10 +5,14 @@ import styles from  "./main.module.scss"
 import ComingAnimes from "@/components/ComingAnimes";
 import SingleComingAnimeCard from "@/components/ComingAnimes/SingleComingAnimeCard";
 import * as process from "process";
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/configs/auth";
 
 export default async function Home()    {
 
+    const session = await getServerSession(authOptions)
 
+    console.log ("Session", session)
 
     const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'action', 'complete'])
 

@@ -224,7 +224,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                       </VStack>
                   </Box>
               </Flex>
-              <Box display={{ base: 'inline-block', md: 'none' }} mb={'15px'}>
+              <Box display={{ base: 'block', md: 'none' }} mb={'15px'}>
                   <VStack spacing={5} align={'left'}>
                       {episodeData.nextEpisode && (
                         <Box>

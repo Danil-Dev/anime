@@ -77,10 +77,10 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     <Box
                         borderRadius={'10px'}
                         overflow={'hidden'}
-                        display={{base: 'inline-block', md: 'none'}}
+                        display={{base: 'block', md: 'none'}}
 
                     >
-                        <Image src={anime.image} alt={anime.title} width={300} height={430}/>
+                        <Image src={anime.image} alt={anime.title} width={500} height={430}/>
                         <Box
                             mt={'15px'}
                             display={{base: 'block', md: 'none'}}

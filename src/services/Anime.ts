@@ -93,7 +93,8 @@ export interface UserData   {
 export interface IComment{
     user: {
         _id: string,
-        email: string
+        name: string,
+        image: string
     },
     content: string,
     commentType: 'Anime' | 'Episode',

@@ -50,7 +50,7 @@ export default function Comments({user, id}: {user: string | null, id: string}) 
           { user === null ?
             <>
               <Box>
-                <Text fontSize={24}>Щоб залиши коментар, <Link as={NextLink} color={'accentAction'} textDecoration={'underline'} href={'/auth/login'}>авторизуйтесь на сайті</Link></Text>
+                <Text fontSize={24}>Щоб залишити коментар, <Link as={NextLink} color={'accentAction'} textDecoration={'underline'} href={'/auth/login'}>авторизуйтесь на сайті</Link></Text>
               </Box>
             </>
              :
@@ -109,10 +109,15 @@ export default function Comments({user, id}: {user: string | null, id: string}) 
             <>
               <Flex gap={4} mb={4}>
                 <Box>
-                  <Avatar bg='teal.500'/>
+                  {
+                    comment.user.image ?
+                        <Avatar name={comment.user.name} src={`https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${comment.user.image}/avatar`}/>:
+                        <Avatar bg='teal.500'/>
+                  }
+
                 </Box>
                 <Box>
-                  <Heading fontSize={16}>{comment.user.email}</Heading>
+                  <Heading fontSize={16}>{comment.user.name}</Heading>
                   <Text fontSize={'sm'} mb={2} color={'textSecondary'}>{new Date(comment.date).toDateString()}</Text>
                   <Text>{comment.content}</Text>
 
