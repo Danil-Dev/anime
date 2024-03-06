@@ -149,7 +149,7 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                             <Text>{anime.description}</Text>
                         </Box>
                         <Box>
-                            <AddToWatchListButton disable={ !anime.auth} isInWatchlist={anime.isInWatchlist} id={anime._id}/>
+                            <AddToWatchListButton disable={ !anime.auth } isInWatchlist={ anime.isInWatchlist } id={ anime._id }/>
                         </Box>
                         <Box >
                             <AnimeInfo anime={anime}/>

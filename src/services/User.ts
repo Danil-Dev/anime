@@ -139,5 +139,28 @@ export const UserServices = {
 
 
         return res.status
+    },
+
+    async changePassword (
+      userId: string,
+      currentPassword: string,
+      newPassword: string,
+      token: string
+      ): Promise<number> {
+        const res = await fetch(`${BASE_API_URL}/user/changePassword`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': token
+            },
+            body: JSON.stringify({
+                userId,
+                currentPassword,
+                newPassword
+            })
+        })
+
+        return res.status
     }
+
 }

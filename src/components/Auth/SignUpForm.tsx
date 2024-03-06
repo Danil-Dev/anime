@@ -33,13 +33,12 @@ export default function SignUpForm() {
                 <Formik
                     initialValues={{
                         email: '',
+                        name: '',
                         password: '',
                         reenterPassword: ''
                     }}
                     onSubmit={
                         async (values) => {
-                            console.log('register', values)
-                            console.log(values)
                             // console.log (`${process.env.BASE_API_URL}/auth/register`)
                             const res = await fetch(`${BASE_API_URL}/auth/register`, {
                                 method: 'POST',
@@ -48,7 +47,8 @@ export default function SignUpForm() {
                                 },
                                 body: JSON.stringify({
                                     email: values.email,
-                                    password: values.password
+                                    password: values.password,
+                                    name: values.name
                                 })
                             })
 
@@ -74,8 +74,11 @@ export default function SignUpForm() {
                             errors.email = 'Обов\'язково'
                         } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
                             errors.email = 'Невірна адреса електронної пошти'
-                        }
-                        else if (!values.password) {
+                        } else if(!values.name) {
+                            errors.name = 'Обов\'язково'
+                        } else if(values.name.length < 3) {
+                            errors.name = 'Ім\'я повинно містити не меньше 3х символів'
+                        }else if (!values.password) {
                             errors.password = 'Обов\'язково'
                         } else if (!values.reenterPassword) {
                             errors.reenterPassword = 'Обов\'язково'
@@ -105,6 +108,15 @@ export default function SignUpForm() {
                                             <Input {...field} id="email" placeholder="Введіть email" />
                                             <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                         </FormControl>
+                                    )}
+                                </Field>
+                                <Field name="name" type="text">
+                                    {({field, form}) => (
+                                      <FormControl isInvalid={form.errors.name && form.touched.name}>
+                                          <FormLabel htmlFor="name">Нікнейм</FormLabel>
+                                          <Input {...field} id="name" placeholder="Введіть нікнейм" />
+                                          <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                      </FormControl>
                                     )}
                                 </Field>
                                 <Field name="password" type="password">

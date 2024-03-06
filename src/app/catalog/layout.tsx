@@ -12,64 +12,6 @@ export default function GenresLayout( props: {
 } ) {
 
 
-    const genres = [
-        {
-            id: 'action',
-            title: 'Бойовик',
-        },
-        {
-            id: 'adventure',
-            title: 'Пригоди',
-        },
-        {
-            id: 'drama',
-            title: 'Драма',
-        },
-        {
-            id: 'ecchi',
-            title: 'Еччі',
-        },
-        {
-            id: 'fantasy',
-            title: 'Фентезі',
-        }
-    ]
-    //
-    //
-    const voicingList = [
-        {
-            id: 'amonogawa',
-            title: 'Amonogawa',
-        },
-        {
-            id: 'tagaroshi',
-            title: 'Tagaroshi',
-        },
-        {
-            id: 'dzuski',
-            title: 'Dzuski',
-        },
-        {
-            id: 'fanvoxua',
-            title: 'FanVoxUa',
-        }
-    ]
-    //
-    const categoryList =[
-        {
-            id: 'popular',
-            title: 'Популярні',
-        },
-        {
-            id: 'new',
-            title: 'Нові',
-        },
-        {
-            id: 'ongoing',
-            title: 'Онгоінги',
-        }
-    ]
-
 
     return (
 

@@ -144,10 +144,10 @@ export const AnimeService = {
 
         const data = await res.json()
 
-        console.log (data)
 
         return data
     } ,
+
     async getAnimeWithCredentials(animeId : string, userId: string): Promise<UserData>{
 
         const res = await fetch(`${BASE_API_URL}/anime/${animeId}/${userId}`, {
@@ -166,7 +166,6 @@ export const AnimeService = {
         const res = await fetch(`${BASE_API_URL}/search?q=${search}`)
         return res.json()
     },
-
 
     async getCatalog(catalog: string): Promise<IAnimeData[]>{
         console.log('Get catalog', catalog)
@@ -264,6 +263,7 @@ export const AnimeService = {
 
         return await res.json()
     },
+
     async getComments (key: string): Promise<IComment[]>{
         const res = await fetch(`${BASE_API_URL}/${key}`, {
             next: {

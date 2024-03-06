@@ -30,9 +30,6 @@ export const authOptions: AuthOptions = {
 
                     if (res.status === 200) {
                         const user = await res.json()
-
-
-                        console.log(user)
                         return user
                     }
                     return null
@@ -75,15 +72,21 @@ export const authOptions: AuthOptions = {
         },
         async session({session, token, user}){
             if (session.user) {
+
                 // @ts-ignore
                 session.user.id = token.uid
+                // @ts-ignore
+                session.user.accessToken = token.accessToken
             }
 
             return Promise.resolve(session)
         },
         async jwt({token, user}) {
             if (user){
+
                 token.uid = user.id
+                // @ts-ignore
+                token.accessToken = user.token;
             }
             return token
         }

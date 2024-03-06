@@ -15,3 +15,15 @@ export const navLinks : INavLink[] = [
 
 
 ]
+
+
+export const settingNav : INavLink[] = [
+    {
+        name: 'Підписка',
+        path: '/profile/settings/membership'
+    },
+    {
+        name: 'Змінити пароль',
+        path: '/profile/settings/changePassword'
+    }
+]
