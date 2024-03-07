@@ -13,10 +13,47 @@ import {getServerSession} from "next-auth/next";
 import ContinueWatchingButton from "@/components/Button/ContinueWatchingButton";
 import {EpisodesList} from "@/components/EpisodesList";
 import NoFound from "@/components/NoFound";
-import FullPageLoader from "@/components/PageLoader/FullPageLoader";
+import {Metadata, ResolvingMetadata} from "next";
 
+type Props = {
+    params: { id: string }
+}
 
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata>{
 
+    const id = params.id
+
+    const anime = await AnimeService.getAnime(id)
+    const genres = anime.genres.map((genreObj) => genreObj.name)
+    // const cats = anime.
+    return {
+        title: `Дивитись ${anime.title} | Aniverse`,
+        description: anime.description,
+        keywords: [anime.title, `Дивитись ${anime.title}`, ...genres],
+        openGraph: {
+            title: `Дивитись ${anime.title} | Aniverse`,
+            description: anime.description,
+            url: `https://aniverse.website/anime/${anime.id}`,
+            images: [
+                {
+                    url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${anime.image_banner}/opengraph`,
+                    width: 1280,
+                    height: 670,
+                },
+                {
+                    url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${anime.image_banner}/opengraphalt`, // Must be an absolute URL
+                    width: 500,
+                    height: 500,
+                    alt: 'My custom alt',
+                },
+            ],
+            locale: 'ua_UA'
+        }
+    }
+}
 
 
 export default async function SinglePage ({params: {id}} : {params: {id:string}}) {
@@ -54,8 +91,8 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
             <Box
                 pt={{base:'80px', md:'175px'}}
                 pb={{base:'20px', md:'120px'}}
-                bgImage={`url("${anime.image_banner}")`}
-                bgPosition={'top center'}
+                bgImage={`url("https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${anime.image_banner}/public")`}
+                bgPosition={'center center'}
                 bgSize={'cover'}
                 zIndex={'-1'}
                 position={'relative'}
