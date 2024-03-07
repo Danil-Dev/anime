@@ -72,7 +72,7 @@ export default function Header () {
                             alignItems={'center'}
                             mr={'15px'}
                         >
-                            <Image src={'/assets/img/bgImages/101.png'} alt={'Logo'} width={45} height={45} />
+                            <Image src={'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/4097df10-e154-4cef-4a4e-2a3cbbf4ba00/avatar'} alt={'Logo'} width={60} height={60} />
                             <Heading
                                 mb={0}
                                 size={'lg'}

@@ -13,6 +13,7 @@ import {getServerSession} from "next-auth/next";
 import ContinueWatchingButton from "@/components/Button/ContinueWatchingButton";
 import {EpisodesList} from "@/components/EpisodesList";
 import NoFound from "@/components/NoFound";
+import FullPageLoader from "@/components/PageLoader/FullPageLoader";
 
 
 
