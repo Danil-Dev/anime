@@ -56,7 +56,7 @@ export default function HistoryList({userId} : {userId: string}) {
 
   return(
     <>
-      <Grid templateColumns={{base: 'repeat(2, 1fr)', md:'repeat(4, 1fr)'}} gap={4  }>
+      <Grid templateColumns={{base: 'repeat(2, 1fr)', md:'repeat(5, 1fr)'}} gap={4  }>
         {history.map((historyItem, index) => (
           <HistoryCard historyItem={historyItem} key={index}/>
         ))}

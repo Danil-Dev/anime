@@ -22,7 +22,7 @@ export default function HistoryCard({historyItem}: {
 
     console.log(historyItem);
     return (
-        <Box maxW={300} as={"div"}>
+        <Box maxW={[300]} as={"div"}>
             <Box mb={5}>
                 {/*<LinkOverlay href={`/anime/${historyItem.animeId.id}/watch?ep=${historyItem.episodeNumber}`}>*/}
                     <Box

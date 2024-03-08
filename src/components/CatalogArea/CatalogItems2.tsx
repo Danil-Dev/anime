@@ -54,7 +54,7 @@ export default function CatalogItems2({type, id}: CatalogItems2Props) {
 
   return(
     <>
-      <Grid templateColumns={{base: '1fr 1fr', md: 'repeat(3, 1fr)'}} gap={'10px'}>
+      <Grid templateColumns={{base: '1fr 1fr', md: 'repeat(4, 1fr)'}} gap={'10px'}>
         {animes.map((anime, idx) => (
           <AnimeCard anime={anime} key={idx} />
         ))}

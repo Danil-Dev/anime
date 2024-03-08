@@ -65,7 +65,6 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const anime = await AnimeService.getAnime(id, session?.user?.id)
 
-    console.log (anime)
 
     if (!anime){
         return (
@@ -78,7 +77,6 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
 
     const pretty_date = new Date(anime.release_date).getFullYear()
 
-    console.log ("Anime", anime)
 
 
 

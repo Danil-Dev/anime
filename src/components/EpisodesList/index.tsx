@@ -66,7 +66,7 @@ export function EpisodesList() {
             <Spinner />
           ) : (
             <>
-                <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={6} ref={containerRef}>
+                <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }} gap={6} ref={containerRef}>
                     {episodes.map((episode, idx) => (
                       <GridItem key={idx}>
                           <EpisodeCard episode={episode} animeId={Array.isArray(id) ? id[0]: id} />

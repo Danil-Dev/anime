@@ -2,6 +2,7 @@ import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 import {darkTheme} from "@/theme/colors";
 import {buttonTheme} from "@/components/Button";
 import {opacities} from "@/theme/index";
+import {defineStyle, defineStyleConfig} from "@chakra-ui/styled-system";
 
 // 2. Add your color mode config
 const config: ThemeConfig = {
@@ -15,8 +16,19 @@ const theme = extendTheme({
     config,
     colors: darkTheme,
     opacities,
+    sizes: {
+        container: {
+            xl: '1920px'
+        }
+    },
     components: {
-        Button: buttonTheme
+        Button: buttonTheme,
+        Container: defineStyleConfig({
+            baseStyle: {
+                paddingLeft: '3.75rem',
+                paddingRight: '3.75rem'
+            }
+        })
     },
     fonts: {
         heading: 'var(--fort-russo-one)',
