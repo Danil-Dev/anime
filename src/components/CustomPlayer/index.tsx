@@ -8,13 +8,13 @@ import { AnimeHistory, UserServices } from "@/services/User";
 import { useSession } from "next-auth/react";
 import { Container, Flex, Box, Link, Heading, Text, Button, VStack, AbsoluteCenter, Spinner } from "@chakra-ui/react";
 import { EpisodeItem } from "../EpisodesList/EpisodeItem";
-import {IEpisodeData} from "@/services/Anime";
+import {IEpisode} from "@/services/Anime";
 
 interface CustomPlayerProps {
     episodeData:{
         id: string,
-        currentEpisode: IEpisodeData,
-        previousEpisode: null | {
+        currentEpisode: IEpisode,
+        prevEpisode: null | {
             episode_number: number,
             title: string,
             image_thumb: string,
@@ -214,10 +214,10 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                                 <EpisodeItem episode={episodeData.nextEpisode} handleChangeEpisode={handleChangeEpisode} />
                             </Box>
                           )}
-                          {episodeData.previousEpisode && (
+                          {episodeData.prevEpisode && (
                             <Box>
                                 <Heading size={'16px'}>Попередній епізод </Heading>
-                                <EpisodeItem episode={episodeData.previousEpisode} handleChangeEpisode={handleChangeEpisode} />
+                                <EpisodeItem episode={episodeData.prevEpisode} handleChangeEpisode={handleChangeEpisode} />
                             </Box>
                           )}
                           <Button as={NextLink} href={`/anime/${params.id}/`}>Більше епізодів</Button>
@@ -232,10 +232,10 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                             <EpisodeItem episode={episodeData.nextEpisode} handleChangeEpisode={handleChangeEpisode} />
                         </Box>
                       )}
-                      { episodeData.previousEpisode && (
+                      { episodeData.prevEpisode && (
                         <Box>
                             <Heading size={'16px'}>Попередній епізод </Heading>
-                            <EpisodeItem episode={episodeData.previousEpisode} handleChangeEpisode={handleChangeEpisode} />
+                            <EpisodeItem episode={episodeData.prevEpisode} handleChangeEpisode={handleChangeEpisode} />
                         </Box>
                       )}
                       <Button as={NextLink} href={`/anime/${params.id}/`}>Більше епізодів</Button>

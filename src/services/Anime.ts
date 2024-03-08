@@ -16,7 +16,7 @@ export interface IAnimeFoundData {
     genres: Genre[],
     release_date: string,
 }
-export interface IEpisodeData {
+export interface IEpisode {
     episode_number: number,
     // start: number,
     intro: string,
@@ -54,10 +54,10 @@ export interface IAnimeData {
     genres: Genre[],
     release_date: string,
     image_banner: string,
-    episodes: IEpisodeData[],
+    episodes: IEpisode[],
     auth: boolean,
     isInWatchlist?: boolean,
-    lastWatchedEpisode?: IEpisodeData | null,
+    lastWatchedEpisode?: IEpisode | null,
     audios: IAudio[],
     studio: IStudio
 }
@@ -100,6 +100,21 @@ export interface IComment{
     commentType: 'Anime' | 'Episode',
     date: string,
     forId: string
+}
+
+export interface IEpisodeData{
+    id: string,
+    currentEpisode: IEpisode,
+    prevEpisode: null | {
+        episode_number: number,
+        title: string,
+        image_thumb: string,
+    },
+    nextEpisode: null | {
+        episode_number: number,
+        title: string,
+        image_thumb: string,
+    }
 }
 
 
@@ -223,7 +238,7 @@ export const AnimeService = {
 
     },
 
-    async getEpisodes(url: string): Promise<IEpisodeData[]>{
+    async getEpisodes(url: string): Promise<IEpisode[]>{
 
         console.log ('Get episodes', url)
         const res = await fetch(`${BASE_API_URL}/${url}`, {
@@ -235,7 +250,7 @@ export const AnimeService = {
         return res.json()
     },
 
-    async getEpisodeData(animeId: string,episodeNumber: number ){
+    async getEpisodeData(animeId: string,episodeNumber: number ) : Promise<IEpisodeData>{
         const res = await fetch(`${BASE_API_URL}/get/episode`, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},

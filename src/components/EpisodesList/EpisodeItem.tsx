@@ -1,4 +1,4 @@
-import {IEpisodeData} from "@/services/Anime";
+import {IEpisode} from "@/services/Anime";
 import styles from './episodesList.module.scss'
 import Image from "next/image";
 

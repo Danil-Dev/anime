@@ -7,6 +7,9 @@ import SingleComingAnimeCard from "@/components/ComingAnimes/SingleComingAnimeCa
 import * as process from "process";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/configs/auth";
+import {UserServices} from "@/services/User";
+import HistoryCard from "@/components/AnimeCard/HistoryCard";
+import HistoryListLanding from "@/components/HistoryList/HistoryListLanding";
 
 export default async function Home()    {
 
@@ -16,7 +19,9 @@ export default async function Home()    {
 
     const animeLists = await AnimeService.getAnimeLists(['popular', 'ongoing', 'action', 'complete'])
 
+    const history =  await UserServices.getLastWatchedEpisodes(session ? session.user.id : null)
 
+    console.log ('History', history)
 
 
     const bannerData : IBannerData = {
@@ -89,6 +94,13 @@ export default async function Home()    {
         <MainBanner/>
         <div className={styles.main_anime_section}>
             <AnimeList animeList={animeLists['ongoing']} title={'Онґоїнґи'} link={'/catalog/categories/ongoing'} />
+            {/*{*/}
+            {/*    history && history.map((historyItem, index) => (*/}
+            {/*      <HistoryCard key={index} historyItem={historyItem}/>*/}
+            {/*  ))*/}
+
+            {/*}*/}
+            <HistoryListLanding historyList={history}/>
             <AnimeList animeList={animeLists['popular']} title={'Популярне'}  link={'/catalog/categories/popular'}/>
             <SingleComingAnimeCard data={banners[2]}/>
 

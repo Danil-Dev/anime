@@ -3,10 +3,10 @@ import {Button} from "@chakra-ui/react";
 import {Bookmark, Play, TrendingDown, User} from "react-feather";
 import {Pagination} from "@mantine/core";
 import NextLink from "next/link";
-import {IEpisodeData} from "@/services/Anime";
+import {IEpisode} from "@/services/Anime";
 
 interface EpisodeCardProps {
-    episode: IEpisodeData,
+    episode: IEpisode,
     animeId: string
 }
 export default function ContinueWatchingButton({episode, animeId}: EpisodeCardProps){

@@ -30,7 +30,7 @@ export async function generateMetadata(
     const genres = anime.genres.map((genreObj) => genreObj.name)
     // const cats = anime.
     return {
-        title: `Дивитись ${anime.title} | Aniverse`,
+        title: `Дивитись ${anime.title} українською | Aniverse`,
         description: anime.description,
         keywords: [anime.title, `Дивитись ${anime.title}`, ...genres],
         openGraph: {

@@ -1,5 +1,5 @@
 'use client'
-import {IEpisodeData} from "@/services/Anime";
+import {IEpisode} from "@/services/Anime";
 import styles from './episodeCard.module.scss'
 import Image from "next/image";
 import {Play} from "react-feather";
@@ -7,7 +7,7 @@ import {Heading, Link, Text} from "@chakra-ui/react";
 import {Box, VStack} from "@chakra-ui/layout";
 import NextLink from "next/link";
 interface EpisodeCardProps {
-    episode: IEpisodeData,
+    episode: IEpisode,
     animeId: string
 }
 export function EpisodeCard ({episode, animeId}: EpisodeCardProps) {

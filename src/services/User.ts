@@ -64,6 +64,19 @@ export const UserServices = {
 
         return await res.json()
     },
+
+    async getLastWatchedEpisodes(userId: string | null) : Promise<AnimeHistory2[] | null> {
+        if (userId){
+            const res = await fetch(`${BASE_API_URL}/user/${userId}/history?page=1`, {
+                cache: "no-store",
+                headers: {"Content-Type": "application/json"},
+            })
+
+            return res.json()
+
+        }
+        return null
+    },
     async getDynamicHistory (url: string): Promise<AnimeHistory2[]> {
 
         const res = await fetch(`${BASE_API_URL}/${url}`, {
