@@ -6,34 +6,35 @@ import {authOptions} from "@/configs/auth";
 import {Metadata} from "next";
 
 type Props = {
-  params: { id: string, episodeNumber: string}
+  params: { id: string, episode: string}
 }
 
 export async function generateMetadata(
   {params} : Props
 ): Promise<Metadata>{
 
-  const {id, episodeNumber} = params
-
-  const episode = await AnimeService.getEpisodeData(id, +episodeNumber)
+  const {id, episode} = params
+  console.log ("Metadata", id, episode)
+  const episodeData = await AnimeService.getEpisodeData(id, +episode)
   const anime = await AnimeService.getAnime(id)
+  console.log (episode)
 
   return {
-    title: `Дивитись ${anime.title} епізод ${episode.currentEpisode.episode_number} | Aniverse`,
-    description: episode.currentEpisode.description,
-    keywords: [anime.title, `${anime.title} епізод ${episodeNumber}`, `Дивитись ${anime.title}`],
+    title: `Дивитись ${anime.title} епізод ${episodeData.currentEpisode.episode_number} | Aniverse`,
+    description: episodeData.currentEpisode.description,
+    keywords: [anime.title, `${anime.title} епізод ${episode}`, `Дивитись ${anime.title}`],
     openGraph: {
-      title: `Дивитись ${anime.title} епізод ${episode.currentEpisode.episode_number} | Aniverse`,
-      description: episode.currentEpisode.description,
+      title: `Дивитись ${anime.title} епізод ${episodeData.currentEpisode.episode_number} | Aniverse`,
+      description: episodeData.currentEpisode.description,
       url: `https://aniverse.website/anime/${anime.id}`,
       images: [
         {
-          url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${episode.currentEpisode.image_thumb}/opengraph`,
+          url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${episodeData.currentEpisode.image_thumb}/opengraph`,
           width: 1280,
           height: 670,
         },
         {
-          url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${episode.currentEpisode.image_thumb}/opengraphalt`, // Must be an absolute URL
+          url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${episodeData.currentEpisode.image_thumb}/opengraphalt`, // Must be an absolute URL
           width: 500,
           height: 500,
           alt: 'My custom alt',
