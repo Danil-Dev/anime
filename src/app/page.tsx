@@ -100,7 +100,10 @@ export default async function Home()    {
             {/*  ))*/}
 
             {/*}*/}
-            <HistoryListLanding historyList={history}/>
+            {
+                history && <HistoryListLanding historyList={history}/>
+            }
+
             <AnimeList animeList={animeLists['popular']} title={'Популярне'}  link={'/catalog/categories/popular'}/>
             <SingleComingAnimeCard data={banners[2]}/>
 
