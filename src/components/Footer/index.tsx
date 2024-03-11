@@ -30,13 +30,13 @@ export default function Footer() {
                     </HStack>
 
                     <Spacer />
-                    <HStack
-                        display={{ base: "none", md: "flex" }}
-                        spacing={5}>
-                        <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">
-                            Здесь будут ссылки на соц сети
-                        </Link>
-                    </HStack>
+                    {/*<HStack*/}
+                    {/*    display={{ base: "none", md: "flex" }}*/}
+                    {/*    spacing={5}>*/}
+                    {/*    <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">*/}
+                    {/*        Здесь будут ссылки на соц сети*/}
+                    {/*    </Link>*/}
+                    {/*</HStack>*/}
 
                 </Flex>
                 <Box
