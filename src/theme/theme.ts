@@ -10,6 +10,13 @@ const config: ThemeConfig = {
     useSystemColorMode: false,
 }
 
+let isMobile = false;
+if (typeof window !== "undefined") {
+    // You would not use window directly in production try to abstract it
+    // in other variable or prop
+    isMobile = window.innerWidth < 480;
+}
+
 
 // 3. extend the theme
 const theme = extendTheme({
@@ -25,8 +32,8 @@ const theme = extendTheme({
         Button: buttonTheme,
         Container: defineStyleConfig({
             baseStyle: {
-                paddingLeft: '3.75rem',
-                paddingRight: '3.75rem'
+                paddingLeft: isMobile ? '0.5rem' : '3.75rem',
+                paddingRight: isMobile ? '0.5rem' : '3.75rem',
             }
         })
     },

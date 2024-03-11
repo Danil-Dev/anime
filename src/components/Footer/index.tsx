@@ -42,9 +42,9 @@ export default function Footer() {
                 <Box
                     display={{ base: "flex", md: "none" }}
                     mb={5}>
-                    <Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">
-                        Здесь будут ссылки на соц сети
-                    </Link>
+                    {/*<Link as={NextLink} href="/" fontStyle="italic" fontSize="14px">*/}
+                    {/*    Здесь будут ссылки на соц сети*/}
+                    {/*</Link>*/}
                 </Box>
 
                 <Text fontSize="14px" color="accentTextLightSecondary">
