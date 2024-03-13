@@ -4,10 +4,10 @@ import axios from "axios";
 export async function GET(req: NextRequest){
   console.log (req)
   try {
-
+    const clientIp = req.headers.get('CF-Connecting-IP');
     const forwarded = req.headers.get('X-Forwarded-For')
     console.log (forwarded)
-    const ip = forwarded.split(/, /)[0]
+    const ip = clientIp ? clientIp : forwarded.split(/, /)[0]
 
     // get Geo information from IP
     const resp = await axios.get(`https://ipapi.co/${ip}/json/`);
