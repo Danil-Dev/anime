@@ -29,6 +29,7 @@
     "@types/swiper": "^6.0.0",
     "@use-gesture/react": "^10.2.27",
     "@vercel/analytics": "^1.0.2",
+    "@vercel/edge": "^1.1.1",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.4.0",
     "babel-plugin-styled-components": "^2.1.4",
