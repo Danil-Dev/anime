@@ -7,6 +7,8 @@ import {usePlayerState} from "@/store/player/hooks";
 import mux from 'mux.js';
 import { Box } from "@chakra-ui/react";
 import {Flex} from "@chakra-ui/layout";
+// @ts-ignore
+import shaka from "shaka-player";
 interface ShakaPlayerProps {
     url: string,
     currentTime?: number,
@@ -59,7 +61,9 @@ export function ShakaPlayer({
         if (isLoaded && player && video){
             // console.log('[ShakaPlayer]: Configure')
 
+            // @ts-ignore
             if (!window.muxjs){
+                // @ts-ignore
                 window.muxjs = mux
             }
 
@@ -78,9 +82,12 @@ export function ShakaPlayer({
                 player.load(url, currentTime).then(() => {
                     console.log('[ShakaPlayer]: Load Complete')
 
+
                     //92bXpCZKY_5P7StgCoZt2dVnSNB44rl2wfYEtSJX
 
                     const tracks = player.getVariantTracks()
+
+
                     if (track !== 'auto'){
                         const findTrack = tracks.find(trackVariant => trackVariant.height === track)
                         if (findTrack){

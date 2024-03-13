@@ -14,7 +14,7 @@ export function useShakaPlayer() {
 
     useEffect(() => {
 
-
+        shaka.polyfill.installAll()
         const errorHandler = (event: shaka.util.Error | Event) => {
 
             console.log('errorHandler', event)

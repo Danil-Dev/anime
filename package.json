@@ -39,6 +39,7 @@
     "framer-motion": "^10.15.1",
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
+    "m3u8-parser": "^7.1.0",
     "mongoose": "^7.4.3",
     "mux.js": "^6.3.0",
     "next": "13.4.12",
