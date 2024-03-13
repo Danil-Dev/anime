@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-
+import axios from "axios";
 
 export async function GET(req: NextRequest){
   console.log (req)
@@ -9,7 +9,11 @@ export async function GET(req: NextRequest){
     console.log (forwarded)
     const ip = forwarded.split(/, /)[0]
 
-    return NextResponse.json({ geo: req.geo, ip: ip || req.ip });
+    // get Geo information from IP
+    const resp = await axios.get(`https://ipapi.co/${ip}/json/`);
+    const geoData = resp.data;
+
+    return NextResponse.json({ geo: geoData || req.geo, ip: ip || req.ip });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
