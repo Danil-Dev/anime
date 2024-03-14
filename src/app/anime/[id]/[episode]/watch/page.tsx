@@ -55,6 +55,8 @@ export default async function WatchPage({params: {id, episode}}: {params: {id: s
 
     const geo = await fetch('https://aniverse.website/api/edge-geo').then(res => res.json())
 
+    console.log (geo)
+
 
     return(
         <>
