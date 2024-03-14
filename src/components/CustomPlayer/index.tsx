@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import { Container, Flex, Box, Link, Heading, Text, Button, VStack, AbsoluteCenter, Spinner } from "@chakra-ui/react";
 import { EpisodeItem } from "../EpisodesList/EpisodeItem";
 import {IEpisode} from "@/services/Anime";
+import * as process from "process";
+import BlockPlayer from "@/components/BlockPlayer";
 
 interface CustomPlayerProps {
     episodeData:{
@@ -29,7 +31,7 @@ interface CustomPlayerProps {
 
 export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
-
+    const [geo, setGeo] = useState<{country: string} | undefined>(undefined)
     const params = useParams();
     const session = useSession();
     const router = useRouter();
@@ -161,9 +163,20 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
         updateEpisodeData();
     }, [session]);
 
+    useEffect (() => {
+        fetch('/api/edge-geo').then(async (res) => {
+            const geo = await res.json()
+
+
+            setGeo({ country : geo.country || undefined})
+        })
+    }, []);
+
+    console.log (geo, process.env.NODE_ENV)
+
     return (
       <>
-          {loading || !episodeData ? (
+          {loading || !episodeData || !geo ? (
             <Box minH={'600px'} bg={'black'} w={'100%'} position={'relative'}>
                 <AbsoluteCenter>
                     <Spinner size={'xl'} />
@@ -171,19 +184,22 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
             </Box>
           ) : (
             <Box mt={'75px'}>
-                <ShakaPlayer
-                  url={episodeData.currentEpisode.video}
-                  intro={episodeData.currentEpisode?.intro}
-                  end={episodeData.currentEpisode.end}
-                  onOnmountPlayer={handleOnmountPlayer}
-                  onEnd={onEnd}
-                  currentTime={episodeSaved?.currentTime || 0}
-                  isLastEpisode={!episodeData.nextEpisode}
-                  onPlay={onPlay}
-                  onPause={onPause}
-                  onSeeked={onSeeked}
-                  poster={episodeData.currentEpisode.image_thumb}
-                />
+                {(process.env.NODE_ENV === 'development' || geo.country === 'UA') ? (
+                  <ShakaPlayer
+                    url={episodeData.currentEpisode.video}
+                    intro={episodeData.currentEpisode?.intro}
+                    end={episodeData.currentEpisode.end}
+                    onOnmountPlayer={handleOnmountPlayer}
+                    onEnd={onEnd}
+                    currentTime={episodeSaved?.currentTime || 0}
+                    isLastEpisode={!episodeData.nextEpisode}
+                    onPlay={onPlay}
+                    onPause={onPause}
+                    onSeeked={onSeeked}
+                    poster={episodeData.currentEpisode.image_thumb}
+                  />
+                ) : <BlockPlayer/>}
+
             </Box>
           )}
           <Container maxW={'container.xl'}>

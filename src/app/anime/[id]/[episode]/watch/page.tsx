@@ -53,16 +53,14 @@ export default async function WatchPage({params: {id, episode}}: {params: {id: s
     const session = await getServerSession(authOptions)
     const episodeData = await AnimeService.getEpisodeData(id, +episode)
 
-    const geo = await fetch('https://aniverse.website/api/edge-geo').then(res => res.json())
-
-    console.log (geo)
+    // const geo = await fetch('https://aniverse.website/api/edge-geo').then(res => res.json())
+    //
+    // console.log (geo)
 
 
     return(
         <>
-          {
-            geo.country !== 'UA' ? <BlockPlayer/> : <CustomPlayer episodeData={episodeData}/>
-          }
+           <CustomPlayer episodeData={episodeData}/>
 
             <Comments user={session? session.user.id : null} id={episodeData.id}/>
         </>
