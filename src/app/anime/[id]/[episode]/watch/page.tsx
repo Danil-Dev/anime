@@ -4,6 +4,7 @@ import Comments from "@/components/Comments";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/configs/auth";
 import {Metadata} from "next";
+import axios from "axios";
 
 type Props = {
   params: { id: string, episode: string}
@@ -46,10 +47,14 @@ export async function generateMetadata(
 }
 export default async function WatchPage({params: {id, episode}}: {params: {id: string, episode: string}}) {
 
-    console.log ("ID", id)
+
 
     const session = await getServerSession(authOptions)
     const episodeData = await AnimeService.getEpisodeData(id, +episode)
+
+    const country = await axios('https://aniverse.website/api/edge-geo')
+
+  console.log ("Country", country)
 
   console.log (session)
 

@@ -3,8 +3,12 @@ import { geolocation } from '@vercel/edge';
 export const runtime = 'edge';
 
 export function GET(request: Request) {
-  const { city , country} = geolocation(request);
-  return new Response(`<h1>Your location is ${city} ${country}</h1>`, {
-    headers: { 'content-type': 'text/html' },
+  const {  country} = geolocation(request);
+
+
+  return new Response(JSON.stringify({
+    country: country || undefined
+  }), {
+    headers: { 'content-type': 'application/json' },
   });
 }
