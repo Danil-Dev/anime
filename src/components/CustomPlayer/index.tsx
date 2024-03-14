@@ -29,7 +29,6 @@ interface CustomPlayerProps {
 
 export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
-    console.log (episodeData)
 
     const params = useParams();
     const session = useSession();
@@ -46,7 +45,6 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
             });
         }
     };
-    console.log ("Episode Data", episodeData)
     const onEnd = () => {
         router.push(`/anime/${params.id}/${currentEpisode + 1}/watch`);
     };
@@ -110,10 +108,9 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
     const updateEpisodeData = async () => {
         const localSave = loadEpisodeDataFromLocalStorage();
-        console.log('localSave', localSave);
+
         if (localSave && localSave.currentEpisode === currentEpisode) {
             if (isDataRecent(localSave.date)) {
-                console.log('localSave', localSave);
                 setEpisodeSaved({
                     animeId: episodeData.id,
                     episodeNumber: localSave.currentEpisode,
@@ -125,11 +122,9 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                 if (serverSave) {
                     const serverTime = new Date(serverSave.watchedOn).getTime();
                     if (serverTime > localSave.date) {
-                        console.log('serverSave', serverSave);
                         setEpisodeSaved(serverSave);
                         setLoading(false);
                     } else {
-                        console.log('localSave', localSave);
                         setEpisodeSaved({
                             animeId: episodeData.id,
                             episodeNumber: localSave.currentEpisode,
@@ -138,7 +133,6 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                         setLoading(false);
                     }
                 } else {
-                    console.log('localSave', localSave);
                     setEpisodeSaved({
                         animeId: episodeData.id,
                         episodeNumber: localSave.currentEpisode,
@@ -150,7 +144,6 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
         } else if (!localSave || localSave.currentEpisode !== currentEpisode) {
             const serverSave = await loadEpisodeDataFromServer();
             if (serverSave) {
-                console.log('serverSave', serverSave);
                 setEpisodeSaved(serverSave);
                 setLoading(false);
             } else {

@@ -4,7 +4,8 @@ import Comments from "@/components/Comments";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/configs/auth";
 import {Metadata} from "next";
-import axios from "axios";
+import BlockPlayer from "@/components/BlockPlayer";
+
 
 type Props = {
   params: { id: string, episode: string}
@@ -52,16 +53,15 @@ export default async function WatchPage({params: {id, episode}}: {params: {id: s
     const session = await getServerSession(authOptions)
     const episodeData = await AnimeService.getEpisodeData(id, +episode)
 
-    const country = await axios('https://aniverse.website/api/edge-geo')
-
-  console.log ("Country", country)
-
-  console.log (session)
+    const geo = await fetch('https://aniverse.website/api/edge-geo').then(res => res.json())
 
 
     return(
         <>
-            <CustomPlayer episodeData={episodeData}/>
+          {
+            geo.country !== 'UA' ? <BlockPlayer/> : <CustomPlayer episodeData={episodeData}/>
+          }
+
             <Comments user={session? session.user.id : null} id={episodeData.id}/>
         </>
 

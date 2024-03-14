@@ -106,8 +106,8 @@ export default function Comments({user, id}: {user: string | null, id: string}) 
 
 
           {comments.map((comment, index) => (
-            <>
-              <Flex gap={4} mb={4}>
+
+              <Flex gap={4} mb={4} key={index}>
                 <Box>
                   {
                     comment.user.image ?
@@ -123,7 +123,7 @@ export default function Comments({user, id}: {user: string | null, id: string}) 
 
                 </Box>
               </Flex>
-            </>
+
           ))}
 
           <Center>

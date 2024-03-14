@@ -7,6 +7,8 @@ import {updateAudio, updateSpeed, updateSubtitle, updateTrack} from "@/store/pla
 import {usePlaybackRate} from "@/lib/dshaka-player/hooks/usePlaybackRate";
 import {useAudioTracks} from "@/lib/dshaka-player/hooks/useAudioTracks";
 import {useTextTracks} from "@/lib/dshaka-player/hooks/useTextTracks";
+import useBrowser from "@/lib/dshaka-player/hooks/useBrowser";
+import {useOs} from "@mantine/hooks";
 enum SettingsType {
     NONE,
     ALL,
@@ -65,13 +67,13 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
     const dispatch = useAppDispatch()
     const {isAuto, selectedTrack, tracks, selectTrack, setAutoMode} = useVideoTracks({
         onSelect: (selectedTrack) => {
-
             dispatch(updateTrack(selectedTrack.height))
         }
     })
 
+    const browser = useBrowser()
+    const os = useOs()
 
-    console.log ("TRACKS", tracks)
     const {selectAudioTrack, audioTracks} = useAudioTracks({
         onSelect: (selectedTrack) => {
             dispatch(updateAudio(selectedTrack))
@@ -112,9 +114,9 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
         setMenuType(SettingsType.NONE)
     }
 
-    useEffect(() => {
-        console.log (selectedSubtitleTrack, subtitleTracks, audioTracks)
-    }, [selectedSubtitleTrack, subtitleTracks, audioTracks])
+    // useEffect(() => {
+    //
+    // }, [selectedSubtitleTrack, subtitleTracks, audioTracks])
 
     const handleOffSubtitle = () =>{
         offSubtitle()
@@ -135,13 +137,21 @@ export function SettingsMenu({type, setMenuType}: {type: SettingsType, setMenuTy
             <div className={type == SettingsType.ALL ? styles.control_settings_all + ' ' + styles.control_settings_menu_wrapper : styles.control_settings_menu_wrapper}>
                 {type === SettingsType.ALL && (
                     <>
-                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.QUALITY)}}>
-                            <div className={styles.control_settings_menu_item_icon}><Image size={24}/> </div>
-                            <div className={styles.control_settings_menu_item_label}>Quality</div>
-                            <div className={styles.control_settings_menu_item_content}>{isAuto ? 'Auto' : selectedTrack.height + 'p'}</div>
-                        </div>
-                        <div className={styles.control_settings_menu_item} onClick={() => {setMenuType(SettingsType.SPEED)}}>
-                            <div className={styles.control_settings_menu_item_icon}><ChevronsRight size={24}/> </div>
+                        {browser !== 'Safari' && os !== 'ios' && (
+                          <div className={styles.control_settings_menu_item} onClick={() => {
+                              setMenuType (SettingsType.QUALITY)
+                          }}>
+                              <div className={styles.control_settings_menu_item_icon}><Image size={24}/></div>
+                              <div className={styles.control_settings_menu_item_label}>Quality</div>
+                              <div
+                                className={styles.control_settings_menu_item_content}>{isAuto ? 'Auto' : selectedTrack.height + 'p'}</div>
+                          </div>
+                        )}
+
+                        <div className={styles.control_settings_menu_item} onClick={() => {
+                            setMenuType (SettingsType.SPEED)
+                        }}>
+                            <div className={styles.control_settings_menu_item_icon}><ChevronsRight size={24}/></div>
                             <div className={styles.control_settings_menu_item_label}>Speed</div>
                             <div className={styles.control_settings_menu_item_content}>x{currentRate}</div>
                         </div>

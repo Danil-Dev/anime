@@ -13,10 +13,7 @@ export function VolumeControl() {
     const {volume, updateCurrentVolume, muted, toggleMute} = useVolume()
     const dispatch = useAppDispatch()
 
-
-    console.log ("mute", muted)
     const handleVolumeChange = (vol: number) => {
-        console.log('handleVolumeChange', vol)
         updateCurrentVolume(vol)
         dispatch(updateVolume(clamp(vol, 0, 1)))
     }
@@ -50,7 +47,6 @@ export function VolumeControl() {
 function VolumeIcon({volume, mute}: {volume: number, mute: boolean}) {
 
 
-    console.log (mute)
     if ( volume === 0 ) return <VolumeX size={24}/>
     if (volume < 0.5) return <Volume1 size={24}/>
     return <Volume2 size={24}/>

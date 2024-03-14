@@ -42,9 +42,6 @@ export function ShakaPlayer({
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null);
 
-    if (containerRef.current){
-        console.log (containerRef.current.clientWidth, containerRef.current.clientHeight)
-    }
 
 
     const { error, isLoaded} = useShakaPlayer()
@@ -54,7 +51,6 @@ export function ShakaPlayer({
 
 
     useEffect(() => {
-        console.log('[ShakaPlayer]: Mount Player', currentTime)
         setVideo(videoRef.current)
         setContainer(containerRef.current)
 
@@ -80,7 +76,6 @@ export function ShakaPlayer({
 
 
                 player.load(url, currentTime).then(() => {
-                    console.log('[ShakaPlayer]: Load Complete')
 
 
                     //92bXpCZKY_5P7StgCoZt2dVnSNB44rl2wfYEtSJX
@@ -114,7 +109,6 @@ export function ShakaPlayer({
                         video.addEventListener('play', () => onPlay(video))
                     }
                     if (onPause && typeof onPause === 'function' && video){
-                        console.log ('[ShakaPlayer]: Add Pause Event')
                         video.addEventListener('pause', () => onPause(video))
                     }
                     if (onSeeked && typeof onSeeked === 'function' && video){

@@ -71,7 +71,6 @@ export function useVideoTracks({onSelect}: UseVideoTracksConfig = {}) {
         const currentConfig = player.getConfiguration()
         let currentTracks = player.getVariantTracks();
 
-        console.log ("Curr Tracks", currentTracks)
         const currentSelectedTrack = currentTracks.find((track) => track.active)
 
         if (currentConfig.abr.enabled !== isAutoRef.current){
