@@ -109,6 +109,9 @@ export default function SignInForm() {
                                         </FormControl>
                                     )}
                                 </Field>
+                                <Text color={'textSecondary'}>
+                                    Забули пароль? <Link fontWeight={'bold'} as={NextLink} href={'/auth/reset-password/request'}>Відновити</Link>
+                                </Text>
                                 <Button
                                     mt={4}
                                     variant={'primary'}
@@ -122,6 +125,7 @@ export default function SignInForm() {
                                 <Text color={'textSecondary'}>
                                     Немає аккаунту? <Link fontWeight={'bold'} as={NextLink} href={'/auth/register'}>Реєстрація</Link>
                                 </Text>
+
 
                             </VStack>
 
