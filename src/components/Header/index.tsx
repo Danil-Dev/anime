@@ -72,7 +72,8 @@ export default function Header () {
                             alignItems={'center'}
                             mr={'15px'}
                         >
-                            <Image src={'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/4097df10-e154-4cef-4a4e-2a3cbbf4ba00/avatar'} alt={'Logo'} width={60} height={60} />
+                            {/*https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/4097df10-e154-4cef-4a4e-2a3cbbf4ba00/avatar*/}
+                            <Image src={'/assets/img/logo-v3.png'} alt={'Logo'} width={50} height={50} />
                             <Heading
                                 mb={0}
                                 size={'lg'}
