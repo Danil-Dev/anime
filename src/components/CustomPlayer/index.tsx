@@ -176,7 +176,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
     return (
       <>
-          {loading || !episodeData || !geo || session.data?.user ? (
+          {loading || !episodeData || !geo || !session.data?.user ? (
             <Box minH={'600px'} bg={'black'} w={'100%'} position={'relative'}>
                 <AbsoluteCenter>
                     <Spinner size={'xl'} />
