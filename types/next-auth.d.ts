@@ -8,7 +8,8 @@ declare module "next-auth" {
         user: {
             id: string,
             token: string,
-            accessToken: string
+            accessToken: string,
+            status: string
         } & DefaultSession['user']
         expires: ISODateString;
     }

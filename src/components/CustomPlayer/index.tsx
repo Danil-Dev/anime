@@ -184,7 +184,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
             </Box>
           ) : (
             <Box mt={'75px'}>
-                {(process.env.NODE_ENV === 'development' || geo.country === 'UA') ? (
+                {(process.env.NODE_ENV === 'development' || geo.country === 'UA' || session.data.user.status === 'admin') ? (
                   <ShakaPlayer
                     url={episodeData.currentEpisode.video}
                     intro={episodeData.currentEpisode?.intro}

@@ -13,6 +13,8 @@ export default function Footer() {
     const pathname = usePathname()
 
     const session = useSession()
+
+  console.log (session)
     return (
         <Box as={'footer'} mt={'70px'}>
             <Box
