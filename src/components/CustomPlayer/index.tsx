@@ -176,7 +176,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
     return (
       <>
-          {loading || !episodeData || !geo ? (
+          {loading || !episodeData || !geo || session.data?.user ? (
             <Box minH={'600px'} bg={'black'} w={'100%'} position={'relative'}>
                 <AbsoluteCenter>
                     <Spinner size={'xl'} />
@@ -184,7 +184,9 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
             </Box>
           ) : (
             <Box mt={'75px'}>
-                {(process.env.NODE_ENV === 'development' || geo.country === 'UA' || session.data.user.status === 'admin') ? (
+                {(
+                  process.env.NODE_ENV === 'development' || geo.country === 'UA' ||
+                  (session.data?.user && session.data.user.status === 'admin')) ? (
                   <ShakaPlayer
                     url={episodeData.currentEpisode.video}
                     intro={episodeData.currentEpisode?.intro}
