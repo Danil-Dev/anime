@@ -28,7 +28,7 @@ export async function generateMetadata(
     openGraph: {
       title: `Дивитись ${anime.title} епізод ${episodeData.currentEpisode.episode_number} | Aniverse`,
       description: episodeData.currentEpisode.description,
-      url: `https://aniverse.website/anime/${anime.id}`,
+      url: `https://aniverse.com.ua/anime/${anime.id}`,
       images: [
         {
           url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${episodeData.currentEpisode.image_thumb}/opengraph`,
@@ -53,7 +53,7 @@ export default async function WatchPage({params: {id, episode}}: {params: {id: s
     const session = await getServerSession(authOptions)
     const episodeData = await AnimeService.getEpisodeData(id, +episode)
 
-    // const geo = await fetch('https://aniverse.website/api/edge-geo').then(res => res.json())
+    // const geo = await fetch('https://aniverse.com.ua/api/edge-geo').then(res => res.json())
     //
     // console.log (geo)
 

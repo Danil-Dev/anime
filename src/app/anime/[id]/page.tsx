@@ -36,7 +36,7 @@ export async function generateMetadata(
         openGraph: {
             title: `Дивитись ${anime.title} | Aniverse`,
             description: anime.description,
-            url: `https://aniverse.website/anime/${anime.id}`,
+            url: `https://aniverse.com.ua/anime/${anime.id}`,
             images: [
                 {
                     url: `https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/${anime.image_banner}/opengraph`,
