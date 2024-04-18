@@ -6,11 +6,25 @@ import NextLink from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { AnimeHistory, UserServices } from "@/services/User";
 import { useSession } from "next-auth/react";
-import { Container, Flex, Box, Link, Heading, Text, Button, VStack, AbsoluteCenter, Spinner } from "@chakra-ui/react";
+import {
+    Container,
+    Flex,
+    Box,
+    Link,
+    Heading,
+    Text,
+    Button,
+    VStack,
+    AbsoluteCenter,
+    Spinner,
+    IconButton
+} from "@chakra-ui/react";
 import { EpisodeItem } from "../EpisodesList/EpisodeItem";
 import {IEpisode} from "@/services/Anime";
 import * as process from "process";
 import BlockPlayer from "@/components/BlockPlayer";
+import {Flag} from "react-feather";
+import {ReportModal} from "@/components/ReportModal";
 
 interface CustomPlayerProps {
     episodeData:{
@@ -176,6 +190,7 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
 
     return (
       <>
+
           {loading || !episodeData || !geo  ? (
             <Box minH={'600px'} bg={'black'} w={'100%'} position={'relative'}>
                 <AbsoluteCenter>
@@ -201,8 +216,18 @@ export function CustomPlayer({ episodeData }: CustomPlayerProps) {
                     poster={episodeData.currentEpisode.image_thumb}
                   />
                 ) : <BlockPlayer/>}
+                <Box bg={'background'}>
+                    <Container maxW={'container.xl'}>
+                        <Flex justifyContent={'flex-end'} gap={2} align={'center'} w={'100%'}>
+                            <Text py={4} m={0} align={'right'}>Помітили помилку в плеєрі? Повідомте про це нам.</Text>
+                            <ReportModal/>
+                        </Flex>
+
+                    </Container>
+                </Box>
 
             </Box>
+
           )}
           <Container maxW={'container.xl'}>
               <Flex justifyContent={'space-between'} mt={'40px'} mb={'24px'}>
