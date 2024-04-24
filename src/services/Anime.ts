@@ -117,6 +117,18 @@ export interface IEpisodeData{
     }
 }
 
+export interface ICollectionItem{
+    title: string,
+    id: string,
+    image: string,
+    release_date: Date
+}
+
+export interface ICollection{
+    title: string,
+    animeIds: ICollectionItem[]
+}
+
 
 
 export const AnimeService = {
@@ -281,6 +293,16 @@ export const AnimeService = {
 
     async getComments (key: string): Promise<IComment[]>{
         const res = await fetch(`${BASE_API_URL}/${key}`, {
+            next: {
+                revalidate: 60
+            },
+        })
+
+        return res.json()
+    },
+
+    async getCollection(animeId: string): Promise<ICollection[]> {
+        const res = await fetch(`${BASE_API_URL}/collection/${animeId}`, {
             next: {
                 revalidate: 60
             },

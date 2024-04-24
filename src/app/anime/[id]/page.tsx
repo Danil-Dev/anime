@@ -14,6 +14,7 @@ import ContinueWatchingButton from "@/components/Button/ContinueWatchingButton";
 import {EpisodesList} from "@/components/EpisodesList";
 import NoFound from "@/components/NoFound";
 import {Metadata, ResolvingMetadata} from "next";
+import {Collection} from "@/components/Collection";
 
 type Props = {
     params: { id: string }
@@ -186,6 +187,9 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                         </Box>
                         <Box>
                             <AddToWatchListButton disable={ !anime.auth } isInWatchlist={ anime.isInWatchlist } id={ anime._id }/>
+                        </Box>
+                        <Box>
+                            <Collection animeId={anime._id}/>
                         </Box>
                         <Box >
                             <AnimeInfo anime={anime}/>
