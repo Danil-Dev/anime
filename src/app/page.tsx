@@ -65,26 +65,30 @@ export default async function Home()    {
         image: '/assets/img/poster/mushoku.webp'
     }
     const bannerData3 : IBannerData = {
-        title: 'Тільки я візьму новий рівень',
+        title: 'Реінкарнація безробітного: В інший світ на повному серйозі (2 сезон 2 частина)',
         genres: [
             {
                 title: 'Пригоди',
                 name: 'adventure'
             },
             {
+                title: 'Комедія',
+                name: 'comedy'
+            },
+            {
                 title: 'Фентезі',
                 name: 'fantasy'
             },
             {
-                title: 'Бойовик',
-                name: 'action'
+                title: 'Еччі',
+                name: 'ecci'
             },
         ],
-        studio: 'A-1 Pictures',
-        description: 'На Землі почали відкриватися портали з яких полізли монстри. Та разом з цим багато людей відкрили в собі магічні сили та почали використовувати їх для винищення цих монстрів й закриття порталів. Їх називають мисливцями. Сонг Джінху також отримав магічні сили, та вони в нього настільки малі, що він лиш трохи сильніший за звичайну людину. Навіть найслабші монстри – складні суперники для нього. На жаль, ніхто з мисливців не може збільшити свою силу. Виходить, Сонг так і буде найслабшим мисливцем? Можливо, так би й сталося, та на одному з завдань він разом з групою інших мисливців знаходять храм древнього бога...',
-        link: '/anime/ore_dake_level_up_na_ken',
-        image_banner:'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/af881117-c109-449d-124a-cfcc028ec400/public',
-        image: 'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/57584282-2b60-4cd4-ccb5-7025de0f7e00/public'
+        studio: 'Studio Bind',
+        description: 'Історія Рудеуса продовжується. Після телепортації всі його друзі та знайомі потрапили в різні частини світу, і він досі не знайшов їх усіх, а шляхи з товаришами, з якими він мандрував понад рік, розійшлися. Проте найскладніше – ще попереду. І Рудеуса, і його родичів та близьких йому людей чекають дедалі більші виклики.',
+        link: '/anime/mushoku_tensei_isekai_ittara_honki_dasu_2_2',
+        image_banner:'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/40f3df46-6a9a-40f2-cf6f-46ea30120f00/public',
+        image: 'https://imagedelivery.net/H7NwWs6k4gpIZUMxFDARAQ/bef6f676-75cd-4381-ef5e-0e6d1c01c600/public'
 
     }
 

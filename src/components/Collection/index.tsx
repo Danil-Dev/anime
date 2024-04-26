@@ -17,11 +17,10 @@ export function Collection({animeId}: {animeId: string}) {
 
     return(
         <>
-            <Skeleton  isLoaded={!isLoading}>
-                <Heading>Зв&apos;язане</Heading>
-            </Skeleton>
+            {isLoading && <Skeleton h={'40px'}></Skeleton>}
+            {!isLoading && data.length > 0 && <Heading>Зв&apos;язане</Heading>}
 
-            { !isLoading ? data[0] && data[0].animeIds.length > 0 ? (
+            { !isLoading ?  data.length > 0 && data[0] && data[0].animeIds.length > 0 ? (
 
                 <SimpleGrid columns={{ base: 2, md: 5}} spacing={2}>
                     {data[0].animeIds.map((item) => (

@@ -22,6 +22,7 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                     height={'100%'}
                     backgroundSize={'cover'}
                     backgroundRepeat={'no-repeat'}
+                    backgroundPosition={'center'}
                     p={{base: '20px', md: '50px'}}
                     backgroundImage={`url(${data.image_banner})`}
                     backgroundColor={'backgroundOutlineBlack'}
@@ -79,7 +80,7 @@ export default function SingleComingAnimeCard({data}:{data:IBannerData}) {
                         bottom={'-20px'}
                         zIndex={'11'}>
 
-                        <Image src={data.image} alt={data.title} width={600} height={700}/>
+                        <Image src={data.image} alt={data.title} width={500} height={700}/>
                     </Box>
                 </Flex>
 

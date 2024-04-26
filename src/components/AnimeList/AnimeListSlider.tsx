@@ -11,16 +11,21 @@ export default function AnimeListSlider({animeList}: {animeList: IAnimeData[]}) 
 
     return (
         <Swiper
-            slidesPerView={'auto'}
-            freeMode={true}
-            modules={[FreeMode, Autoplay]}
+            slidesPerView={5}
+
+
+            modules={[Autoplay]}
             spaceBetween={15}
             autoplay={{
                 delay: 1,
-                disableOnInteraction: false
+                // disableOnInteraction: false
 
             }}
-            loop={true}
+            breakpoints={{
+                320: {
+                    slidesPerView: 2
+                }
+            }}
             speed={10000}
         >
             {animeList.map((anime, idx) => (
