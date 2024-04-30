@@ -102,7 +102,8 @@ export default async function SinglePage ({params: {id}} : {params: {id:string}}
                     left: "0",
                     width: "100%",
                     height: "100%",
-                    backgroundColor: "backgroundOutlineBlack",
+                    // backgroundColor: "backgroundOutlineBlack",
+                    background: 'linear-gradient(0deg, hsl(240,28.57%,19.22%), #00000099)',
                     zIndex: "-1",
                     backdropFilter: "blur(5px)"
                 }}
