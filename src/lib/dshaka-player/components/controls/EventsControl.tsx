@@ -7,6 +7,7 @@ import {useTimeline} from "@/lib/dshaka-player/hooks/useTimeline";
 import {useHotkeys} from "@mantine/hooks";
 import useStateRef from "react-usestateref";
 import {isMobile} from "react-device-detect";
+import {useFullscreen} from "@/lib/dshaka-player/hooks/useFullscreen";
 interface EventsControlProps {
   isHiddenControls?: boolean,
   handleViewControl?: () => void
@@ -25,6 +26,7 @@ export function EventsControl({isHiddenControls, handleViewControl}: EventsContr
   const tapTimeoutRef = useRef(null)
 
   const {togglePlayback, isPlaying} = usePlayback()
+  const {toggleFullscreen} = useFullscreen()
   const { updateCurrentTime, getCurrentTime} = useTimeline({
     updateInterval: 250
   })
@@ -103,10 +105,29 @@ export function EventsControl({isHiddenControls, handleViewControl}: EventsContr
 
   }
   const handleClick = () => {
-    if (!isMobile){
-      togglePlayback()
+    const now = new Date().getTime();
+    const DOUBLE_CLICK_DELAY = 300; // задержка для определения двойного клика
+
+    if (lastTapRef.current && (now - lastTapRef.current) < DOUBLE_CLICK_DELAY) {
+      clearTimeout(tapTimeoutRef.current); // Очистка таймера одиночного клика
+      handleDoubleClick();
+    } else {
+      tapTimeoutRef.current = setTimeout(() => {
+        if (!isMobile) {
+          togglePlayback();
+        }
+      }, DOUBLE_CLICK_DELAY);
     }
-  }
+    lastTapRef.current = now;
+  };
+  const handleDoubleClick = () => {
+    console.log('Double clicked!');
+    if (!isMobile){
+      toggleFullscreen()
+    }
+
+    // Вы можете добавить любую логику здесь, например, переключение в полноэкранный режим или другие действия
+  };
 
 
   useHotkeys([
@@ -117,12 +138,15 @@ export function EventsControl({isHiddenControls, handleViewControl}: EventsContr
   useEffect(() => {
     if (containerRef.current){
       containerRef.current.addEventListener('touchstart',handleTap)
+
       containerRef.current.addEventListener('click', handleClick)
+
     }
     return () => {
       if (containerRef.current){
         containerRef.current.removeEventListener('touchstart',handleTap)
         containerRef.current.removeEventListener('click', handleClick)
+
       }
     }
   }, [isHiddenControls])

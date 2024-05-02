@@ -2,6 +2,7 @@ import {MutableRefObject, useEffect, useRef, useState} from "react";
 import {useShaka} from "@/lib/dshaka-player/components/ShakaProvider";
 // @ts-ignore
 import shaka from "shaka-player";
+import log from "loglevel";
 
 
 export function useShakaPlayer() {
@@ -26,6 +27,22 @@ export function useShakaPlayer() {
         if (video && shaka){
             const _player = new shaka.Player(video)
             setPlayer(_player)
+
+            const castProxy = new shaka.cast.CastProxy(
+                video,
+                _player,
+                '320B2F0E',
+                true
+            )
+
+            console.log('castProxy', castProxy)
+            console.log(castProxy.canCast())
+
+            // castProxy.cast().then(res => console.log)
+
+            // @ts-ignore
+            window.castProxy = castProxy
+
             _player.addEventListener('error', errorHandler)
             setIsLoaded(true)
         }
